@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * NGÀY 2: TOÁN TỬ VÀ CẤU TRÚC ĐIỀU KHIỂN TRONG JAVASCRIPT
+ */
+
+        // ==========================================
+        // I. TOÁN TỬ (OPERATORS)
+        // ==========================================
+
+        // 1. Toán tử số học (+, -, *, /, %, **)
+        let a = 10;
+        let b = 3;
+        console.log(a + b);  // Cộng: 13
+        console.log(a % b);  // Chia lấy dư: 1
+        console.log(a ** b); // Lũy thừa: 1000
+
+        // 2. Toán tử gán (=, +=, -=, *=, /=)
+        let x = 5;
+        x += 10; // Tương đương x = x + 10 -> x = 15
+
+        // 3. Toán tử so sánh (==, ===, !=, !==, >, <, >=, <=)
+        // LƯU Ý: === và !== so sánh cả giá trị và kiểu dữ liệu (Nên dùng)
+        console.log(5 == "5");  // true (chỉ so sánh giá trị)
+        console.log(5 === "5"); // false (khác kiểu dữ liệu: number vs string)
+
+        // 4. Toán tử logic (&&, ||, !)
+        // && (AND): Đúng khi tất cả đều đúng
+        // || (OR): Đúng khi ít nhất một cái đúng
+        // ! (NOT): Phủ định giá trị hiện tại
+        let isAdult = true;
+        let hasTicket = false;
+        console.log(isAdult && hasTicket); // false
+
+        // 5. Toán tử điều kiện (Ternary Operator - ?)
+        // Cú pháp: điều_kiện ? giá_trị_đúng : giá_trị_sai
+        let age = 18;
+        let canVote = (age >= 18) ? "Được bầu cử" : "Chưa đủ tuổi";
+
+        // 6. Toán tử optional chaining (?.)
+        // Giúp truy cập thuộc tính sâu của object mà không sợ lỗi nếu object đó bị null/undefined
+        let user = { profile: { name: "Gemini" } };
+        console.log(user?.profile?.name); // "Gemini"
+        console.log(user?.address?.street); // undefined (không gây lỗi chương trình)
+
+        // 7. Toán tử spread (...) và rest (...)
+        // Spread: Trải các phần tử của mảng/đối tượng ra
+        let arr1 = [1, 2, 3];
+        let arr2 = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
+
+        // Rest: Gom các phần tử còn lại vào một mảng
+        function sum(...numbers) {
+            return numbers.reduce((total, num) => total + num, 0);
+        }
+
+
+        // ==========================================
+        // II. CẤU TRÚC ĐIỀU KHIỂN (CONTROL FLOW)
+        // ==========================================
+
+        // 1. Cấu trúc if...else
+        let score = 85;
+        if (score >= 90) {
+            console.log("Loại Xuất sắc");
+        } else if (score >= 80) {
+            console.log("Loại Giỏi");
+        } else {
+            console.log("Cần cố gắng thêm");
+        }
+
+        // 2. Cấu trúc switch...case
+        // Dùng khi có nhiều điều kiện so sánh bằng (===) cụ thể
+        let day = 2;
+        switch (day) {
+            case 2:
+                console.log("Thứ Hai");
+                break; // Quan trọng: Dùng break để thoát khỏi switch
+            case 3:
+                console.log("Thứ Ba");
+                break;
+            default:
+                console.log("Ngày không xác định");
+        }
+    </script>
+</body>
+
+</html>

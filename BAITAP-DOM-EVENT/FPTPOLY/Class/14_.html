@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 14: API & HTML5 API (LÀM VIỆC VỚI DỮ LIỆU VÀ THIẾT BỊ)
+ */
+
+        // ==========================================
+        // 1. API LÀ GÌ? (APPLICATION PROGRAMMING INTERFACE)
+        // ==========================================
+        // - API là "cầu nối" cho phép các phần mềm/ứng dụng giao tiếp với nhau.
+        // - Trong Web: Là cách website lấy dữ liệu từ Server hoặc điều khiển các chức năng của thiết bị.
+        // - Ví dụ: Web gọi API của Google Maps để hiển thị bản đồ, hoặc gọi API thời tiết để lấy nhiệt độ.
+
+        // ==========================================
+        // 2. HTML5 API LÀ GÌ?
+        // ==========================================
+        // - Là các tính năng/công cụ được tích hợp sẵn vào trình duyệt hiện đại.
+        // - Không cần cài đặt thư viện bên ngoài, chỉ cần dùng JS gọi ra là được.
+
+        // ==========================================
+        // 3. LOCALSTORAGE (CỰC KỲ QUAN TRỌNG)
+        // ==========================================
+        // - Dùng để lưu trữ dữ liệu bền vững ngay trên trình duyệt của người dùng.
+        // - Đặc điểm: Tắt máy, đóng tab dữ liệu VẪN CÒN ĐÓ.
+        // - Dung lượng: Khoảng 5MB - 10MB.
+
+        // Các lệnh cơ bản:
+        localStorage.setItem("username", "Gemini");       // Lưu dữ liệu
+        let name = localStorage.getItem("username");      // Lấy dữ liệu
+        // localStorage.removeItem("username");            // Xóa 1 dữ liệu cụ thể
+        // localStorage.clear();                           // Xóa sạch sành sanh
+
+        // Lưu ý: LocalStorage chỉ lưu chuỗi (String). Muốn lưu Object/Array phải qua JSON:
+        let user = { id: 1, name: "An" };
+        localStorage.setItem("user", JSON.stringify(user)); // Chuyển sang chuỗi để lưu
+
+        // ==========================================
+        // 4. SESSIONSTORAGE
+        // ==========================================
+        // - Hoàn toàn giống LocalStorage về cách dùng (setItem, getItem...).
+        // - Khác biệt: Dữ liệu sẽ BỊ XÓA ngay khi đóng tab hoặc trình duyệt.
+
+        // ==========================================
+        // 5. GEOLOCATION API (VỊ TRÍ ĐỊA LÝ)
+        // ==========================================
+        // - Lấy tọa độ (kinh độ, vĩ độ) của người dùng (cần người dùng cho phép).
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log("Kinh độ:", position.coords.longitude);
+            console.log("Vĩ độ:", position.coords.latitude);
+        });
+
+        // ==========================================
+        // 6. AUDIO / VIDEO API
+        // ==========================================
+        // - Điều khiển các trình phát nhạc/phim bằng mã JS thay vì dùng nút mặc định.
+        const myVideo = document.querySelector("video");
+        // myVideo.play();  // Phát
+        // myVideo.pause(); // Tạm dừng
+        // myVideo.volume = 0.5; // Chỉnh âm lượng
+
+        // ==========================================
+        // 7. CANVAS API (VẼ BẰNG JS)
+        // ==========================================
+        // - Canvas là một "bảng vẽ" (thẻ <canvas>).
+        // - Context (ctx) là "cây bút" để vẽ lên bảng đó.
+        // - Ứng dụng: Làm Game 2D, hiệu ứng animation, vẽ biểu đồ (Chart).
+
+        /*
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = "red";
+        ctx.fillRect(10, 10, 100, 50); // Vẽ một hình chữ nhật đỏ
+        */
+
+        // ==========================================
+        // PHẦN VỀ NHÀ TÌM HIỂU THÊM (NÂNG CAO)
+        // ==========================================
+        // 1. Drag & Drop API: Kéo thả các phần tử trên trang (như kéo file vào Gmail).
+        // 2. File API: Đọc thông tin file (tên, size) khi người dùng chọn file từ máy tính.
+        // 3. Notification API: Hiển thị thông báo đẩy (push notification) trên màn hình máy tính/điện thoại.
+    </script>
+</body>
+
+</html>

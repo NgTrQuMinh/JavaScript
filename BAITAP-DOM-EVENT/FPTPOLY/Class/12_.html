@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 12: THAO TÁC SÂU VỚI DOM (DOCUMENT OBJECT MODEL)
+ */
+
+        // ==========================================
+        // 1. DOM LÀ GÌ?
+        // ==========================================
+        // - DOM (Document Object Model) là giao diện lập trình cho tài liệu HTML[cite: 1].
+        // - Khi trang web tải, trình duyệt chuyển mã HTML thành cấu trúc dạng cây (DOM Tree)[cite: 1].
+        // - Cấu trúc phân cấp: document -> html -> body -> các thẻ con (h1, p, div...)[cite: 1].
+        // - DOM cho phép JavaScript làm việc, thay đổi nội dung và cấu trúc HTML[cite: 1].
+
+        // ==========================================
+        // 2. CÁC LOẠI NODE TRONG DOM
+        // ==========================================
+        // Mọi thành phần trong cây DOM đều là một Node[cite: 1]:
+        // - Element Node: Các thẻ HTML (div, p, h1...)[cite: 1].
+        // - Text Node: Văn bản bên trong các thẻ[cite: 1].
+        // - Attribute Node: Các thuộc tính của thẻ (class, id, src...)[cite: 1].
+
+        // ==========================================
+        // 3. TRUY XUẤT PHẦN TỬ (SELECTORS)
+        // ==========================================
+        // Cách cũ:
+        // - document.getElementById("id"): Lấy 1 phần tử qua ID[cite: 1].
+        // - document.getElementsByClassName("class"): Lấy danh sách qua Class[cite: 1].
+
+        // Cách hiện đại (Khuyên dùng):
+        // - document.querySelector(".class / #id / tag"): Lấy phần tử đầu tiên tìm thấy[cite: 1].
+        // - document.querySelectorAll(".class"): Lấy tất cả phần tử thỏa mãn (trả về NodeList)[cite: 1].
+
+        // ==========================================
+        // 4. THAY ĐỔI NỘI DUNG
+        // ==========================================
+        // - .innerText: Thay đổi văn bản thuần, chỉ những gì hiển thị[cite: 1].
+        // - .textContent: Thay đổi văn bản, bao gồm cả các đoạn text ẩn[cite: 1].
+        // - .innerHTML: Thay đổi nội dung có bao gồm cả thẻ HTML bên trong[cite: 1].
+
+        // ==========================================
+        // 5. ATTRIBUTE VS PROPERTY
+        // ==========================================
+        // - Attribute: Được viết trực tiếp trong file HTML (vd: <input value="abc">)[cite: 1].
+        // - Property: Là thuộc tính của đối tượng DOM trong JS (vd: input.value)[cite: 1].
+        // - Thay đổi Property sẽ cập nhật giao diện ngay lập tức[cite: 1].
+
+        // ==========================================
+        // 6. THAO TÁC ATTRIBUTE (THUỘC TÍNH)
+        // ==========================================
+        // - element.getAttribute("ten_thuoc_tinh"): Lấy giá trị[cite: 1].
+        // - element.setAttribute("ten_thuoc_tinh", "gia_tri"): Thiết lập giá trị[cite: 1].
+        // - element.removeAttribute("ten_thuoc_tinh"): Xóa thuộc tính[cite: 1].
+
+        // ==========================================
+        // 7. TẠO & THÊM PHẦN TỬ MỚI
+        // ==========================================
+        // Bước 1: Tạo phần tử: let newEl = document.createElement("the_html")[cite: 1].
+        // Bước 2: Thêm nội dung: newEl.innerText = "Chào buổi 12"[cite: 1].
+        // Bước 3: Gắn vào DOM: parent.appendChild(newEl) (Thêm vào cuối cha)[cite: 1].
+
+        // ==========================================
+        // 8. CHÈN PHẦN TỬ VÀO VỊ TRÍ CỤ THỂ
+        // ==========================================
+        // - parent.insertBefore(newNode, referenceNode): Chèn newNode vào trước referenceNode[cite: 1].
+        // Ví dụ: menu.insertBefore(newItem, menu.firstChild) (Chèn vào đầu danh sách)[cite: 1].
+
+        // ==========================================
+        // 9. XÓA PHẦN TỬ
+        // ==========================================
+        // - element.remove(): Tự xóa chính phần tử đó khỏi trang web[cite: 1].
+        // - parent.removeChild(child): Xóa phần tử con thông qua phần tử cha[cite: 1].
+
+        /**
+         * LƯU Ý KHI THỰC HÀNH:
+         * 1. Dùng classList (add, remove, toggle) để xử lý class thay vì setAttribute[cite: 1].
+         * 2. Hạn chế lạm dụng innerHTML trong vòng lặp vì sẽ làm chậm hiệu năng trang web[cite: 1].
+         */
+    </script>
+</body>
+
+</html>

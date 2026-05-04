@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 6: BÀI TẬP THỰC HÀNH MẢNG (ARRAY)
+ */
+
+        // ------------------------------------------
+        // Bài 1 – Thêm phần tử
+        // Viết hàm addElement(arr, value) thêm phần tử vào cuối mảng và in ra mảng.
+        // ------------------------------------------
+        function addElement(arr, value) {
+            arr.push(value); // Sử dụng push để thêm vào cuối mảng[cite: 1]
+            console.log(arr);
+        }
+
+        console.log("--- Bài 1 ---");
+        addElement([1, 2], 3); // Output: [1, 2, 3]
+
+
+        // ------------------------------------------
+        // Bài 2 – Kiểm tra phần tử tồn tại
+        // Viết hàm checkExist(arr, value) trả về true/false.
+        // ------------------------------------------
+        function checkExist(arr, value) {
+            return arr.includes(value); // Sử dụng includes để kiểm tra tồn tại[cite: 1]
+        }
+
+        console.log("\n--- Bài 2 ---");
+        console.log(checkExist([1, 2, 3], 2)); // true
+        console.log(checkExist([1, 2, 3], 5)); // false
+
+
+        // ------------------------------------------
+        // Bài 3 – Tìm vị trí phần tử
+        // Viết hàm findIndex(arr, value) trả về vị trí đầu tiên tìm thấy.
+        // ------------------------------------------
+        function findIndex(arr, value) {
+            return arr.indexOf(value); // Sử dụng indexOf để tìm index[cite: 1]
+        }
+
+        console.log("\n--- Bài 3 ---");
+        console.log(findIndex([10, 20, 30], 20)); // Output: 1
+
+
+        // ------------------------------------------
+        // Bài 4 – Lọc số chẵn
+        // Viết hàm getEvenNumbers(arr) trả về mảng mới chỉ gồm số chẵn.
+        // ------------------------------------------
+        function getEvenNumbers(arr) {
+            // filter tạo mảng mới thỏa mãn điều kiện[cite: 1]
+            return arr.filter(num => num % 2 === 0);
+        }
+
+        console.log("\n--- Bài 4 ---");
+        console.log(getEvenNumbers([1, 2, 3, 4])); // Output: [2, 4]
+
+
+        // ------------------------------------------
+        // Bài 5 – Nhân đôi phần tử
+        // Viết hàm doubleArray(arr) nhân đôi tất cả phần tử trong mảng.
+        // ------------------------------------------
+        function doubleArray(arr) {
+            // map biến đổi từng phần tử và trả về mảng mới[cite: 1]
+            return arr.map(num => num * 2);
+        }
+
+        console.log("\n--- Bài 5 ---");
+        console.log(doubleArray([1, 2, 3])); // Output: [2, 4, 6]
+
+
+        // ------------------------------------------
+        // Bài 6 – Tính tổng mảng
+        // Viết hàm sumArray(arr) trả về tổng các phần tử.
+        // ------------------------------------------
+        function sumArray(arr) {
+            // reduce tích lũy các giá trị về một con số duy nhất[cite: 1]
+            return arr.reduce((total, num) => total + num, 0);
+        }
+
+        console.log("\n--- Bài 6 ---");
+        console.log(sumArray([1, 2, 3, 4])); // Output: 10
+
+
+        // ------------------------------------------
+        // Bài 7 – Xử lý tổng hợp
+        // Yêu cầu: Loại bỏ số lẻ -> Nhân đôi số còn lại -> Tính tổng.
+        // ------------------------------------------
+        function processArray(arr) {
+            // Kết hợp (Chaining) các hàm nâng cao[cite: 1]
+            return arr
+                .filter(num => num % 2 === 0) // Lọc số chẵn
+                .map(num => num * 2)          // Nhân đôi
+                .reduce((total, num) => total + num, 0); // Tính tổng
+        }
+
+        console.log("\n--- Bài 7 ---");
+        console.log(processArray([1, 2, 3, 4]));
+        // Bước xử lý: [1,2,3,4] -> [2,4] -> [4,8] -> 12
+        // Output: 12
+    </script>
+</body>
+
+</html>

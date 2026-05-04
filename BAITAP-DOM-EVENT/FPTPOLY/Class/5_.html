@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 5: MẢNG (ARRAY) TRONG JAVASCRIPT
+ */
+
+        // ==========================================
+        // 1. TỔNG QUAN VỀ MẢNG
+        // ==========================================
+
+        // 1.1 Mảng là gì?
+        // Mảng là một biến đặc biệt có thể chứa nhiều giá trị cùng một lúc. 
+        // Các giá trị (phần tử) được sắp xếp theo thứ tự và có chỉ số (index) bắt đầu từ 0.
+
+        // 1.2 Tạo mảng
+        let fruits = ["Apple", "Banana", "Cherry"]; // Cách phổ biến nhất
+        let numbers = new Array(1, 2, 3);          // Cách dùng constructor
+
+        // 1.3 Truy cập & sửa phần tử
+        console.log(fruits[0]); // Lấy phần tử đầu tiên: "Apple"
+        fruits[1] = "Mango";    // Sửa "Banana" thành "Mango"
+
+        // 1.4 Thuộc tính length
+        // Trả về số lượng phần tử có trong mảng
+        console.log(fruits.length); // 3
+
+        // ==========================================
+        // 2. DUYỆT MẢNG (LOOPING)
+        // ==========================================
+        let arr = ["A", "B", "C"];
+
+        // Dùng vòng lặp for cơ bản
+        for (let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+
+        // Dùng for...of (Ngắn gọn, hiện đại)
+        for (let item of arr) {
+            console.log(item);
+        }
+
+        // Dùng forEach (Phương thức của mảng)
+        arr.forEach((item, index) => {
+            console.log(`Vị trí ${index} là ${item}`);
+        });
+
+        // ==========================================
+        // 3. THAO TÁC VỚI MẢNG
+        // ==========================================
+
+        // 3.1 Thêm / Xóa phần tử
+        let stack = [1, 2];
+        stack.push(3);      // Thêm vào cuối -> [1, 2, 3]
+        stack.pop();       // Xóa phần tử cuối -> [1, 2]
+        stack.unshift(0);  // Thêm vào đầu -> [0, 1, 2]
+        stack.shift();     // Xóa phần tử đầu -> [1, 2]
+
+        // 3.2 Phương thức splice() (Cực kỳ quan trọng)
+        // Cú pháp: splice(vị_trí_bắt_đầu, số_lượng_xóa, phần_tử_thêm_mới...)
+        let colors = ["Red", "Green", "Blue"];
+        // Xóa 1 phần tử tại vị trí index 1:
+        colors.splice(1, 1); // ["Red", "Blue"]
+        // Thêm phần tử mà không xóa:
+        colors.splice(1, 0, "Yellow"); // ["Red", "Yellow", "Blue"]
+
+        // 3.4 Tìm kiếm
+        let myArr = [10, 20, 30, 20];
+        console.log(myArr.indexOf(20));     // Trả về index đầu tiên tìm thấy: 1
+        console.log(myArr.lastIndexOf(20)); // Trả về index cuối cùng tìm thấy: 3
+        console.log(myArr.includes(30));    // Kiểm tra có tồn tại không: true
+
+        // ==========================================
+        // 4. CÁC HÀM NÂNG CAO (HAY DÙNG NHẤT)
+        // ==========================================
+        let data = [1, 2, 3, 4, 5];
+
+        // 4.1 map(): Tạo mảng mới bằng cách biến đổi từng phần tử
+        let double = data.map(num => num * 2); // [2, 4, 6, 8, 10]
+
+        // 4.2 filter(): Lọc các phần tử thỏa mãn điều kiện
+        let evens = data.filter(num => num % 2 === 0); // [2, 4]
+
+        // 4.3 find(): Tìm phần tử ĐẦU TIÊN thỏa mãn điều kiện
+        let found = data.find(num => num > 3); // 4
+
+        // 4.4 reduce(): Tích lũy các phần tử về một giá trị duy nhất (vd: Tính tổng)
+        let sum = data.reduce((total, num) => total + num, 0); // 15
+
+        // 4.5 sort() & reverse()
+        let names = ["Banana", "Apple", "Orange"];
+        names.sort();    // Sắp xếp A-Z: ["Apple", "Banana", "Orange"]
+        names.reverse(); // Đảo ngược mảng: ["Orange", "Banana", "Apple"]
+
+        // LƯU Ý KHI SORT SỐ:
+        let nums = [1, 100, 25, 10];
+        nums.sort((a, b) => a - b); // Sắp xếp tăng dần: [1, 10, 25, 100]
+    </script>
+</body>
+
+</html>

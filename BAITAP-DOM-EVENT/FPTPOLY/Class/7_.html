@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 7: OBJECT & MẢNG ĐỐI TƯỢNG (ARRAY OF OBJECTS)
+ */
+
+        // ==========================================
+        // I. LÝ THUYẾT VỀ OBJECT
+        // ==========================================
+
+        // 1. Object là gì?
+        // Object là một tập hợp các thuộc tính (property) dưới dạng key: value. 
+        // Nó dùng để mô tả một thực thể cụ thể (ví dụ: một con người, một sản phẩm).
+
+        // 2. Tạo object
+        let user = {
+            name: "Gemini",
+            age: 1,
+            isAdmin: true
+        };
+
+        // 3. Truy cập & Sửa
+        console.log(user.name);    // Cách 1: Dot notation (.)
+        console.log(user["age"]);  // Cách 2: Bracket notation ([])
+        user.age = 2;              // Sửa giá trị
+
+        // 4. Duyệt object (Dùng for...in)
+        for (let key in user) {
+            console.log(key + ": " + user[key]);
+        }
+
+        // 5. Các hàm Object hỗ trợ
+        console.log(Object.keys(user));   // Lấy danh sách các key -> ["name", "age", "isAdmin"]
+        console.log(Object.values(user)); // Lấy danh sách các giá trị -> ["Gemini", 2, true]
+
+        // 6. JSON (JavaScript Object Notation)
+        // Là định dạng dữ liệu dùng để trao đổi giữa client và server.
+        let jsonStr = JSON.stringify(user); // Chuyển Object sang chuỗi JSON
+        let obj = JSON.parse(jsonStr);      // Chuyển chuỗi JSON ngược lại thành Object
+
+        // 7. Mảng đối tượng (Quan trọng nhất)
+        // Là một mảng mà mỗi phần tử bên trong là một Object. 
+        // Đây là cấu trúc dữ liệu phổ biến nhất khi làm việc với API/Database.
+
+        // ==========================================
+        // II. GIẢI BÀI TẬP
+        // ==========================================
+
+        // Dữ liệu dùng chung
+        let students = [
+            { id: 1, name: "An", score: 8 },
+            { id: 2, name: "Bình", score: 6 },
+            { id: 3, name: "Chi", score: 9 },
+            { id: 4, name: "Dũng", score: 7 }
+        ];
+
+        // Bài 1 – In danh sách sinh viên
+        function printStudents(list) {
+            list.forEach(s => console.log(`${s.name} - ${s.score}`)); // Duyệt mảng[cite: 1]
+        }
+        console.log("--- Bài 1 ---");
+        printStudents(students);
+
+        // Bài 2 – Thêm sinh viên
+        function addStudent(list, newStudent) {
+            list.push(newStudent); // Thêm vào cuối mảng[cite: 1]
+        }
+        addStudent(students, { id: 5, name: "Lan", score: 10 });
+
+        // Bài 3 – Xoá sinh viên theo id
+        function removeStudent(list, id) {
+            // Trả về mảng mới không chứa id cần xóa[cite: 1]
+            return list.filter(s => s.id !== id);
+        }
+
+        // Bài 4 – Tìm sinh viên theo id
+        function findStudent(list, id) {
+            // Trả về đối tượng đầu tiên thỏa mãn[cite: 1]
+            return list.find(s => s.id === id);
+        }
+        console.log("\n--- Bài 4 ---");
+        console.log(findStudent(students, 3));
+
+        // Bài 5 – Lọc sinh viên điểm cao (score >= 8)
+        function getTopStudents(list) {
+            return list.filter(s => s.score >= 8); // Dùng filter để lọc[cite: 1]
+        }
+
+        // Bài 6 – Lấy danh sách tên
+        function getStudentNames(list) {
+            return list.map(s => s.name); // Dùng map để tạo mảng mới chỉ gồm tên[cite: 1]
+        }
+        console.log("\n--- Bài 6 ---");
+        console.log(getStudentNames(students));
+
+        // Bài 7 – Tính điểm trung bình
+        function averageScore(list) {
+            if (list.length === 0) return 0;
+            // Dùng reduce để tính tổng điểm rồi chia cho số lượng[cite: 1]
+            let total = list.reduce((sum, s) => sum + s.score, 0);
+            return total / list.length;
+        }
+        console.log("\n--- Bài 7 ---");
+        console.log("ĐTB:", averageScore(students));
+
+        // Bài 8 – Sắp xếp sinh viên theo điểm giảm dần
+        function sortByScore(list) {
+            // Dùng sort với hàm so sánh[cite: 1]
+            return [...list].sort((a, b) => b.score - a.score);
+        }
+        console.log("\n--- Bài 8 (Giảm dần) ---");
+        console.table(sortByScore(students)); // In dạng bảng cho đẹp
+    </script>
+</body>
+
+</html>

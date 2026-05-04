@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 3: HÀM (FUNCTIONS) & PHẠM VI BIẾN (SCOPE)
+ */
+
+        // ==========================================
+        // I. LÝ THUYẾT
+        // ==========================================
+
+        // 1. Hàm là gì: 
+        // Là một khối mã thực hiện một công việc cụ thể, giúp tái sử dụng code và làm chương trình gọn gàng hơn.
+
+        // 2. Các loại hàm:
+
+        // - Khai báo hàm (Function Declaration):
+        // Có thể gọi hàm trước khi khai báo nhờ cơ chế hoisting.
+        function hello() {
+            console.log("Xin chào!");
+        }
+
+        // - Hàm được gán cho biến (Function Expression):
+        // Hàm không tên (anonymous) được gán vào biến. Phải khai báo xong mới gọi được.
+        const tinhTong = function (a, b) {
+            return a + b;
+        };
+
+        // - Hàm rút gọn (Arrow Function - ES6):
+        // Cú pháp ngắn gọn, thường dùng cho các hàm xử lý nhanh.
+        const tinhNhan = (a, b) => a * b;
+
+        // 3. Tham số (Parameters):
+        // Là các biến nhận giá trị truyền vào khi gọi hàm. 
+        // Ta có thể đặt giá trị mặc định cho tham số để tránh lỗi nếu người dùng không truyền vào.
+        function checkTuoi(tuoi = 18) {
+            console.log("Tuổi là: " + tuoi);
+        }
+
+        // 4. Từ khóa return:
+        // Trả về một giá trị từ hàm và dừng việc thực thi hàm ngay lập tức.
+        function layNamHienTai() {
+            return 2026; // Trả về 2026 và thoát hàm
+        }
+
+        // 5. Phạm vi biến (Scope):
+        // - Global Scope: Khai báo ngoài cùng, dùng được mọi nơi.
+        // - Function Scope: Khai báo trong hàm, chỉ dùng được trong hàm đó.
+        // - Block Scope (let, const): Khai báo trong { }, chỉ dùng được trong cặp ngoặc đó (if, for...).
+
+
+        // ==========================================
+        // II. GIẢI BÀI TẬP
+        // ==========================================
+
+        /**
+         * Bài 1 – Kiểm tra số chẵn lẻ
+         * Viết hàm isEven(n): trả về "Số chẵn" hoặc "Số lẻ"
+         */
+        function isEven(n) {
+            if (n % 2 === 0) {
+                return "Số chẵn";
+            } else {
+                return "Số lẻ";
+            }
+        }
+
+        console.log("--- Bài 1 ---");
+        console.log(isEven(4)); // Kết quả: Số chẵn
+        console.log(isEven(7)); // Kết quả: Số lẻ
+
+
+        /**
+         * Bài 2 – Tính lũy thừa của 2 số
+         * Viết hàm power(a, b) trả về a lũy thừa b.
+         */
+        const power = (a, b) => a ** b;
+        // Hoặc dùng: Math.pow(a, b)
+
+        console.log("\n--- Bài 2 ---");
+        console.log(power(2, 3)); // Kết quả: 8
+        console.log(power(5, 2)); // Kết quả: 25
+
+
+        /**
+         * Bài 3 – Viết hàm chào hỏi
+         * Viết hàm sayHello(name) in ra lời chào. 
+         * Nếu không truyền đối số thì in ra: Hello World
+         */
+        function sayHello(name = "World") {
+            console.log("Hello " + name);
+        }
+
+        console.log("\n--- Bài 3 ---");
+        sayHello("Nam"); // Kết quả: Hello Nam
+        sayHello();      // Kết quả: Hello World
+    </script>
+</body>
+
+</html>

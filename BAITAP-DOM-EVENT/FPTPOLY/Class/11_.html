@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 11: BOM (BROWSER OBJECT MODEL) & DOM (DOCUMENT OBJECT MODEL)
+ */
+
+        // ==========================================
+        // PHẦN 1: BOM (LÀM VIỆC VỚI TRÌNH DUYỆT)
+        // ==========================================
+
+        // 1. BOM là gì?
+        // Là bộ các đối tượng giúp JavaScript tương tác với trình duyệt (không liên quan đến nội dung trang).
+
+        // 2. Các đối tượng chính: window (cha lớn nhất), screen, location, history, navigator.
+
+        // 3. Hộp thoại
+        // alert("Thông báo");
+        // let result = confirm("Bạn có chắc không?"); // Trả về true/false
+        // let name = prompt("Nhập tên bạn:"); // Trả về chuỗi nhập vào
+
+        // 4. Điều hướng trang (Location)
+        // location.href = "https://google.com"; // Chuyển trang
+        // location.reload(); // Tải lại trang
+
+        // 5. History
+        // history.back(); // Quay lại trang trước
+        // history.forward(); // Tiến trang sau
+
+        // 6. Navigator (Thông tin trình duyệt)
+        console.log(navigator.userAgent); // Thông tin về trình duyệt đang dùng
+
+        // 7. Screen (Thông tin màn hình)
+        console.log(screen.width, screen.height);
+
+        // 8. Timer
+        // setTimeout(() => { console.log("Sau 2 giây"); }, 2000);
+        // let count = setInterval(() => { console.log("Lặp lại mỗi 1 giây"); }, 1000);
+        // clearInterval(count); // Dừng lặp
+
+
+        // ==========================================
+        // PHẦN 2: DOM (LÀM VIỆC VỚI NỘI DUNG HTML)
+        // ==========================================
+
+        // 1. DOM là gì?
+        // Khi trình duyệt tải HTML, nó chuyển thành cấu trúc cây (DOM Tree). 
+        // DOM giúp JS thêm, sửa, xóa các phần tử HTML.
+
+        // 2. Truy xuất phần tử
+        // let el = document.getElementById("id");
+        // let el = document.querySelector(".class / tag / #id");
+
+        // 3. Thay đổi nội dung & Attribute
+        // el.innerText = "Nội dung mới";
+        // el.innerHTML = "<b>In đậm</b>";
+        // el.setAttribute("src", "image.jpg");
+
+
+        // ==========================================
+        // PHẦN 3: GIẢI BÀI TẬP THỰC HÀNH
+        // ==========================================
+
+        // Bài 1 – Đổi nội dung tiêu đề
+        function bai1() {
+            const title = document.getElementById("title");
+            title.innerText = "Xin chào sinh viên";
+        }
+
+        // Bài 2 – Đổi màu chữ
+        function bai2() {
+            const p = document.querySelector("p");
+            p.style.color = "red";
+        }
+
+        // Bài 3 – Lấy giá trị input
+        function bai3() {
+            const inputVal = document.getElementById("name").value;
+            document.getElementById("result").innerText = inputVal;
+        }
+
+        // Bài 4 – Thêm phần tử vào danh sách
+        function bai4() {
+            const ul = document.getElementById("list");
+            const li = document.createElement("li"); // Tạo thẻ li mới
+            li.innerText = "Item mới";
+            ul.appendChild(li); // Thêm vào cuối ul
+        }
+
+        // Bài 5 – Xoá phần tử (Gán trực tiếp vào thẻ li: onclick="this.remove()")
+        // <li>Item 1</li> -> Click là mất
+
+        // Bài 6 – Toggle class
+        function bai6() {
+            const btn = document.querySelector("button");
+            btn.classList.toggle("active"); // Có thì xóa, không có thì thêm
+        }
+
+        // Bài 7 – Form login giả lập
+        function bai7() {
+            const user = document.getElementById("user").value;
+            const pass = document.getElementById("pass").value;
+            const msg = document.getElementById("msg");
+
+            if (user === "admin" && pass === "123") {
+                msg.innerText = "Đăng nhập thành công";
+                msg.style.color = "green";
+            } else {
+                msg.innerText = "Sai tài khoản hoặc mật khẩu";
+                msg.style.color = "red";
+            }
+        }
+
+        // Bài 8 – Đếm số ký tự (Sử dụng sự kiện oninput)
+        function bai8() {
+            const input = document.getElementById("txtInput");
+            const count = input.value.length;
+            document.getElementById("charCount").innerText = `Số ký tự: ${count}`;
+        }
+
+        // Bài 9 & 10 – Todo List & CRUD Mini
+        function addTask() {
+            const taskInput = document.getElementById("task");
+            const ul = document.getElementById("list");
+
+            if (taskInput.value.trim() === "") return;
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+        <span>${taskInput.value}</span>
+        <button onclick="this.parentElement.remove()">Xoá</button>
+    `;
+
+            // Click vào tên để xoá (Bài 9)
+            li.querySelector("span").onclick = function () { this.parentElement.remove(); };
+
+            ul.appendChild(li);
+            taskInput.value = ""; // Xóa trống input sau khi thêm
+        }
+
+        // Bài 11 – Đồng hồ realtime
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById("clock").innerText = now.toLocaleTimeString();
+        }, 1000);
+
+        // Bài 12 – Dark mode
+        function toggleDarkMode() {
+            document.body.style.backgroundColor =
+                document.body.style.backgroundColor === "black" ? "white" : "black";
+            document.body.style.color =
+                document.body.style.color === "white" ? "black" : "white";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 13: SỰ KIỆN (EVENTS) TRONG JAVASCRIPT
+ */
+
+        // ==========================================
+        // 1. EVENT LÀ GÌ?
+        // ==========================================
+        // - Event là những "hành động" hoặc "sự việc" xảy ra trên hệ thống mà bạn đang lập trình.
+        // - Trong Web: Event chủ yếu là các hành động của người dùng (User Interaction).
+        // - Cơ chế: Người dùng làm gì đó -> Trình duyệt phát ra tín hiệu -> JS bắt tín hiệu và phản ứng lại.
+
+        // ==========================================
+        // 2. CÁC LOẠI EVENT PHỔ BIẾN
+        // ==========================================
+        /*
+           NHÓM          | EVENT      | MÔ TẢ
+           --------------|------------|------------------------------------------
+           Chuột (Mouse) | click      | Nhấn chuột vào phần tử
+                         | dblclick   | Nhấn đúp chuột
+                         | mouseover  | Di chuột vào phần tử
+           --------------|------------|------------------------------------------
+           Bàn phím      | keydown    | Khi vừa nhấn phím xuống
+                         | keyup      | Khi buông phím ra
+           --------------|------------|------------------------------------------
+           Form          | submit     | Khi gửi form (quan trọng nhất)
+                         | change     | Khi giá trị thay đổi (select, checkbox)
+           --------------|------------|------------------------------------------
+           Input         | input      | Khi đang gõ vào ô nhập liệu (thời gian thực)
+           --------------|------------|------------------------------------------
+           Window        | load       | Khi toàn bộ trang web đã tải xong
+        */
+
+        // ==========================================
+        // 3. CÁC CÁCH GẮN SỰ KIỆN (EVENT LISTENING)
+        // ==========================================
+
+        // Cách 1: Inline Event (Viết trong HTML - Không khuyến khích)
+        // <button onclick="alert('Hello')">Click</button>
+
+        // Cách 2: Gán qua thuộc tính của DOM (Chỉ gắn được 1 hàm cho 1 event)
+        const btn = document.querySelector('button');
+        btn.onclick = function () {
+            console.log("Cách này đơn giản nhưng bị hạn chế");
+        };
+
+        // Cách 3: addEventListener (Hiện đại nhất - Khuyên dùng)
+        // Cú pháp: element.addEventListener('tên_event', hàm_xử_lý)
+        btn.addEventListener('click', () => {
+            console.log("Phản ứng khi người dùng click!");
+        });
+
+        // ==========================================
+        // 4. EVENT OBJECT (Đối tượng sự kiện)
+        // ==========================================
+        // Khi một sự kiện xảy ra, trình duyệt tự động gửi một đối tượng chứa thông tin 
+        // về sự kiện đó vào hàm xử lý (thường đặt tên là 'e' hoặc 'event').
+
+        btn.addEventListener('click', function (e) {
+            console.log(e.type);   // Loại sự kiện (vd: "click")
+            console.log(e.target); // Phần tử cụ thể đã phát sinh sự kiện
+        });
+
+        // Ví dụ bắt phím người dùng gõ:
+        window.addEventListener('keydown', (e) => {
+            console.log(`Bạn vừa nhấn phím: ${e.key}`);
+        });
+
+        // ==========================================
+        // 5. preventDefault() - NGĂN HÀNH VI MẶC ĐỊNH
+        // ==========================================
+        // Một số phần tử có hành vi mặc định (ví dụ: thẻ <a> nhảy trang, form tự load lại).
+        // preventDefault() dùng để chặn các hành vi đó lại để xử lý bằng JS.
+
+        const myForm = document.querySelector('form');
+
+        myForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Ngăn trang web load lại khi nhấn Submit
+            console.log("Đã chặn load trang để xử lý dữ liệu bằng AJAX/Fetch...");
+        });
+
+        const myLink = document.querySelector('a');
+        myLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Click nhưng không nhảy sang trang mới
+            console.log("Đã chặn chuyển trang!");
+        });
+    </script>
+</body>
+
+</html>

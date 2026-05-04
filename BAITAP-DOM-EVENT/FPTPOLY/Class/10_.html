@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+ * BUỔI 10: OOP NÂNG CAO - GETTER, SETTER, STATIC & COMPOSITION
+ */
+
+        // ==========================================
+        // I. LÝ THUYẾT
+        // ==========================================
+
+        // 1. Getter & Setter
+        // Dùng để kiểm soát việc truy cập và thay đổi giá trị của các thuộc tính.
+        // Giúp bảo vệ dữ liệu (Validation) trước khi gán.
+
+        // 2. Static (Tĩnh)
+        // Các thuộc tính hoặc phương thức được khai báo với từ khóa 'static' 
+        // sẽ thuộc về chính Class đó, chứ không thuộc về các instance (đối tượng cụ thể).
+        // Gọi trực tiếp qua: TenClass.tenPhuongThuc()
+
+        // 3. Private Property (#)
+        // Sử dụng dấu # trước tên biến để biến đó trở thành thuộc tính riêng tư.
+        // Không thể truy cập hoặc sửa đổi từ bên ngoài Class.
+
+        // 4. Composition (Thành phần)
+        // Là cách thiết kế bằng cách kết hợp nhiều object nhỏ để tạo thành một object lớn.
+        // "Has-a relationship" (Ví dụ: Một Car có một Engine).
+
+
+        // ==========================================
+        // II. GIẢI BÀI TẬP
+        // ==========================================
+
+        // Bài 1 – Tạo class cơ bản
+        class Student {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            getInfo() {
+                return `${this.name} - ${this.age} tuổi`;
+            }
+        }
+
+        // Bài 2 – Constructor & Bài 5, 6 (Getter & Setter)
+        class Product {
+            constructor(name, price) {
+                this.name = name;
+                this._price = price; // Dùng dấu _ để tránh trùng tên với getter/setter
+            }
+
+            // Getter (Bài 5)
+            get price() {
+                return `${this._price} VND`;
+            }
+
+            // Setter (Bài 6)
+            set price(value) {
+                if (value < 0) {
+                    console.error("Lỗi: Giá không được âm!");
+                } else {
+                    this._price = value;
+                }
+            }
+        }
+
+        // Bài 3 – Method Tính diện tích
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            getArea() {
+                return this.width * this.height;
+            }
+        }
+
+        // Bài 4 – Logic trong method (Xếp loại)
+        class StudentRank extends Student { // Kế thừa từ class Student ở Bài 1
+            constructor(name, score) {
+                super(name);
+                this.score = score;
+            }
+            getRank() {
+                if (this.score >= 8) return "Giỏi";
+                if (this.score >= 6.5) return "Khá";
+                return "Trung bình";
+            }
+        }
+
+        // Bài 7 – Private (#) & Bank Account
+        class BankAccount {
+            #balance = 0; // Thuộc tính private
+
+            deposit(amount) {
+                if (amount > 0) this.#balance += amount;
+            }
+
+            withdraw(amount) {
+                if (amount > this.#balance) {
+                    console.log("Số dư không đủ để rút!");
+                } else {
+                    this.#balance -= amount;
+                }
+            }
+
+            getBalance() {
+                return `Số dư hiện tại: ${this.#balance}`;
+            }
+        }
+
+        // Bài 8 – Static Method
+        class MathUtil {
+            static add(a, b) {
+                return a + b;
+            }
+            static multiply(a, b) {
+                return a * b;
+            }
+        }
+
+        // Bài 9 – Static nâng cao (Đếm số sinh viên)
+        class StudentCounter {
+            static count = 0; // Thuộc tính static để đếm chung
+
+            constructor(name) {
+                this.name = name;
+                StudentCounter.count++; // Mỗi lần new instance thì tăng biến static
+            }
+
+            static getTotal() {
+                return `Tổng số sinh viên: ${StudentCounter.count}`;
+            }
+        }
+
+        // ==========================================
+        // KIỂM TRA KẾT QUẢ (TEST)
+        // ==========================================
+
+        console.log("--- Bài 4: Xếp loại ---");
+        const sv1 = new StudentRank("An", 8.5);
+        console.log(sv1.getRank()); // Giỏi
+
+        console.log("\n--- Bài 5 & 6: Getter/Setter ---");
+        const p1 = new Product("Laptop", 20000);
+        console.log(p1.price); // 20000 VND
+        p1.price = -500; // Báo lỗi
+
+        console.log("\n--- Bài 8: Static Math ---");
+        console.log(MathUtil.add(10, 5)); // 15
+
+        console.log("\n--- Bài 9: Static Count ---");
+        new StudentCounter("An");
+        new StudentCounter("Bình");
+        new StudentCounter("Chi");
+        console.log(StudentCounter.getTotal()); // Tổng số sinh viên: 3
+    </script>
+</body>
+
+</html>
