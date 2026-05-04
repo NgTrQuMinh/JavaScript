@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1. Lớp hỗ trợ để hiển thị Modal */
+        .show-modal {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* 2. Cấu trúc nền Modal (Overlay) */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        /* 3. Nội dung Modal */
+        .modalContent {
+            width: 100%;
+            /* Đảm bảo co giãn trên mobile */
+            max-width: 500px;
+            /* Giới hạn độ rộng tối đa */
+            padding: 40px;
+            border-radius: 20px;
+            background-color: #fff;
+            position: relative;
+            /* Để nút Close (absolute) canh theo khung này */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin: 0 20px;
+            /* Khoảng cách an toàn khi xem trên điện thoại */
+        }
+
+        /* 4. Nút đóng (X) */
+        .modalCloser {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: #999;
+            font-size: 20px;
+        }
+
+        /* 5. Mô tả */
+        .modalDesc {
+            font-size: 15px;
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* 6. Khu vực nút bấm */
+        .modalAction {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Căn giữa các nút */
+            gap: 15px;
+            /* Khoảng cách giữa các nút */
+        }
+
+        .modalSummit,
+        .modalCanecl {
+            border: 0;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .modalSummit {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modalCanecl {
+            background-color: #eee;
+            color: #333;
+        }
+
+        .modalSummit:hover,
+        .modalCanecl:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="modal">
+        <div class="modalContent">
+            <i class="fa faTime modalCloser"></i>
+            <div class="modalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam officia tempore, a
+                unde laborum quisquam delectus quas suscipit reprehenderit nesciunt minus eveniet quod non veniam
+                cumque, deserunt ipsum quia? Libero.</div>
+            <div class="modalAction">
+                <button class="modalSummit">Summit</button>
+                <button class="modalCanecl">Cancle</button>
+            </div>
+        </div>
+    </div> -->
+    <script>
+        /*
+        <div class="modal">
+            <div class="modalContent">
+                <i class="fa faTime modalCloser"></i>
+                <div class="modalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam officia tempore, a
+                    unde laborum quisquam delectus quas suscipit reprehenderit nesciunt minus eveniet quod non veniam
+                    cumque, deserunt ipsum quia? Libero.</div>
+                <div class="modalAction">
+                    <button class="modalSummit">Summit</button>
+                    <button class="modalCanecl">Cancle</button>
+                </div>
+            </div>
+        </div> 
+        */
+        const modal = document.createElement("div");
+        modal.classList.add("modal");
+
+        const modalContent = document.createElement("div");
+        modalContent.classList.add("modalContent");
+
+        const modalCloser = document.createElement("i");
+        modalCloser.classList.add("fa", "faTime", "modalCloser");
+
+        const modalDesc = document.createElement("div");
+        modalDesc.classList.add("modalDesc");
+        modalDesc.textContent = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam officia tempore, a
+        unde laborum quisquam delectus quas suscipit reprehenderit nesciunt minus eveniet quod non veniam
+        cumque, deserunt ipsum quia ? Libero.`;
+
+        const modalAction = document.createElement("div")
+        modalAction.classList.add("modalAction");
+
+        const modalSummit = document.createElement("button");
+        modalSummit.classList.add("modalSummit");
+        const modalCanecl = document.createElement("button");
+        modalCanecl.classList.add("modalCanecl");
+        modalSummit.textContent = "Summits";
+        modalCanecl.textContent = "Cancle";
+
+        document.body.appendChild(modal);
+        modal.appendChild(modalContent);
+        modalContent.appendChild(modalCloser);
+        modalContent.appendChild(modalDesc);
+        modalContent.appendChild(modalAction);
+        modalAction.appendChild(modalSummit);
+        modalAction.appendChild(modalCanecl);
+
+        const is_show = document.querySelector(".modal");
+        setTimeout(() => {
+            is_show.classList.add("show-modal");
+        }, 2000);
+    </script>
+</body>
+
+</html>

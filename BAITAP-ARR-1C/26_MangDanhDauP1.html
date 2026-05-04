@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 26. Mảng đánh dấu 1
+        // Hãy đếm xem có bao nhiêu giá trị khác nhau trong mảng?
+        const Arr = [3, 9, 4, 0, 9];
+        
+        const Mark = new Array(1000).fill(0);
+
+        let max = -Infinity;
+        for (let i = 0; i < Arr.length; i++) {
+            Mark[Arr[i]] = 1;
+            if (Arr[i] > max) {
+                max = Arr[i];
+            }
+        }
+
+        let cnt = 0;
+        for (let i = 0; i < Mark.length; i++) {
+            if (Mark[i] != 0) {
+                ++cnt;
+            }
+        }
+        console.log(cnt);
+    </script>
+</body>
+</html>

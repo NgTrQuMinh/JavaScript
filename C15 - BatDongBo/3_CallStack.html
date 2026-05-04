@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Call Stack là gì?
+        // Call Stack là một cấu trúc dữ liệu mà JavaScript Engine (như V8 trên Chrome) sử dụng để quản lý việc thực thi các hàm. Nó theo dõi:
+        // Hàm nào đang được chạy.
+        // Hàm nào được gọi bên trong hàm đó.
+        // Hàm nào sẽ được chạy tiếp theo.
+
+        // 2. Cách Call Stack hoạt động
+        // Khi bạn chạy một chương trình:
+        // Global Execution Context: Khi script bắt đầu chạy, một "ngữ cảnh toàn cục" được đẩy vào stack.
+        // Push: Mỗi khi một hàm được gọi, nó sẽ được đẩy (push) lên đỉnh của stack.
+        // Execute: Engine sẽ thực thi hàm ở trên đỉnh stack.
+        // Pop: Khi hàm đó chạy xong (gặp lệnh return hoặc kết thúc hàm), nó sẽ được rút ra (pop) khỏi stack và quyền điều khiển chuyển về hàm ngay bên dưới nó.
+        function sayHi() {
+            console.log("Hi!");
+        }
+
+        function greeting() {
+            sayHi();
+            console.log("How are you?");
+        }
+        greeting();
+        // Diễn biến trong Call Stack:
+        // Trống rỗng.
+        // Thêm hàm greeting() vào stack.
+        // Bên trong greeting, gọi sayHi(). Thêm sayHi() vào đỉnh stack.
+        // Thực thi sayHi(), in ra "Hi!", sau đó xóa sayHi() khỏi stack.
+        // Tiếp tục thực thi greeting(), in ra "How are you?", sau đó xóa greeting() khỏi stack.
+        // Stack trống (kết thúc chương trình).
+
+        // 4. Hiện tượng "Stack Overflow"
+        // Bạn có bao giờ nghe tên trang web Stack Overflow chưa? Tên nó bắt nguồn từ một lỗi phổ biến: Tràn ngăn xếp.
+        // Điều này xảy ra khi một hàm gọi chính nó (đệ quy) mà không có điểm dừng, hoặc gọi nhau vô tận. Stack sẽ đầy cho đến khi trình duyệt báo lỗi:
+        // Uncaught RangeError: Maximum call stack size exceeded.
+        // Lưu ý: Call Stack giúp quản lý các tác vụ đồng bộ (synchronous). Với các tác vụ bất đồng bộ (asynchronous) như setTimeout hay gọi API, 
+        // JavaScript sẽ cần đến sự trợ giúp của Callback Queue và Event Loop để không làm tắc nghẽn Call Stack.
+    </script>
+</body>
+
+</html>

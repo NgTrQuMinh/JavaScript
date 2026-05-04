@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            padding: 50px 0px 20px 0px;
+            text-align: center;
+        }
+
+        #Form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Form input {
+            width: 500px;
+            padding: 10px 20px;
+            margin: 10px 0px;
+        }
+
+        #Form button {
+            width: 500px;
+            padding: 10px 20px;
+            margin: 10px 0px;
+        }
+
+        .inputError {
+            border: 1px solid red;
+        }
+
+        .error {
+            display: block;
+            color: red;
+            font-size: 17px;
+            height: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Đăng kí thành viên</h1>
+    <form id="Form">
+        <input type="text" name="user" id="user" placeholder="UserName"><span class="errorUser error"></span>
+        <input type="text" name="email" id="email" placeholder="Email"><span class="errorEmail error"></span>
+        <input type="password" name="password" id="password" placeholder="Password"><span
+            class="errorPass error"></span>
+        <input type="text" name="experience" id="experience" placeholder="Experience"><span
+            class="errorExperience error"></span>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const Form = document.getElementById("Form");
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                // Lấy dữ liệu từ form
+                const formData = new FormData(Form);
+                // Chuyển sang object
+                const data = Object.fromEntries(formData.entries());
+
+                const user = document.querySelector("#user");
+                const email = document.querySelector("#email");
+                const password = document.querySelector("#password");
+                const experience = document.querySelector("#experience");
+
+                const errorUser = document.querySelector(".errorUser");
+                const errorEmail = document.querySelector(".errorEmail");
+                const errorPass = document.querySelector(".errorPass");
+                const errorExperience = document.querySelector(".errorExperience");
+
+                errorUser.textContent = "";
+                errorEmail.textContent = "";
+                errorPass.textContent = "";
+                errorExperience.textContent = "";
+
+                let check = true;
+                if (data.user === "") {
+                    errorUser.textContent = "Vui lòng nhập User";
+                    user.classList.add("inputError");
+                    check = false;
+                } else {
+                    user.classList.remove("inputError");
+                }
+                
+                if (data.email === "") {
+                    errorEmail.textContent = "Vui５ nhập Email";
+                    email.classList.add("inputError");
+                    check = false;
+                } else if (!data.email.includes("@")) {
+                    errorEmail.textContent = "Email phải chúa @.";
+                    email.classList.add("inputError");
+                    check = false;
+                } else {
+                    email.classList.remove("inputError");
+                }
+                
+                const hasNumber = /[0-9]/.test(data.password);
+                if (data.password === "") {
+                    errorPass.textContent = "Vui５ nhập Password";
+                    password.classList.add("inputError");
+                    check = false;
+                } else if (data.password.length <= 6 || !hasNumber) {
+                    errorPass.textContent = "Password 6-10 ký tự, có chữ số";
+                    password.classList.add("inputError");
+                    check = false;
+                } else {
+                    password.classList.remove("inputError");
+                }
+                if (data.experience === "") {
+                    errorExperience.textContent = "Vui lòng nhập Experience";
+                    experience.classList.add("inputError");
+                    check = false;
+                } else if (isNaN(data.experience)) {
+                    errorExperience.textContent = "Experience phải là số";
+                    document.getElementById("experience").classList.add("inputError");
+                    check = false;
+                } else {
+                    experience.classList.remove("inputError");
+                }
+                if (check === true) {
+                    alert("Đăng kí thành công");
+                    Form.reset();
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

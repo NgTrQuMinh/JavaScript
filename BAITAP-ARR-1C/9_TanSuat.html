@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 9. Tần suất
+        const Arr = [4, 2, 6, 3, 0, 7, 7];
+
+        Arr.sort((a, b) => {
+            return a - b;
+        })
+
+        for (let i = 0; i < Arr.length; i++) {
+            let check = 0;
+            for (let j = 0; j < Arr.length; j++) {
+                if (Arr[i] === Arr[j]) {
+                    check = 1;
+                    break;
+                }
+            }
+            if (check === 1) {
+                let cnt = 1;
+                for (let j = 0; j < i; j++) {
+                    if (Arr[i] === Arr[j]) {
+                        ++cnt;
+                    }
+                }
+                console.log(Arr[i], cnt);
+            }
+        }
+        console.log("------------------------------");
+        // Mảng Đánh Dấu
+        const mark = new Array(8).fill(0);  // Khởi tạo mảng đánh dấu với 8 phần tử (từ 0-7), giá trị mặc định là 0
+
+        // Duyệt và đánh dấu
+        for (let num of Arr) {
+            mark[num]++;
+        }
+        console.log(mark);
+    </script>
+</body>
+
+</html>

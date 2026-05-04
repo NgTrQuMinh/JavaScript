@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách nhận diện Anonymous Function
+        // Gán vào một biến
+        const sayHello = function () {
+            console.log("Xin chào!");
+        };
+        sayHello();
+
+        // 2. Các trường hợp sử dụng phổ biến
+        // A. Làm tham số cho hàm khác (Callback)
+        setTimeout(function () {
+            console.log("Đã đợi xong 2 giây!");
+        }, 2000);
+
+        // B. Hàm mũi tên (Arrow Function)
+        const add = (a, b) => a + b;
+
+        // C. Hàm tự thực thi (IIFE)
+        (function () {
+            console.log("Hàm này tự chạy luôn!");
+        })(); // () là để gọi luôn function đó ra
+
+    </script>
+</body>
+
+</html>

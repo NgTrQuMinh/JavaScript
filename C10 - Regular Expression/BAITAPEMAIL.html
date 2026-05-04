@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện tập Regex: Email & Password</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #eef2f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        /* Hiệu ứng màu sắc khi Regex đúng/sai */
+        input.valid {
+            border-color: #2ecc71;
+            background-color: #fafffa;
+        }
+
+        input.invalid {
+            border-color: #e74c3c;
+            background-color: #fffafa;
+        }
+
+        .status {
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .status.valid {
+            color: #2ecc71;
+        }
+
+        .status.invalid {
+            color: #e74c3c;
+        }
+
+        .hint {
+            font-size: 11px;
+            color: #666;
+            margin-top: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-left: 3px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Luyện Tập Regex</h2>
+
+        <div class="input-group">
+            <label>Email:</label>
+            <input type="text" id="emailInput" placeholder="nhap-email@vidu.com">
+            <span id="emailStatus" class="status"></span>
+        </div>
+
+        <div class="input-group">
+            <label>Password:</label>
+            <input type="password" id="passInput" placeholder="Nhập mật khẩu">
+            <span id="passStatus" class="status"></span>
+        </div>
+
+        <div class="hint">
+            <strong>Thử thách Regex của bạn:</strong><br>
+            1. <b>Email:</b> Phải có @ và tên miền hợp lệ.<br>
+            2. <b>Password:</b> Ít nhất 8 ký tự, 1 chữ hoa, 1 số và 1 ký tự đặc biệt.
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById("emailInput");
+        const passInput = document.getElementById("passInput");
+        const emailStatus = document.getElementById("emailStatus");
+        const passStatus = document.getElementById("passStatus");
+
+        function updateUI(inputEl, statusEl, isValid, message) {
+            if (isValid) {
+                inputEl.classList.add("valid");
+                inputEl.classList.remove("invalid");
+                statusEl.textContent = "Hợp lệ!";
+                statusEl.className = "status valid";
+            } else {
+                inputEl.classList.add("invalid");
+                inputEl.classList.remove("valid");
+                statusEl.textContent = message;
+                statusEl.className = "status invalid";
+            }
+        }
+
+        emailInput.addEventListener("input", (e) => {
+            const value = e.target.value;
+            const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const CheckEmail_Regex = REGEX_EMAIL.test(value.trim());
+            updateUI(emailInput, emailStatus, CheckEmail_Regex, "Email không hợp lệ (thiếu @ hoặc tên miền).");
+        });
+
+        passInput.addEventListener("input", (e) => {
+            const value = e.target.value;
+            const REGEX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            const CheckPass_Regex = REGEX_PASSWORD.test(value.trim());
+            updateUI(passInput, passStatus, CheckPass_Regex, "Mật khẩu yếu (Cần 8 ký tự, 1 hoa, 1 số, 1 đặc biệt).");
+        })
+
+    </script>
+
+</body>
+
+</html>

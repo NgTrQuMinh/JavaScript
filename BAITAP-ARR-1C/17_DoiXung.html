@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 17. Mảng đối xứng
+        const Arr = [870, 1069, 2363, 375, 2188, 6059, 6775, 495, 643, 832, 832, 643, 495, 6775, 6059, 2188, 375, 2363, 1069, 870];
+
+        // Sử DỤng Hàm Every Để kiểm tra xem tất cả có đúng ko.
+        const isPalindrome = Arr.every((value, index) => {
+            return value === Arr[Arr.length - index - 1];   // Arr[0] === Arr[20 - 0 - 1]
+        })
+        console.log(isPalindrome ? "YES" : "NO");
+
+        // Code Chay
+        const Check_isPalindrome = ((arr) => {
+            let l = 0, r = arr.length - 1;
+            while (l <= r) {
+                if (arr[l] !== arr[r]) {
+                    return false;
+                }
+                ++l; --r;
+            }
+            return true;
+        })
+
+        console.log(Check_isPalindrome(Arr) ? "Yes" : "NO");
+    </script>
+</body>
+
+</html>

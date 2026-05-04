@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 4. Meta characters
+        // \d: khớp với số nó sẽ tương đương với [0-9] -----  \D: ngược lại vói \d tương đương với [^0-9]
+        /\d/.test("1234"); // true
+        // \w: khớp với các kí tự và dấu gạch dưới và số, tương đương với [a-z A-Z 0-9_] ----- \W: ngược lại
+        /\w/.test("_"); // true
+        // \s: khớp với tất cả các kí tự khoảng trắng: space tab newline ----- \S: các kí tự ko phải khoảng trắng
+        /\s/.test(" "); // true
+        // \n: khớp với newline(xuống hàng)
+        // \t: khớp với lại tab
+        // .: khớp với tất cả mọi thứ ngoại trừ newline(\n) xuống hàng.
+        // [^]: khớp với tất cả mọi thứ
+    </script>
+</body>
+
+</html>

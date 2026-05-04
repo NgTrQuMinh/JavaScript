@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách hoạt động của Đa hình trong JS
+        // tính đa hình thường được thể hiện rõ nhất thông qua ghi đè phương thức (Method Overriding). 
+        // Khi một lớp con kế thừa từ lớp cha, nó có thể định nghĩa lại một phương thức đã tồn tại ở lớp cha để phù hợp với đặc thù của nó.
+
+        // Giả sử ta có một lớp cha là VatNuoi và các lớp con như Cho, Meo. 
+        // Tất cả đều có hành động keu(), nhưng mỗi loài lại kêu khác nhau.
+
+        class VatNuoi {
+            keu() {
+                return "Tiếng kêu động vật...";
+            }
+        }
+
+        class Cho extends VatNuoi {
+            keu() {
+                return "Gâu gâu!";
+            }
+        }
+
+        class Meo extends VatNuoi {
+            keu() {
+                return "Meo meo!";
+            }
+        }
+
+        // Hàm sử dụng tính đa hình
+        function choVatNuoiAn(conVat) {
+            console.log(conVat.keu());
+        }
+
+        const myDog = new Cho();
+        const myCat = new Meo();
+
+        choVatNuoiAn(myDog); // Output: Gâu gâu!
+        choVatNuoiAn(myCat); // Output: Meo meo!
+
+        // 2. Tại sao tính đa hình lại quan trọng?
+        // Tính linh hoạt: Bạn có thể viết một hàm hoặc một đoạn code có thể làm việc với nhiều loại đối tượng khác nhau mà không cần biết chính xác đối tượng đó thuộc lớp nào
+        // Dễ mở rộng: Khi bạn muốn thêm một loài vật mới bạn chỉ cần tạo class Vit và ghi đè phương thức keu(). Bạn không cần sửa đổi hàm choVatNuoiAn.
+        // Sạch code: Giúp loại bỏ các câu lệnh kiểm tra điều kiện rườm rà như if (loai == 'cho') ... else if (loai == 'meo') ....
+
+        // 3. Đa hình thông qua Interface (Duck Typing)
+        // JavaScript là một ngôn ngữ "dynamic typing", nên nó còn có một dạng đa hình không chính thức gọi là Duck Typing: "Nếu nó đi như một con vịt và kêu như một con vịt, thì nó là một con vịt."
+        
+    </script>
+</body>
+
+</html>

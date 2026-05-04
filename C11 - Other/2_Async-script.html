@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Script async: tải song song, chạy ngay khi có -->
+    <script async src="analytics.js"></script>
+</head>
+
+<body>
+    <h1>Trang web</h1>
+    <!-- <script async> dùng để tải và chạy file JavaScript không chặn việc phân tích cú pháp HTML.
+
+    Khi gặp thẻ <script async src="...">, trình duyệt sẽ tải script song song với việc đọc HTML, và ngay khi tải xong 
+    sẽ tạm dừng phân tích HTML để chạy script, sau đó mới tiếp tục. -->
+
+    <!-- So sánh nhanh:
+    Thuộc tính	            Tải script	                        Khi nào chạy
+    không async/defer	    ngay lập tức, chặn HTML	        chạy ngay, chặn HTML
+    async	                song song với HTML	            chạy ngay khi tải xong (có thể trước khi HTML tải xong)
+    defer	                song song với HTML	            chạy sau khi HTML phân tích xong, theo thứ tự -->
+
+    <!-- Khi nào dùng async?
+    Dùng cho script độc lập, không phụ thuộc vào DOM hay script khác (ví dụ: Google Analytics, quảng cáo).
+
+    Không dùng async nếu script cần truy cập DOM hoặc có thứ tự chạy quan trọng. -->
+</body>
+
+</html>

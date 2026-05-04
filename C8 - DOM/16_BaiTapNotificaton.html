@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Demo Notification Siêu Cấp Cơ Bản</h2>
+    
+    <button onclick="xinQuyen()">1. Cho phép thông báo</button>
+    <button onclick="hienThongBao()">2. Hiện thông báo ngay</button>
+
+    <script>
+        // Bước 1: Xin quyền từ người dùng
+        function xinQuyen() {
+            Notification.requestPermission().then(function(result) {
+                alert("Trạng thái quyền: " + result);
+            });
+        }
+
+        // Bước 2: Hiển thị thông báo
+        function hienThongBao() {
+            if (Notification.permission === "granted") {
+                // Lệnh quan trọng nhất ở đây
+                new Notification("Chào bạn!", {
+                    body: "Đây là nội dung thông báo cơ bản.",
+                    icon: "https://via.placeholder.com/100" 
+                });
+            } else {
+                alert("Bạn cần bấm nút 'Cho phép' trước đã!");
+            }
+        }
+    </script>
+</body>
+</html>

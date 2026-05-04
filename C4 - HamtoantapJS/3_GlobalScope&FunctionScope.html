@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Global Scope (Phạm vi toàn cục)
+        let globalName = "Gemini"; // Biến Global
+
+        function sayHello() {
+            console.log("Hello " + globalName); // Truy cập được từ bên trong hàm
+        }
+        sayHello(); // Output: Hello Gemini
+
+        // 2. Function Scope (Phạm vi hàm)
+        function secretMessage() {
+            let secret = "Đây là bí mật!";
+            console.log(secret); // Hoạt động bình thường
+        }
+
+        secretMessage();
+        console.log(secret); // LỖI: Uncaught ReferenceError: secret is not defined
+
+        // 3. Block Scope (Phạm vi khối)
+        {
+            var nameVar = "Tôi là Var";
+            let nameLet = "Tôi là Let";
+            const nameConst = "Tôi là Const";
+        }
+        console.log(nameVar);   // Output: "Tôi là Var" (Vẫn truy cập được!)
+        console.log(nameLet);   // LỖI: ReferenceError
+        console.log(nameConst); // LỖI: ReferenceError
+
+
+        //----- Tổng kết quy tắc "Phạm vi"  Để dễ nhớ, bạn có thể hình dung thứ tự từ lớn đến nhỏ như sau:
+        // Global Scope: Cả thành phố đều thấy bạn.
+        // Function Scope: Chỉ người trong nhà(hàm) thấy bạn.
+        // Block Scope: Chỉ người trong phòng(cặp ngoặc {}) thấy bạn.
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // for...in (Dùng cho Object) -- Dùng để duyệt qua các key (thuộc tính) của một đối tượng.
+        const Object = { name: "Gemini", age: 1, dev: "Google" };
+        for (let key in Object) {
+            console.log(key + ": " + person[key]);
+        }
+        // key: Là biến đại diện cho tên của thuộc tính (chuỗi) ở mỗi lần lặp.
+        // object: Đối tượng mà bạn muốn duyệt qua.
+
+        // 2. Ví dụ thực tế
+        const smartPhone = {
+            brand: "Apple",
+            model: "iPhone 15",
+            color: "Titanium"
+        };
+
+        for (let x in smartPhone) {
+            console.log(x + ": " + smartPhone[x]);
+        }
+        // Kết quả:
+        // brand: Apple
+        // model: iPhone 15
+        // color: Titanium
+
+        // 3. Những đặc điểm quan trọng cần lưu ý
+        // A. Duyệt qua cả Prototype (Kế thừa)
+        // Đây là điểm "nguy hiểm" nhất của for...in. Nó không chỉ duyệt các thuộc tính của riêng đối tượng đó mà còn duyệt luôn 
+        // các thuộc tính được kế thừa từ chuỗi prototype của nó.
+        // Giải pháp: Luôn dùng kèm với Object.hasOwn() hoặc hasOwnProperty() để đảm bảo bạn chỉ thao tác trên dữ liệu gốc của đối tượng.
+        for (let key in person) {
+            if (Object.hasOwn(person, key)) {
+                console.log(key); // Chỉ in ra thuộc tính thực sự của person
+            }
+        }
+        // B. Không đảm bảo thứ tự
+        // C. Đừng dùng cho Mảng (Array)
+
+
+    </script>
+</body>
+
+</html>

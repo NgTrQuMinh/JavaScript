@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img id="slide" src="./Image/1.jpg" alt="">
+    <div>
+        <button id="btnPause" type="submit">PAUSE</button>
+        <button id="btnStar" type="submit">START</button>
+    </div>
+    <script>
+        const Image = [
+            "./Image/1.jpg",
+            "./Image/2.jpg",
+            "./Image/3.jpg",
+            "./Image/4.jpg",
+            "./Image/5.jpg"
+        ];
+        const slide = document.querySelector("#slide");
+        let index = 0;
+        let auto = null;
+        
+        function showImg() {
+            slide.src = Image[index];
+        }
+
+        function nextImg() {
+            ++index;
+            if (index > Image.length - 1) {
+                index = 0;
+            }
+            showImg();
+        }
+
+        function starImg() {
+            if (!auto) {
+                auto = setInterval(() => {
+                    nextImg();
+                }, 1000);
+            }
+        }
+        starImg();
+        function pauseImg() {
+            clearInterval(auto);
+            auto = null;
+        }
+
+        const btnStar = document.querySelector("#btnStar");
+        const btnPause = document.querySelector("#btnPause");
+
+        btnStar.addEventListener("click" , starImg)
+        btnPause.addEventListener("click", pauseImg);
+    </script>
+</body>
+</html>

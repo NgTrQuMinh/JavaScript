@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 0. Viết hàm find LongestWord nhận vào một mảng các chuỗi và trả về chuỗi dài nhất trong mảng đó. Nếu có nhiều chuỗi có độ dài giống nhau và là dài nhất, trả về chuỗi xuất hiện đầu tiên.
+        function findLongestWord(arr) {
+            return arr.reduce((a, b) => a.length > b.length ? a : b);
+        }
+        console.log(findLongestWord(["abc", "def", "ghi", "jkl", "mno"])); 
+
+        // 1. Viết hàm compressString để rút gọn một chuỗi bằng cách thay thế các nhóm ký tự liên tiếp giống nhau bằng một ký tự đó kèm theo số lần xuất hiện liên tiếp của ký tự đó.
+        function compressString(str) {
+            let result = "";
+            let count = 1;
+            for (let i = 1; i < str.length; i++) {
+                if (str[i] === str[i - 1]) {
+                    count++;
+                } else {
+                    result += str[i - 1] + count;
+                    count = 1;
+                }
+            }
+            result += str[str.length - 1] + count;
+            return result;
+        }
+        
+        
+        // 2. Viết hàm calculateGrade để tính điểm trung bình từ một mảng điểm số và trả về xếp loại dựa trên điểm trung bình đó. Xếp loại được định nghĩa như sau:
+        function calculateGrade(arr) {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            let avg = sum / arr.length;
+            if (avg >= 9) {
+                return "A";
+            } else if (avg >= 8) {
+                return "B";
+            } else if (avg >= 7) {
+                return "C";
+            } else if (avg >= 6) {
+                return "D";
+            } else {
+                return "F";
+            }
+        }
+
+        // 3. Viết hàm isPalindrome để kiểm tra một chuỗi có phải là chuỗi đối xứng hay không. Một chuỗi được coi là đối xứng nếu việc đọc nó từ trái qua phải hoặc từ phải qua trái đều giống nhau.
+        function Reverse(str) {
+            return str.split("").reverse().join("");
+        }
+
+        function isPalindrome(str) {
+            return str === Reverse(str);
+        }
+        
+        // 4. Viết hàm findMissing Number để tìm số thiếu trong một dãy số từ 1 đến n. Mảng đầu vào chứa các số từ 1 đến n nhưng thiếu một số, không có trùng lặp.
+        function findMissing(str) {
+            let result = [];
+            for (let i = 1; i <= str; i++) {
+                if (!result.includes(i)) {
+                    result.push(i);
+                }
+            }
+            return result;
+        }
+        
+        // 5. Viết hàm maxConsecutiveOnes để tìm độ dài của chuỗi
+        function maxConsecutiveOnes(str) {
+            let result = 0;
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === "1") {
+                    count++;
+                    result = Math.max(result, count);
+                } else {
+                    count = 0;
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+
+</html>

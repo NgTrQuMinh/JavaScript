@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Async/Await là gì?
+        // Async/Await là một "lớp áo" (syntactic sugar) bao bọc bên ngoài Promise. Nó không thay đổi cách JS vận hành, nhưng giúp chúng ta viết code bất đồng bộ trông giống hệt như code tuần tự (đồng bộ).
+
+        // A. Async: Khai báo một hàm bất đồng bộ.
+        // Hàm này luôn trả về một Promise.
+        // Nếu bạn trả về một giá trị không hứa hẹn, JavaScript sẽ tự động gói giá trị đó vào một Lời hứa đã được giải quyết.
+        async function hello() {
+            return "Chào bạn!";
+        }
+        hello().then(data => console.log(data)); // "Chào bạn!"
+
+        // B. Await: Tạm dừng việc thực thi hàm cho đến khi Promise có kết quả.
+        // await chỉ có thể dùng bên trong hàm async
+        // Nó khiến JS đợi cho đến khi Promise ổn định (thành công hoặc thất bại) rồi mới chạy tiếp dòng code bên dưới.
+        async function layDuLieu(id) {
+            try {
+                let response = await fetch(`https://api.example.com/data/${id}`);   // Sử dụng dấu backtick để truyền id vào URL
+                if (!response.ok) {     // Kiểm tra nếu phản hồi từ server không thành công (vd: lỗi 404, 500)
+                    throw new Error("Lỗi mạng hoặc server không phản hồi");
+                }
+                let data = await response.json();
+                return data; // Phải return thì hàm .then() bên ngoài mới nhận được dữ liệu
+            } catch (error) {
+                console.error("Đã có lỗi xảy ra:", error);
+            }
+        }
+        // Sử dụng Async/Await ở cả hai đầu
+        const hienThiDuLieu = async () => { // Tạo một hàm bao (wrapper) để có thể sử dụng từ khóa await
+            const data = await layDuLieu(1);    // Chuyển dữ liều từ hàm layDuLieu với id = 1 sang hàm hienThiDuLieu
+            if (data) {
+                console.log("Dữ liệu nhận được:", data);
+            } else {
+                console.log("Không lấy được dữ liệu.");
+            }
+        };
+        hienThiDuLieu(); 
+
+        // 2. Xử lý lỗi (Error Handling)
+        // Với Promise thuần, bạn dùng .catch(). Với Async/Await, bạn dùng cấu trúc try...catch truyền thống. Rất sạch sẽ!
+        async function checkHeThong() {
+            try {
+                let ketQua = await fetch('https://api-loi.com');
+                let data = await ketQua.json();
+            } catch (sai) {
+                console.error("Có lỗi xảy ra nè:", sai);
+            }
+        }
+
+        // 3. Những "Cạm bẫy" cần tránh (Góc kinh nghiệm)
+        // Sai lầm 1: Quên await
+        // Sai lầm 2: Làm code chạy chậm (Sequential bottleneck)
+        // const user = await fetchUser(); // Đợi 2s
+        // const post = await fetchPost(); // Đợi 2s nữa => Tổng 4s
+        // const [user, post] = await Promise.all([fetchUser(), fetchPost()]); // Tổng chỉ mất 2s
+        // Sai lầm 3: Dùng await trong vòng lặp forEach
+
+        // Tóm lại:
+        // Muốn dùng await thì hàm bao ngoài phải có async.
+        // Luôn bọc trong try...catch để tránh "sập" app.
+        // Dùng Promise.all nếu muốn thực hiện nhiều tác vụ cùng lúc.
+    </script>
+</body>
+
+</html>

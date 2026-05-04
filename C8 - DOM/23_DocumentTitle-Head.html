@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Document.title và Document.head là hai thuộc tính cực kỳ phổ biến để truy cập và điều chỉnh thông tin "meta" của trang web
+
+        // 1. document.title - nội dung nằm trong thẻ <title>
+        console.log(document.title); // Đọc -> Document
+        const TitleNew = document.title = "Tiêu đề mới nè!"; // Ghi -> Tiêu đề mới nè!
+        console.log(TitleNew); // Tiêu đề mới nè!
+
+        // 2. document.head - Thuộc tính này trả về phần tử <head> của tài liệu hiện tại.
+        // Dùng để chèn thêm các thẻ <link>, <style>, hoặc <meta> vào trang web bằng JavaScript.
+        console.log(document.head); // Trả về toàn bộ node <head>
+
+        // "viewport" content="width=device-width, initial-scale=1.0"
+        const meta = document.createElement("meta");
+        meta.setAttribute("name", "viewport");
+        meta.setAttribute("content", "width=device-width, initial-scale=1.0");
+        document.head.appendChild(meta);
+
+    </script>
+</body>
+
+</html>

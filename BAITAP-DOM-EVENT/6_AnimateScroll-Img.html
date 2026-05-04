@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực hành Animate Scroll Img</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #333;
+            color: white;
+        }
+
+        .container {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 100px;
+            /* Khoảng cách xa để dễ quan sát hiệu ứng cuộn */
+        }
+
+        /* Trạng thái ban đầu của ảnh */
+        .reveal {
+            position: relative;
+            transform: translateY(150px);
+            /* Đẩy xuống thấp */
+            opacity: 0;
+            /* Ẩn đi */
+            transition: all 1s ease-out;
+            /* Thời gian chuyển động 1 giây */
+        }
+
+        .reveal img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Khi thêm class 'active' qua JS, ảnh sẽ hiện lên */
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Cuộn xuống để xem hiệu ứng</h1>
+    </header>
+
+    <div class="container">
+        <div class="reveal">
+            <img src="https://picsum.photos/800/500?random=1" alt="Ảnh 1">
+        </div>
+        <div class="reveal">
+            <img src="https://picsum.photos/800/500?random=2" alt="Ảnh 2">
+        </div>
+        <div class="reveal">
+            <img src="https://picsum.photos/800/500?random=3" alt="Ảnh 3">
+        </div>
+        <div class="reveal">
+            <img src="https://picsum.photos/800/500?random=4" alt="Ảnh 4">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Chọn thẻ div .reveal (nơi chứa hiệu ứng CSS)
+            const reveals = document.querySelectorAll(".reveal");
+
+            window.addEventListener("scroll", () => {
+                // Lấy chiều cao của phần khung nhìn trình duyệt (viewport).
+                const windowHeight = window.innerHeight;
+
+                reveals.forEach(element => {
+                    // getBoundingClientRect().top: Lấy khoảng cách từ mép TRÊN của phần tử
+                    const revealTop = element.getBoundingClientRect().top;
+
+                    // NẾU Thẻ div(hình ảnh) < So với thanh cuộn đến hình ảnh + 150 thì nó sẽ hiện ra
+                    if (revealTop < windowHeight - 150) {
+                        element.classList.add("active");
+                    } else {
+                        // Nếu muốn cuộn lên ảnh ẩn đi để hiện lại lần sau:
+                        element.classList.remove("active");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

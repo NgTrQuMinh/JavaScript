@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Constructor Function (hàm tạo) là một loại hàm đặc biệt được dùng để khởi tạo và tạo ra nhiều đối tượng (object) 
+        // có cùng cấu trúc và thuộc tính.
+
+        // Sử dụng Constructor Function
+        function Character(name, hp, atk, defense) {
+            this.name = name;
+            this.hp = hp;
+            this.atk = atk;
+            this.defense = defense;
+            this.attack = function (target) {
+                const dame = Math.max(this.atk - target.defense, 0);
+                target.hp -= dame;
+            }
+            this.isAlive = (() => {
+                return this.hp > 0;
+            })
+        }
+
+        const Tom = new Character('Tom', 100, 50, 50);
+        Tom.speed = 100; // add spped cho Tom
+        
+
+        const Jerry = new Character('Jerry', 50, 20, 20);
+        console.log(Tom); // Character {name: "Tom", hp: 100, atk: 50, defense: 50, spped: 100  ,attack: ƒ, isAlive: ƒ}
+        console.log(Jerry); // Character {name: "Jerry", hp: 50, atk: 20, defense: 20, spped: undefined, attack: ƒ, isAlive: ƒ}
+    </script>
+</body>
+
+</html>

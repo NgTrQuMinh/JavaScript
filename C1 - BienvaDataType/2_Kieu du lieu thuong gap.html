@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Các Kiểu dữ liệu thường gặp (Data Types)
+
+        // A. Nhóm Nguyên thủy (Đơn giản)
+        // 1. Number (Số)
+        let score = 100;      // Số nguyên
+        let price = 19.99;    // Số thập phân
+        let temperature = -5; // Số âm
+
+        // 2. String (Chuỗi)
+        let name = 'Gemini';
+        let message = "Chào mừng bạn đến với JS";
+        let greeting = `Xin chào, tôi là ${name}`; // Template string (rất tiện lợi)
+
+        // 3. Boolean (Luận lý)
+        let isLearning = true;
+        let isFinished = false;
+
+        // 4. Undefined (Chưa xác định)
+        let x;
+        console.log(x); // Kết quả: undefined
+
+        // 5. Null (Trống rỗng)
+        let currentJob = null; // Hiện tại đang thất nghiệp hoặc chưa có việc
+
+        // 6. BigInt & Symbol (Nâng cao)
+        const bigNumber = 9007199254740991n;    // BigInt: Dùng cho các số cực lớn (vượt quá giới hạn an toàn của Number). Thêm chữ n ở cuối.
+        let id = Symbol("id");  // Symbol: Tạo ra một định danh duy nhất, thường dùng cho các thuộc tính ẩn trong Object.
+
+        // B. Nhóm Phức hợp (Dữ liệu cấu trúc)
+        // Object (Đối tượng): Chứa dữ liệu theo cặp "tên: giá trị".
+        let user = { name: "An", age: 20 };
+
+        // Array (Mảng): Một danh sách các giá trị có thứ tự.
+        let colors = ["red", "green", "blue"];
+
+        // 3. Đặc tính cần nhớ: Động (Dynamic Typing)
+        let data = 10;    // Lúc này là Number
+        data = "Gemini";  // Bây giờ đã biến thành String
+    </script>
+</body>
+
+</html>

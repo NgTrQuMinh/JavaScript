@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 1. Đếm chẵn lẻ, tổng chẵn lẻ
+        // Output: 2 4 -492 846
+
+        const Arr = [-711, 327, 372, 779, 451, -864];
+
+        let cnt_c = 0, sum_c = 0;
+        let cnt_l = 0, sum_l = 0;
+        for (const value of Arr) {
+            if (value % 2 === 0) {
+                ++cnt_c;
+                sum_c += value;
+            } else {
+                ++cnt_l;
+                sum_l += value;
+            }
+        }
+        console.log("Chẵn:", cnt_c, sum_c);
+        console.log("Chẵn:", cnt_l, sum_l);
+    </script>
+</body>
+</html>

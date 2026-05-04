@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myButton" style="padding: 20px;">
+        <span id="mySpan" style="background: yellow;">Click vào tôi!</span>
+    </button>
+    <script>
+        // event.target: Là thằng bị bấm trúng (phần tử thực tế khởi phát sự kiện).
+        // event.currentTarget: Là thằng đang nghe (phần tử mà bạn gắn addEventListener).
+        const btn = document.getElementById('myButton');
+
+        btn.addEventListener('click', function (e) {
+            console.log('Target:', e.target); // sẽ chọn chính xác ra thằng bị bấm trúng.
+            console.log('CurrentTarget:', e.currentTarget.id); // sẽ chọn phần tử mình click  
+        });
+
+    </script>
+</body>
+
+</html>

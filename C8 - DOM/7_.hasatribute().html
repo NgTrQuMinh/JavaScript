@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn"></button>
+    <script>
+        // .hasAttribute() -- Kiểm tra thuộc tính của HTML Element
+        // Cú pháp: element.hasAttribute('tên_thuộc_tính')
+        // bạn sử dụng phương thức này để xem một thẻ có chứa thuộc tính nào đó hay không (ví dụ: href, class, disabled).
+        // Kết quả: Trả về true hoặc false.
+
+        const btn = document.querySelector('.btn');
+
+        if (btn.hasAttribute('class')) {
+            console.log("OK");
+        } else {
+            console.log("FALSE");
+        }
+
+        // 2. Kiểm tra thuộc tính của Object (Đối tượng)
+        // Cách A: Dùng toán tử in
+        // Cách này sẽ kiểm tra cả thuộc tính của chính đối tượng đó và cả các thuộc tính nó được thừa kế từ "cha" (prototype).
+        const user1 = {
+            name: 'Gemini',
+            age: 1
+        };
+
+        console.log('name' in user1); // true
+        console.log('toString' in user1); // true (vì kế thừa từ Object)
+
+        // Cách B: Dùng .hasOwnProperty()
+        // Đây là cách an toàn và phổ biến nhất, nó chỉ kiểm tra những thuộc tính trực tiếp thuộc về đối tượng đó, không tính hàng kế thừa.
+        const user2 = { name: 'Gemini' };
+
+        console.log(user2.hasOwnProperty('name'));     // true
+        console.log(user2.hasOwnProperty('toString')); // false
+
+        // Cách C: Dùng Object.hasOwn() (Khuyên dùng cho JS hiện đại)
+        // Từ năm 2022, phương thức này được ra đời để thay thế cho hasOwnProperty vì nó ngắn gọn và an toàn hơn.
+        console.log(Object.hasOwn(user2, "name")); // true
+    </script>
+</body>
+
+</html>

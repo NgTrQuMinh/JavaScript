@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="slider" id="slider1">
+        <div class="slides">
+            <img src="img1.jpg" alt="1">
+            <img src="img2.jpg" alt="2">
+            <img src="img3.jpg" alt="3">
+        </div>
+        <button class="prev">Prev</button>
+        <button class="next">Next</button>
+    </div>
+
+    <script>
+        // 1. Constructor Function: Khởi tạo các thuộc tính cơ bản
+        function SimpleSlider(selector) {
+            this.container = document.querySelector(selector);
+            this.slides = this.container.querySelectorAll('.slides img');
+            this.nextBtn = this.container.querySelector('.next');
+            this.prevBtn = this.container.querySelector('.prev');
+
+            this.currentIndex = 0;
+
+            // Khởi tạo các sự kiện
+            this.init();
+        }
+
+        // 2. Phương thức hiển thị Slide (Dùng chung qua Prototype)
+        SimpleSlider.prototype.showSlide = function (index) {
+            // Logic vòng lặp: nếu quá ảnh cuối thì về 0, nếu nhỏ hơn 0 thì về ảnh cuối
+            if (index >= this.slides.length) this.currentIndex = 0;
+            else if (index < 0) this.currentIndex = this.slides.length - 1;
+            else this.currentIndex = index;
+
+            // Ẩn tất cả và hiện ảnh hiện tại
+            this.slides.forEach(img => img.style.display = 'none');
+            this.slides[this.currentIndex].style.display = 'block';
+        };
+
+        // 3. Phương thức Next/Prev
+        SimpleSlider.prototype.next = function () {
+            this.showSlide(this.currentIndex + 1);
+        };
+
+        SimpleSlider.prototype.prev = function () {
+            this.showSlide(this.currentIndex - 1);
+        };
+
+        // 4. Lắng nghe sự kiện (Sử dụng BIND ở đây!)
+        SimpleSlider.prototype.init = function () {
+            // Phải dùng .bind(this) vì trong addEventListener, 'this' sẽ trỏ vào nút bấm (Button)
+            // Chúng ta cần 'this' trỏ về đối tượng SimpleSlider của mình
+            this.nextBtn.addEventListener('click', this.next.bind(this));
+            this.prevBtn.addEventListener('click', this.prev.bind(this));
+
+            // Hiển thị cái đầu tiên
+            this.showSlide(0);
+        };
+
+        // --- SỬ DỤNG ---
+        const mySlider = new SimpleSlider('#slider1');
+
+    </script>
+</body>
+
+</html>

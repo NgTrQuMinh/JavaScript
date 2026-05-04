@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi màu nền</title>
+    <style>
+        .Btn {
+            background-color: #fff;
+            width: 200px;
+            height: 150px;
+            color: red;
+            border-radius: 2px;
+            border: 1px solid gray;
+            text-align: center;
+            cursor: pointer;
+            /* Thêm để hiện bàn tay khi hover */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="Btn">ChangeColor</button>
+
+    <script>
+        const btn = document.querySelector(".Btn");
+        const body = document.querySelector("body");
+
+        const colors = ["#000000", "#FFFFFF", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"];
+        let currentIndex = 0;
+
+        const changeColor = () => {
+            body.style.backgroundColor = colors[currentIndex];
+            currentIndex++;
+
+            if (currentIndex >= colors.length) {
+                currentIndex = 0;
+            }
+        };
+
+        btn.addEventListener("click", changeColor);
+    </script>
+</body>
+
+</html>

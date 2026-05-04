@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const mySet = new Set();
+        mySet.add(1);   // Them phan tu 1 vao set
+        mySet.add("Minh");  
+        console.log(mySet); // Set(2) { 1, "Minh" } 
+    
+        // Kiem tra phan tu co trong set hay khong
+        console.log(mySet.has(1));  // true
+        console.log(mySet.has(2));  // false
+    
+        // Xoa phan tu trong set
+        mySet.delete(1);    // Xoa phan tu 1 trong set
+        console.log(mySet); // Set(1) { "Minh" }
+        console.log(mySet.clear) // Xoa toan bo phan tu trong set
+        console.log(mySet.size);    // 0
+
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        // Chuyen mang thanh set
+        const mySet1 = new Set(arr);
+        console.log(mySet1);    // Set(9) { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+
+        // Chuyen set thanh mang
+        const arr1 = [...mySet1];
+        console.log(arr1);  // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+          
+    </script>
+</body>
+</html>

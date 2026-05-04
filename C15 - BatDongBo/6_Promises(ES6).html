@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Ba trạng thái của Promise
+        // Một Promise luôn nằm trong 1 tiêu chuẩn trạng thái duy nhất tại một thời điểm:
+        // Pending (Đang chờ): Đang nấu phở, chưa biết xong hay hỏng.
+        // Fulfilled (Thành công): Phở đã xong, mời bạn thưởng thức.
+        // Rejected (Thất bại): Hết bánh phở, xin lỗi quý khách.
+
+        // 2. Cách khởi tạo một Promise
+        // Chúng ta dùng từ khóa new Promise. 
+        // Nó nhận vào một hàm có hai tham số: resolve (gọi khi thành công) và reject (gọi khi có lỗi).
+        const thueXe = new Promise((resolve, reject) => {
+            const coXe = false;
+            if (coXe) {
+                resolve("Đã thuê được xe SH!"); // Thành công
+            } else {
+                reject("Hết xe rồi, đi bộ nhé."); // Thất bại
+            } 
+        });
+
+        // 3. Cách sử dụng (Consume)
+        // Để nhận kết quả từ Promise, chúng ta sử dụng các phương thức sau:
+        // .then(): Nhận kết quả khi Promise thành công.
+        // .catch(): Bắt lỗi khi Promise thất bại.
+        // .finally(): Luôn luôn chạy dù thành công hay thất bại (ví dụ: tắt hiệu ứng loading).
+        thueXe
+            .then((result) => {
+                console.log("Tuyệt vời: " + result);
+            })
+            .catch((error) => {
+                console.log("Chia buồn: " + error);
+            })
+            .finally(() => {
+                console.log("Về nhà ngủ.");
+            });
+
+        // 4. Tại sao Promise lại quan trọng?
+        // Trước khi có Promise, chúng ta dùng Callback. Nếu có nhiều việc liên tiếp, code sẽ bị "Callback Hell" (lồng nhau quá nhiều như hình kim tự tháp), rất khó đọc và bảo trì.
+        // Promise Chaining (Chuỗi hứa hẹn):
+        // Promise cho phép chúng ta nối các hành động lại với nhau một cách gọn gàng:
+
+        // dangNhap()
+        //     .then(user => layThongTin(user.id))
+        //     .then(info => layDonHang(info.email))
+        //     .catch(err => console.log("Lỗi ở bất kỳ bước nào cũng chui vào đây"));
+
+    </script>
+</body>
+
+</html>

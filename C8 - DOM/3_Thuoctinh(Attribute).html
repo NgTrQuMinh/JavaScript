@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Attribute là các thông tin bổ sung được viết trực tiếp trong thẻ mở của HTML.
+        // Ví dụ: Trong <input id="username" type="text" value="Nam">, thì id, type, và value chính là các attributes.
+        
+        // 2. Cách thao tác với Attribute bằng JavaScript
+        // getAttribute(name): Lấy giá trị của attribute.
+        // setAttribute(name, value): Thiết lập hoặc thay đổi giá trị.
+        // hasAttribute(name): Kiểm tra xem attribute đó có tồn tại không.
+        // removeAttribute(name): Xóa bỏ attribute.
+
+        // 3. Sự khác biệt giữa Attribute và Property Đây là phần dễ gây nhầm lẫn nhất:
+        // Attribute: Nằm trong tệp HTML. Giá trị của nó luôn là một chuỗi (string).
+        // Property: Là các biến nằm trong đối tượng DOM (JavaScript object). 
+        // Giá trị có thể là bất cứ kiểu dữ liệu nào (string, boolean, number, object...).
+                        
+        // Ví dụ về sự khác biệt:  Với một checkbox: <input type="checkbox" checked>
+        // getAttribute('checked') sẽ trả về một chuỗi trống "" hoặc "checked".
+        // input.checked (Property) sẽ trả về giá trị boolean true.
+
+        // 4. Custom Attributes (Data Attributes)
+        // Trong JS hiện đại, người ta thường dùng tiền tố data- để lưu trữ dữ liệu riêng trên HTML 
+        // mà không làm hỏng cấu trúc chuẩn. Bạn có thể truy cập chúng qua thuộc tính .dataset.
+
+        // HTML: <div id="user" data-id="123" data-role="admin"></div>
+        // ```javascript
+        // const user = document.getElementById('user');
+        // console.log(user.dataset.id);   // "123"
+        // console.log(user.dataset.role); // "admin"
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // B1: Kiểm tra value có phải là 1 object ko?
+        function isObject(value) {
+            if (typeof value === "object" && !Array.isArray(value) && value != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        console.log(isObject({}));
+
+        // B2: Chuyển đổi {a: 1, b: 2} -> [["a", 1], ["b", 2]]
+        function objectIsArr(value) {
+            return Object.entries(value).map(item => item);
+        }
+        console.log(objectIsArr({ a: 1, b: 2 }));
+
+        // B3: Xóa object: ({a: 1, b: 2 }, 'b') -> {a: 1}
+        function without(object, delete_object) {
+            delete object[delete_object];
+            return object;
+        }
+        console.log(without({ a: 1, b: 2 }, "b"));
+
+        // B4: So sánh object độ dài chuỗi: {a:1} {b:1} = true -- {a:1} {b:1, c:1} = fals 
+        function compareObject(object1, object2) {
+            const keys1 = Object.keys(object1);
+            const keys2 = Object.keys(object2);
+
+            // Bước 1: So sánh độ dài trước để tối ưu hiệu năng
+            if (keys1.length !== keys2.length) {
+                return false;
+            }
+            // Bước 2: So sánh từng giá trị tương ứng với key
+            // Chúng ta duyệt qua mảng keys1 (lúc này đã chắc chắn keys1 và keys2 cùng độ dài)
+            return keys1.every((key) => {
+                return object1[key] === object2[key];
+            });
+        }
+        console.log(compareObject({ a: 1 }, { b: 1 }));       // false (khác key)
+        console.log(compareObject({ a: 1 }, { a: 1 }));       // true (giống cả key lẫn value)
+        console.log(compareObject({ a: 1 }, { a: 1, b: 2 })); // false (khác độ dài)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Cả call() và apply() đều dùng để gọi một hàm ngay lập tức và cho phép bạn xác định giá trị của từ khóa this. 
+        // Điểm khác biệt duy nhất giữa chúng nằm ở cách bạn truyền các tham số (arguments) vào hàm
+
+        // Mẹo nhớ: Call dùng cho Comma (dấu phẩy), Apply dùng cho Array (mảng).
+
+        function introduce(country, city) {
+            console.log(`Tôi là ${this.name}. Tôi đến từ ${city}, ${country}.`);
+        }
+
+        const person1 = { name: "An" };
+        const person2 = { name: "Bình" };
+
+        // Dùng call(): truyền tham số rời rạc
+        introduce.call(person1, "Việt Nam", "Hà Nội");
+        // Kết quả: Tôi là An. Tôi đến từ Hà Nội, Việt Nam.
+
+        // Dùng apply(): truyền tham số dưới dạng mảng
+        introduce.apply(person2, ["Việt Nam", "Đà Nẵng"]);
+        // Kết quả: Tôi là Bình. Tôi đến từ Đà Nẵng, Việt Nam.
+
+    </script>
+</body>
+
+</html>

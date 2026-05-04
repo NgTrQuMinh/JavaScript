@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Mức 3: Nâng cao (this + nhiều object)
+        // Bài 5
+        // Tạo class Product:
+        // Thuộc tính: name, price, quantity
+        // Method:
+        // getTotal() → tổng tiền = price × quantity
+        // 👉 Tạo 2–3 sản phẩm và tính tổng tiền tất cả
+        class Product {
+            static TotalAll = 0;
+            constructor(name, price, quantity) {
+                this.name = name;
+                this.price = price;
+                this.quantity = quantity;
+                Product.TotalAll += this.getTotal();
+            }
+            
+            set name(newName) {
+                this._name = newName;
+            }
+            
+            set price(newPrice) {
+                this._price = newPrice;
+            }
+            
+            set quantity(newQuantity) {
+                this._quantity = newQuantity;
+            }
+            get name() {
+                return this._name
+            }
+            
+            get price() {
+                return this._price
+            }
+            get quantity() {
+                return this._quantity
+            }
+            
+            getTotal() {
+                return this.price * this.quantity;
+            }
+        }
+        const product1 = new Product("Áo", 30000, 5);
+        const product2 = new Product("Quần", 50000, 2);
+
+        console.log(`${product1.name}  ${product1.getTotal()}`); 
+        console.log(`${product2.name}  ${product2.getTotal()}`); 
+
+        console.log(Product.TotalAll); 
+
+
+        // Bài 6
+        // Tạo class Car:
+        // Thuộc tính: brand, speed
+        // Method:
+        // accelerate() → tăng speed lên 10
+        // brake() → giảm speed 10 (không âm)
+        class Car {
+            constructor(brand, speed) {
+                this.brand = brand;
+                this.speed = speed;
+            }
+            get brand() {
+                return this._brand;
+            }
+            get speed() {
+                return this._speed;
+            }
+            set brand(newBrand) {
+                this._brand = newBrand;
+            }
+            set speed(newSpeed) {
+                this._speed = newSpeed;
+            }
+            accelerate() {
+                this.speed += 10;
+            }
+            brake() {
+                this.speed -= 10;
+            }
+        }
+        const car1 = new Car("Toyota", 100);
+        car1.accelerate();
+        console.log(car1.speed); 
+        car1.brake();
+        console.log(car1.speed);
+
+        // Mức 4: OOP thật sự (kế thừa - inheritance)
+        // Bài 7
+        // Tạo class Animal:
+        // Method: speak()
+        // Tạo class con:
+        // Dog → ghi đè speak() → "Gâu gâu"
+        // Cat → "Meo meo"
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+            speak() {
+                console.log(`${this.name} speak`);
+            }
+        }
+        class Dog extends Animal {
+            speak() {
+                console.log(`${this.name} speak: Gau Gau`);
+            }
+        }
+        class Cat extends Animal {
+            speak() {
+                console.log(`${this.name} speak: Meo Meo`);
+            }
+        }
+
+        // Bài 8
+        // Tạo class Employee:
+        // Thuộc tính: name, salary
+        // Method: getSalary()
+        // Tạo class con:
+        // Manager → thêm bonus
+        // getSalary() = salary + bonus
+        class Employee {
+            constructor(name, salary) {
+                this.name = name;
+                this.salary = salary;
+            }
+            getSalary() {
+                return this.salary;
+            }
+        }
+        class Manager extends Employee {
+            constructor(name, salary, bonus) {
+                super(name, salary);
+                this.bonus = bonus;
+            }
+            getSalary() {
+                return this.salary + this.bonus;
+            }
+        }
+        const employee = new Employee("Nguyen Van A", 1000000);
+        console.log(employee.getSalary());
+        const manager = new Manager("Nguyen Van B", 2000000, 500000);
+        console.log(manager.getSalary());
+
+        // Bài 10 (Gần giống project)
+        // Tạo class User:
+        // Thuộc tính: email, password
+        // Method:
+        // checkLogin(email, password) → trả true/false
+        class User {
+            constructor (email, password){
+                this.email = email;
+                this.password = password;
+            }
+            checkLogin(email, password) {
+                return this.email === email && this.password === password;
+            }
+
+        }
+        const user = new User("jHx5R@example.com", "123456");
+        console.log(user.checkLogin("jHx5R@example.com", "123456")); // true.
+        console.log(user.checkLogin("jHx5R@example.com", "1236")); // false.
+    </script>
+</body>
+</html>

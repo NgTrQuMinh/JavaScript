@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Nhóm Bảo mật: Object.freeze() và Object.seal()
+        // Object.freeze() (Đóng băng hoàn toàn):
+        const car = { brand: "Toyota" };
+        Object.freeze(car);
+
+        car.brand = "Honda"; // Không tác dụng
+        car.year = 2024;     // Không thể thêm mới
+        delete car.brand;    // Không thể xóa
+
+        console.log(car); // Vẫn là { brand: "Toyota" }
+
+        
+        // Object.seal() (Niêm phong):
+        const laptop = { model: "MacBook" };
+        Object.seal(laptop);
+
+        laptop.model = "Dell"; // CÓ THỂ sửa giá trị hiện có
+        laptop.color = "Gray"; // Không thể thêm mới
+        delete laptop.model;   // Không thể xóa
+
+        console.log(laptop); // { model: "Dell" }
+    </script>
+</body>
+
+</html>

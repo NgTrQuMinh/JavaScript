@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box" style="width: 100px; height: 100px; background: red; margin-top: 500px;">
+        Hộp mục tiêu
+    </div>
+    <script>
+        const box = document.querySelector("#box");
+
+        // Lấy thông tin vị trí
+        const rect = box.getBoundingClientRect();   // DOMRect -> bottom - height - left - right - top - width - x  - y
+        console.log(rect);
+        console.log("Vị trí so với khung nhìn (Viewport):");
+        console.log(`Top: ${rect.top}, Left: ${rect.left}`);
+
+        // Tính toán vị trí tuyệt đối so với toàn bộ tài liệu (Document)
+        // Hữu ích khi bạn cần đặt một phần tử khác đè lên chính xác vị trí này
+        const absoluteTop = rect.top + window.scrollY;
+        const absoluteLeft = rect.left + window.scrollX;
+
+        console.log(`Vị trí thực tế trên trang: ${absoluteTop}px, ${absoluteLeft}px`);
+    </script>
+</body>
+
+</html>

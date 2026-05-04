@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cú pháp cơ bản
+        // Phương thức filter() tạo ra một mảng mới chứa tất cả các phần tử vượt qua bài kiểm tra do bạn thiết lập.
+        // const newArray = array.filter((element, index, array) => {
+        // Trả về true nếu muốn giữ phần tử, false nếu muốn loại bỏ
+        // });
+
+        // element: Phần tử hiện tại đang được xử lý.
+        // index(tùy chọn): Chỉ số của phần tử đó.
+        // array(tùy chọn): Mảng gốc ban đầu.
+
+        // 2. Cách thức hoạt động
+        // filter() sẽ lặp qua từng phần tử và chạy hàm callback mà bạn cung cấp.
+        // Nếu hàm trả về true(hoặc một giá trị "truthy"), phần tử đó được đưa vào mảng mới.
+        // Nếu trả về false, phần tử đó bị loại bỏ.
+        // Quan trọng: Mảng gốc của bạn vẫn giữ nguyên, không bị thay đổi(Tính bất biến - Immutability).
+
+        // 3. Các ví dụ thực tế
+        // A. Lọc số chẵn
+        const numbers = [1, 2, 3, 4, 5, 6];
+        const evens = numbers.filter(num => num % 2 === 0);
+        console.log(evens); // Kết quả: [2, 4, 6]
+
+        // B. Lọc danh sách đối tượng (Object)
+        const users = [
+            { name: 'An', age: 17 },
+            { name: 'Bình', age: 20 },
+            { name: 'Chi', age: 15 },
+            { name: 'Dương', age: 25 }
+        ];
+        function filterAge(arr) {   // Lọc những người đã đủ tuổi trưởng thành (>= 18)
+            return arr.filter((value) => {  // Bên trong Arr -> tìm đến các value -> có age >= 18.
+                return value.age >= 18;
+            })
+        }
+        console.log(filterAge(users));  // Kết quả: [{ name: 'Bình', age: 20 }, { name: 'Dương', age: 25 }]
+
+        // C. Tìm kiếm theo từ khóa
+        const fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
+        const search = 'apple';
+        function searchValue(arr, searchValue) {
+            return arr.filter((value) => {
+                return value.toLowerCase().includes(searchValue.toLowerCase());
+            })
+        }
+        console.log(searchValue(fruits, search));
+
+        // 4. Những lưu ý "sống còn"
+        // Luôn trả về giá trị logic
+        // Không làm thay đổi mảng gốc
+        // Hiệu suất: Nếu mảng có hàng triệu phần tử, hãy cẩn thận vì filter sẽ duyệt qua toàn bộ mảng. 
+        // Nếu bạn chỉ cần tìm một phần tử duy nhất, hãy dùng .find() để tiết kiệm tài nguyên.
+
+    </script>
+</body>
+
+</html>

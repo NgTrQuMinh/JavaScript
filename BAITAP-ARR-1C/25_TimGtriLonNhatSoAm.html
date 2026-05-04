@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 25: Tìm số âm lớn nhất trong Arr.
+        const Arr = [1, 3, -2, -5, 2, -2, -1, 5];
+
+        const maxNegative = Arr.reduce((max, current) => {
+            // Chỉ xét các số âm
+            if (current < 0) {
+                // Nếu max chưa có giá trị (null) hoặc current lớn hơn max hiện tại
+                if (max === null || current > max) {
+                    return current;
+                }
+            }
+            return max;
+        }, null); // Khởi tạo giá trị ban đầu là null
+
+        console.log(maxNegative); // Kết quả: -1
+
+
+    </script>
+</body>
+
+</html>

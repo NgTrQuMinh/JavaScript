@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  Bài 2. Trung bình cộng nguyên tố
+        const Prime = ((value) => {
+            for (let i = 2; i <= Math.sqrt(value); i++) {
+                if (value % i === 0) {
+                    return false;
+                }
+            }
+            return value > 1;
+        })
+
+        const Arr = [-911, 234, 151, 347, 231];
+
+        let Sum = 0, cnt = 0;
+        for (const value of Arr) {
+            if (Prime(value)) {
+                Sum += value;
+                ++cnt;
+            }   
+        }
+        
+        let Result = Math.round(Sum / cnt);
+        console.log(Result);
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  arguments là một đối tượng dạng mảng (array-like object) tồn tại bên trong các hàm truyền thống (function).
+        function tinhTong() {
+            let tong = 0;
+            for (let i = 0; i < arguments.length; i++) {
+                tong += arguments[i];
+            }
+            return tong;
+        }
+
+        console.log(tinhTong(1, 2, 3, 4)); // Kết quả: 10
+
+    </script>
+</body>
+
+</html>

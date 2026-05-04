@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Slide Image</h2>
+    <img id="slide" src="https://picsum.photos/id/1015/500/300">
+    <div class="control">
+        <button id="dautien" type="submit">dau tien</button>
+        <button id="vesau" type="submit">ve sau</button>
+        <button id="ditiep" type="submit">di tiep</button>
+        <button id="dunglai" type="submit">dung lai</button>
+        <button id="vetruoc" type="submit">ve truoc</button>
+        <button id="cuoicung" type="submit">cuoi cung</button>
+    </div>
+    <script>
+        const Images = [
+            "https://picsum.photos/id/1015/500/300",
+            "https://picsum.photos/id/1016/500/300",
+            "https://picsum.photos/id/1018/500/300",
+            "https://picsum.photos/id/1020/500/300",
+            "https://picsum.photos/id/1024/500/300"
+        ];
+        const slide = document.getElementById("slide");
+        let index = 0;
+        let check = null;
+
+        function showImage() {
+            slide.src = Images[index];
+        }
+
+        function dautienImage() {
+            index = 0;
+            showImage();
+        }
+
+        function cuoicungImage() {
+            index = Images.length - 1;
+            showImage();
+        }
+
+        function vesauImage() {
+            index--;
+            if (index < 0) {
+                index = Images.length - 1;
+            }
+            showImage();
+        }
+
+        function vetruocImage() {
+            index++;
+            if (index > Images.length - 1) {
+                index = 0;
+            }
+            showImage();
+        }
+
+        function ditiepImage() {
+            if (!check) {
+                check = setInterval(() => {
+                    vetruocImage();
+                }, 1000);
+            }
+        }
+
+        function dunglaiImage() {
+            clearInterval(check);
+            check = null;
+        }
+
+        const dautien = document.getElementById("dautien");
+        const vesau = document.getElementById("vesau");
+        const ditiep = document.getElementById("ditiep");
+        const dunglai = document.getElementById("dunglai");
+        const vetruoc = document.getElementById("vetruoc");
+        const cuoicung = document.getElementById("cuoicung");
+
+        dautien.addEventListener('click', dautienImage);
+        vesau.addEventListener("click", vesauImage);
+        ditiep.addEventListener("click", ditiepImage);
+        dunglai.addEventListener("click", dunglaiImage);
+        vetruoc.addEventListener("click", vetruocImage);
+        cuoicung.addEventListener("click", cuoicungImage);
+
+    </script>
+</body>
+
+</html>

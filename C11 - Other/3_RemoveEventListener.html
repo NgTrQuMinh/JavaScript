@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="myBtn">Click me</button>
+    <script>
+        // removeEventListener là phương thức dùng để gỡ bỏ một sự kiện đã được gán trước đó bằng addEventListener.
+        // Cú pháp:
+        // element.removeEventListener(eventName, handlerFunction, options);
+        // Định nghĩa hàm xử lý
+        function handleClick() {
+            console.log("Button clicked");
+        }
+
+        const button = document.getElementById("myBtn");
+
+        // Thêm listener
+        button.addEventListener("click", handleClick);
+
+        // Sau 3 giây, gỡ bỏ listener (click nữa sẽ không log nữa)
+        setTimeout(() => {
+            button.removeEventListener("click", handleClick);
+            console.log("Listener đã được gỡ bỏ");
+        }, 3000);
+
+        // Lưu ý quan trọng:
+        // 1 Không thể gỡ bỏ hàm ẩn danh:
+        // ✅ Đúng: phải dùng hàm có tên
+        function log() {
+            console.log("click");
+        }
+        button.addEventListener("click", log);
+        button.removeEventListener("click", log);
+
+        // 2 Options phải khớp:
+        // Nếu thêm với { capture: true } thì khi gỡ cũng phải có đúng { capture: true }.
+
+        // 3 Cách thay thế hiện đại: AbortController:
+        const controller = new AbortController();
+        button.addEventListener("click", handleClick, { signal: controller.signal });
+        // Gỡ bỏ tất cả listener cùng signal:
+        controller.abort();
+
+        // Khi nào cần dùng?
+        // Khi component bị hủy (trong React, Vue,...).
+        // Khi chỉ muốn lắng nghe sự kiện một số lần nhất định (dùng { once: true } thay vì tự gỡ).
+        // Để tối ưu hiệu năng, tránh tích tụ listener.
+
+    </script>
+</body>
+
+</html>

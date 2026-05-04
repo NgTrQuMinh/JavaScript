@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách hoạt động
+        // Getter (get): Dùng để lấy giá trị. Nó trông giống như một hàm nhưng bạn gọi nó như một thuộc tính bình thường (không cần dấu ngoặc đơn ()).
+        // Setter (set): Dùng để gán giá trị. Nó cho phép bạn thêm logic kiểm tra điều kiện trước khi cập nhật dữ liệu.
+
+        // 2. Ví dụ thực tế
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            set width(newWidth) {
+                if (newWidth > 0) {
+                    this._width = newWidth;
+                } else {
+                    console.error("Width must be greater than 0");
+                }
+            }
+
+            set height(newHeight) {
+                if (newHeight > 0) {
+                    this._height = newHeight;
+                } else {
+                    console.log("Height must be greater than 0");
+                }
+            }
+
+            get width() {
+                return `${this._width}cm`;
+            }
+
+            get height() {
+                return `${this._height}cm`;
+            }
+
+            get area() {
+                return `${this._width * this._height.toFixed(1)}cm`;
+            }
+        }
+
+        // Cac gia tri ko co y nghia gi
+        const rectangle = new Rectangle(-1000, "pizza");
+        console.log(rectangle.width);   // -1000    -> error
+        console.log(rectangle.height);  // "pizza"  -> error
+
+        // Cac gia tri co y nghia gi
+        rectangle.width = 10;
+        rectangle.height = 20;
+        console.log(rectangle.width);   // 10
+        console.log(rectangle.height);  // 20
+        console.log(rectangle.area);    // 200
+    </script>
+</body>
+
+</html>

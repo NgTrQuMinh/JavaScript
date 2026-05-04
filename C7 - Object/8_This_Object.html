@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Trong một Phương thức (Method) của Đối tượng
+        // Khi this nằm trong một hàm thuộc về một đối tượng, nó đại diện cho chính đối tượng đó.
+        // This nó sẽ đề cập đến object gần nhất
+        const user = {
+            ten: "Gemini",
+            xinChao: function () {
+                console.log("Xin chào, tôi là " + this.ten);
+            }
+        };
+        user?.xinChao(); // Kết quả: Xin chào, tôi là Gemini
+
+        // 2. Trong Hàm thông thường (Function)
+        // Nếu bạn gọi một hàm bình thường (không thuộc đối tượng nào), this sẽ trỏ về Global Object:
+        // Trong trình duyệt: là window.
+        // Trong chế độ nghiêm ngặt ('use strict';): là undefined.
+
+        // 3. Arrow Functions (Hàm mũi tên)
+        // Hàm mũi tên không có this riêng. Nó mượn this từ phạm vi bên ngoài (lexical scope) nơi nó được định nghĩa. 
+        // Đây là điểm khác biệt quan trọng nhất so với hàm truyền thống.
+        const PC = {
+            hang: "Apple",
+            layHang: function () {
+                // Hàm mũi tên dùng 'this' của layHang (là đối tượng maytinh)
+                setTimeout(() => {
+                    console.log(this.hang);
+                }, 100);
+            }
+        };
+        PC?.layHang(); // Kết quả: Apple
+    </script>
+</body>
+
+</html>

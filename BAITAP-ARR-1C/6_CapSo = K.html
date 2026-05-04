@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // hãy đếm xem trong mảng A[] tồn tại bao nhiêu cặp số A[i], A[j] với i khác j sao cho tổng của 2 phần tử này bằng số K  cho trước.
+        // Output: 4
+        const Arr = [1, 2, 3, 1, 2];
+        const K = 3;
+
+        let cnt = 0;
+        for (const i of Arr) {
+            for (const j of Arr) {
+                if (i + j === K) {
+                    ++cnt;
+                }
+            }
+        }
+        console.log(cnt);
+        
+
+    </script>
+</body>
+</html>

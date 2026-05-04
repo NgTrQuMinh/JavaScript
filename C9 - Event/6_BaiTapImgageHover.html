@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .zoom-box {
+            width: 500px;
+            height: 400px;
+            overflow: hidden;
+            cursor: zoom-in;
+            border: 1px solid #000;
+        }
+
+        .zoom-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin: center center;
+            /* Điểm bắt đầu zoom */
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="zoom-box" id="zoom-box">
+        <img src="https://picsum.photos/800/600" id="main-img" alt="Zoom Image">
+    </div>
+    <script>
+        const box = document.getElementById('zoom-box');
+        const img = document.getElementById('main-img');
+
+        box.addEventListener('mousemove', (e) => {
+            // Tính toán vị trí chuột so với khung hình -- Tọa độ chuột (clientX và offsetTop)
+            const x = e.clientX - e.target.offsetLeft;
+            const y = e.clientY - e.target.offsetTop;
+
+            // Thay đổi tâm điểm zoom dựa trên vị trí chuột -- transform-origin (Chìa khóa của hiệu ứng)
+            img.style.transformOrigin = `${x}px ${y}px`;
+            img.style.transform = "scale(2)"; // Phóng to gấp đôi
+        });
+
+        box.addEventListener('mouseleave', () => {
+            img.style.transformOrigin = "center center";
+            img.style.transform = "scale(1)";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 2. Anchor ^ $
+        // ^ string bắt đầu với từ nào đó
+        // $ stirng kết thúc với từ nào đó
+        /hi/.test("hi"); // true
+        /hi$/.test("welcome to hi"); // true.
+        /hi$/.test("welcome to vietnam"); // false.
+
+        /hi^/.test("welcome to hi"); // false.
+        /hi^/.test("hi welcome to hi"); // false.
+
+    </script>
+</body>
+
+</html>

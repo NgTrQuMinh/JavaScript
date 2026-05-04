@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slider {
+            width: 600px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slides img {
+            width: 600px;
+            flex-shrink: 0;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        #prev {
+            left: 0;
+        }
+
+        #next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <button id="prev">❮</button>
+
+        <img id="image" src="">
+
+        <button id="next">❯</button>
+    </div>
+    <script>
+        // Mảng chứa link ảnh
+        const images = [
+            "https://picsum.photos/id/1015/600/300",
+            "https://picsum.photos/id/1016/600/300",
+            "https://picsum.photos/id/1018/600/300"
+        ];
+
+        // Lấy thẻ img
+        const img = document.getElementById("image");
+
+        // Lấy nút
+        const nextBtn = document.getElementById("next");
+        const prevBtn = document.getElementById("prev");
+
+        let index = 0;  // Vị trí hiện tại
+
+        // Hàm hiển thị ảnh
+        function showImage() {
+            img.src = images[index]; // lấy ảnh trong mảng
+        }
+        // 👉 NEXT
+        nextBtn.addEventListener("click", () => {
+            index++; // ấn vào thì ++index
+            if (index >= images.length) {
+                index = 0; // quay về đầu
+            }
+            showImage();
+        });
+        // 👉 PREV
+        prevBtn.addEventListener("click", () => {
+            index--;
+            if (index < 0) {
+                index = images.length - 1; // về cuối
+            }
+            showImage();
+        });
+        // Hiển thị ảnh đầu tiên khi load
+        showImage();
+    </script>
+</body>
+
+</html>

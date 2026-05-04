@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // localStorage.setItem('key', JSON.stringify(value));  // Tạo 1 key với value?
+        const UserLocal = localStorage.setItem("username", "Minh");
+
+        // const data = JSON.parse(localStorage.getItem('key'));    // Lấy dữ liệu từ localStorage
+        console.log(localStorage.getItem("username"));
+
+        // localStorage.removeItem("key") -> Xóa theo key
+        localStorage.removeItem("username");
+
+        // localStorage.clear(); -> Xóa hết localStorage
+
+        let arr = [1, 2, 3, 4, 5];
+        localStorage.setItem("List", JSON.stringify(arr));
+
+        const data = JSON.parse(localStorage.getItem('List'));
+        console.log(typeof data);   // Nếu bỏ typeof thành arr. mảng (Array) thực chất là một loại đối tượng (Object) đặc biệt.
+    </script>
+</body>
+</html>

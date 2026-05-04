@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 3. Range []
+        // [a-z]: các kí tự từ a-z
+        // [A-Z]: CÁC KÍ TỰ TỪ A-Z
+        // [0-9]: các số từ 0-9
+        // [a-z 0-9 A-Z]: các số từ 0-9 hoặc a-z hoặc A-Z
+
+        /[a-z]/.test("aâfs"); // true
+        /[A-Z]/.test("ABCSA"); // true
+        /[0-9]/.test("ágagsgs"); // false
+        /[a-z 0-9 A-Z]/.test("ágasgnagso125125");
+
+        // 4. [^a-z] - phủ định ---- giống !a.
+        /[^a-z]/.test("abcdz"); // false
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // B1: Viết chương trình nhập vào chương trình số năm sinh và in ra số tuổi.
+        function myAge() {
+            // 1. Lấy năm hiện tại từ hệ thống
+            const now = new Date();
+            const currentYear = now.getFullYear();
+
+            // 2. Dùng prompt() để lấy dữ liệu từ người dùng
+            const yearBirth = +prompt("Nhập năm sinh của bạn: ");
+
+            // 3. Tính toán và in kết quả
+            const age = currentYear - yearBirth;
+            console.log("Tuổi của bạn là: " + age);
+
+            return age;
+        }
+        myAge();
+
+        // B2: Viết chương trình đếm ngược thời gian theo từng giây dựa vào thời gian. Ví dụ thời gian làm bài là 30p nếu chạy về 0
+        // thì thông báo đã hết thời gian
+        function timeOut(minute) {
+            const s = minute * 60;  // chuyển đổi phút sang giây
+            let cnt = 0;
+            const timeOut = setInterval(() => {
+                cnt += 1;
+                console.log(`Đã trôi qua: ${cnt} giây`);
+                if (cnt === s) {
+                    clearInterval(timeOut);
+                    console.log("Kết Thúc!");
+                }
+            }, 1000);
+        }
+        timeOut(0.2);
+
+        // B3: 
+        function timeSince(date) {
+            // Thời gian hiện tại - thời gian đặt
+            const nowTime = new Date(); // thời gian hiện tại
+            const yourTime = new Date(date) // Thời gian đặt
+
+            let seconds = Math.floor((nowTime.getTime() - yourTime.getTime()) / 1000); // (lấy thời gian của hiện tại(mlsecon) -  thời gian đặt(mlsecon)) / 1000 -> lấy số giây
+            
+            if (seconds < 0) {
+                alert("NOT FOUNT!");
+                return;
+            }
+
+            let timer = seconds / 31536000  // tính từ giây sang năm.
+            if (timer > 1) {
+                console.log(Math.floor(timer), "năm trước");
+                return;
+            }
+
+            timer = seconds / 2678400; 
+            if (timer > 1) {
+                console.log(Math.floor(timer), "tháng trước");
+                return;
+            }
+
+            timer = seconds / 604800;
+            if (timer > 1) {
+                console.log(Math.floor(timer), "tuần trước");
+                return;
+            }
+
+            timer = seconds / 86400;
+            if (timer > 1) {
+                console.log(Math.floor(timer), "ngày trước");
+                return;
+            }
+
+            timer = seconds / 3600;
+            if (timer > 1) {
+                console.log(Math.floor(timer), "giờ trước");
+                return;
+            }
+
+            timer / seconds / 60;
+            if (timer > 1) {
+                console.log(Math.floor(timer), "phút trước");
+                return;
+            }
+
+            timer = seconds;
+            if (timer > 1) {
+                console.log(Math.floor(timer), "giây trước");
+                return;
+            }
+        }
+
+        // --- Ví dụ sử dụng ---
+        let pastDate = "2007-09-21T10:00:00";
+        timeSince(pastDate);
+
+    </script>
+</body>
+
+</html>

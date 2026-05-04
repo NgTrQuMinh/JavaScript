@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 4. Lớn hơn, nhỏ hơn: Đếm xem mảng có bao nhiêu số lớn hơn X và bao nhiêu số nhỏ hơn X
+        const Arr = [-798, 183, 434, 850, 555];
+        const X = 135;  // 4 1
+
+        let Biggest = 0;
+        let Smaller = 0;
+        for (const value of Arr) {
+            if (value >= X) {
+                ++Biggest;
+            } else {
+                ++Smaller;
+            }
+        }
+        console.log("Có:",Biggest,"Lớn Hơn", X);
+        console.log("Có:",Smaller,"Nhỏ Hơn", X);
+        
+
+        
+    </script>
+</body>
+</html>

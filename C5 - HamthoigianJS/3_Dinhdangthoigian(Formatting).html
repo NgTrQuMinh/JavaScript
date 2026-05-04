@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Định dạng thời gian (Formatting)
+        // 1. Sử dụng các phương thức toLocaleString() (Khuyên dùng)
+        // Đây là cách mạnh mẽ và linh hoạt nhất vì nó hỗ trợ đa ngôn ngữ và tự động điều chỉnh theo khu vực (locale).
+        const now = new Date();
+
+        // Định dạng kiểu Việt Nam (24 giờ)
+        console.log(now.toLocaleString('vi-VN'));       // Kết quả: 29/03/2026, 13:30:45
+        
+        // Chỉ lấy giờ (hệ 12 giờ có AM/PM)
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        };
+        console.log(now.toLocaleTimeString('vi-VN', options));      // Kết quả: 01:44 CH
+
+        // 2. Sử dụng Intl.DateTimeFormat
+        // Nếu bạn cần hiệu năng cao (khi định dạng hàng nghìn dòng dữ liệu), hãy dùng đối tượng Intl.
+        const formatter = new Intl.DateTimeFormat('vi-VN', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: false
+        });
+        console.log(formatter.format(new Date())); // 13:30:45
+
+        // 3. Tự định dạng thủ công (Manual)
+        // Khi bạn muốn kiểm soát hoàn toàn chuỗi ký tự (ví dụ: YYYY/MM/DD), bạn có thể trích xuất từng thành phần:
+        const d = new Date();
+        const formatted = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+        // Lưu ý: Các phương thức này trả về số đơn (ví dụ: 9 thay vì 09).
+        // Bạn nên dùng .padStart(2, '0') để thêm số 0 dẫn đầu.
+
+        const hh = String(d.getHours()).padStart(2, '0');
+        const mm = String(d.getMinutes()).padStart(2, '0');
+        console.log(`${hh}:${mm}`); // 13:30
+
+
+        // 4. Sử dụng thư viện ngoài (Third-party Libraries)
+        // Day.js: Nhẹ, cú pháp hiện đại.
+        // dayjs().format('HH:mm:ss')
+        // Luxon: Thư viện mạnh mẽ cho các ứng dụng lớn.
+        // date-fns: Sử dụng các hàm thuần túy (pure functions), rất tốt cho việc tối ưu mã nguồn.
+
+
+    </script>
+</body>
+
+</html>

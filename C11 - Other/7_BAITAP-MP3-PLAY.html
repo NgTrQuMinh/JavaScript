@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .player {
+            width: 300px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <h3>🎵 Simple MP3 Player</h3>
+
+        <!-- Audio -->
+        <audio id="audio"></audio>
+
+        <!-- Hiển thị tên bài -->
+        <p id="title">No song</p>
+
+        <!-- Nút điều khiển -->
+        <button id="prev">⏮</button>
+        <button id="play">▶</button>
+        <button id="next">⏭</button>
+    </div>
+    <script>
+        // 🎵 Danh sách bài hát (mảng)
+        const songs = [
+            {
+                name: "Song 1",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            },
+            {
+                name: "Song 2",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            },
+            {
+                name: "Song 3",
+                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+            }
+        ];
+
+        // Lấy element
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("play");
+        const nextBtn = document.getElementById("next");
+        const prevBtn = document.getElementById("prev");
+        const title = document.getElementById("title");
+
+        // Trạng thái
+        let index = 0;
+        let isPlaying = false;
+
+        // 👉 Load bài hát
+        function loadSong() {
+            audio.src = songs[index].src;
+            title.textContent = songs[index].name;
+        }
+
+        // 👉 Play / Pause
+        playBtn.addEventListener("click", () => {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.textContent = "▶";
+            } else {
+                audio.play();
+                playBtn.textContent = "⏸";
+            }
+
+            isPlaying = !isPlaying;
+        });
+
+        // 👉 Next
+        nextBtn.addEventListener("click", () => {
+            index = (index + 1) % songs.length;
+            loadSong();
+            audio.play();
+            playBtn.textContent = "⏸";
+            isPlaying = true;
+        });
+
+        // 👉 Prev
+        prevBtn.addEventListener("click", () => {
+            index = (index - 1 + songs.length) % songs.length;
+            loadSong();
+            audio.play();
+            playBtn.textContent = "⏸";
+            isPlaying = true;
+        });
+
+        // 👉 Khi load trang
+        loadSong();
+    </script>
+</body>
+
+</html>

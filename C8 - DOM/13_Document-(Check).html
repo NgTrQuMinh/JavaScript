@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="parent1">Có nội dung</div>
+    <div id="parent2">
+        <!-- ở đây có chú thích -->
+    </div>
+    <div id="parent3"></div>
+
+    <hr>
+
+    <div id="grandpa">
+        <div id="father">
+            <button id="son">Nhấn vào tôi</button>
+        </div>
+    </div>
+    <script>
+        const p1 = document.getElementById('parent1');
+        const p2 = document.getElementById('parent2');
+        const p3 = document.getElementById('parent3');
+
+        // .hasChildNodes() - Trả về true nếu phần tử có ít nhất một nút con (bao gồm cả văn bản và khoảng trắng)
+        console.log(p1.hasChildNodes()); // true (vì có chứa text "Có nội dung")
+        console.log(p2.hasChildNodes()); // true (vì comment cũng là một Node)
+        console.log(p3.hasChildNodes()); // false (không có gì bên trong)
+
+
+        // .contains(otherNode) - Kiểm tra xem một phần tử có chứa phần tử khác hay không (kiểm tra quan hệ Cha - Con/Cháu).
+        const grandpa = document.getElementById('grandpa');
+        const father = document.getElementById('father');
+        const son = document.getElementById('son');
+        const stranger = document.createElement('p'); // Một phần tử lạ chưa gán vào đâu
+
+        console.log(grandpa.contains(father));  // true (con trực tiếp)
+        console.log(grandpa.contains(son));     // true (cháu - vẫn thuộc grandpa)
+        console.log(father.contains(grandpa));  // false (cha không chứa ông)
+        console.log(grandpa.contains(stranger));// false (không liên quan)
+        console.log(son.contains(son));         // true (tự chứa chính mình)
+
+        // 3. Kiểm tra trạng thái phần tử
+        // .disabled: Kiểm tra nút bấm hoặc input có đang bị khóa không.
+        // .checked: Kiểm tra checkbox/radio đã được tích hay chưa.
+        // .isConnected: Một thuộc tính (boolean) cho biết Node đó có đang được gắn vào cây DOM chính hay chỉ đang nằm trong bộ nhớ.
+    </script>
+</body>
+
+</html>

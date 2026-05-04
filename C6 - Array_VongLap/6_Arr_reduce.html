@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Reduce là gì?
+        // (reduce = giảm thuật), phương thức này dùng để biến đổi một mảng thành một giá trị duy nhất
+        // (có thể là một số, một chuỗi, một object, hoặc thậm chí là một mảng mới).
+
+        // array.reduce((accumulator, Value, index, arr) => {
+        //      logic xử lý
+        // }, initialValue);
+
+        // accumulator (biến tích lũy): Lưu trữ kết quả cộng dồn của các bước trước đó.
+        // Value: Phần tử hiện tại đang được xử lý.
+        // initialValue (giá trị khởi tạo): Đây là tham số cực kỳ quan trọng. Nếu thiếu nó, reduce sẽ lấy phần tử đầu tiên của mảng làm giá trị khởi tạo.
+
+        // 2. Cơ chế hoạt động (Ví dụ tính tổng)
+        const numbers = [1, 2, 3, 4];
+        const sum = numbers.reduce((acc, value) => {
+            return acc + value;   // Kết quả: 0 += 1 + 2 + 3 + 4 = 10;
+        }, 0);
+        console.log(sum);
+
+        // 3. Tại sao initialValue lại quan trọng?
+        // Nếu có initialValue: Vòng lặp chạy từ phần tử đầu tiên(index 0).
+        // Nếu KHÔNG có initialValue: * acc sẽ lấy giá trị của phần tử đầu tiên(index 0).
+        // Vòng lặp bắt đầu chạy từ phần tử thứ hai(index 1).
+        // Nguy hiểm: Nếu mảng rỗng mà không có initialValue, JS sẽ ném lỗi TypeError.
+        // Lời khuyên: Luôn luôn đặt initialValue để code an toàn và dễ kiểm soát.
+
+        // 4. Các ứng dụng "xịn xò" của Reduce
+        // A. Làm phẳng mảng (Flattening) --- Biến mảng đa chiều thành mảng một chiều.
+        const nested = [[1, 2], [3, 4], [5, 6]];
+        const flat = nested.reduce((acc, value) => {
+            return acc.concat(value);
+        }, []);
+        console.log(flat);  // [1, 2, 3, 4, 5, 6]
+
+        // B. Đếm số lần xuất hiện (Grouping/Counting)
+        const fruits = ['apple', 'banana', 'orange', 'apple', 'orange', 'apple'];
+        function countFruits(arr) {
+            return arr.reduce((arr, value) => {
+                if (arr[value]) {   // Nếu như bên trong có thì nó sẽ cộng dồn lên.
+                    arr[value]++;
+                } else {
+                    arr[value] = 1; // Nếu như bên trong ko có thì nó sẽ là 1.
+                }
+                return arr;
+            }, {})
+        }
+        console.log(countFruits(fruits)); // { apple: 3, banana: 1, orange: 2 }
+
+        // C. Thay thế cho cả Map và Filter
+        // Thay vì chạy 2 vòng lặp (lọc rồi mới nhân đôi), bạn có thể làm trong 1 lần reduce để tối ưu hiệu năng:
+        const numbersC = [10, 20, 30, 40];
+        const doubleBigNumbers = numbersC.reduce((acc, cur) => {
+            if (cur > 25) acc.push(cur * 2);    // Nếu như value trong Arr lớn hơn 25 thì sẽ * 2 và map vào 1 mảng mới.
+            return acc;
+        }, []);
+        console.log(doubleBigNumbers);  // [60, 80]
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

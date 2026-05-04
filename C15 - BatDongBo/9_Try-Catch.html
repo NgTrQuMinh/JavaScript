@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // bạn có thể tóm gọn lại là: if...else dùng cho những thứ nằm trong tầm kiểm soát, còn try...catch dùng cho những thứ nằm ngoài tầm kiểm soát.
+        // 1. try...catch Cấu trúc cơ bản   
+        // try: Nơi bạn đặt các đoạn mã "nguy hiểm" Nếu một dòng trong try bị lỗi, JS sẽ ngừng chạy các dòng phía dưới nó và nhảy ngay sang khối catch.
+
+        // catch (error): Biến error là một đối tượng chứa thông tin về lỗi. Hai thuộc tính phổ biến nhất là: 
+        // error.name: Loại lỗi (ví dụ: ReferenceError, TypeError).
+        // error.message: Lời giải thích lỗi bằng tiếng Anh (ví dụ: variable is not defined).
+
+        // finally: Đây là trạm dừng cuối cùng. Nó thường được dùng để dọn dẹp tài nguyên vì nó luôn luôn chạy.
+        console.log("... Then the execution continues");
+            let json = `{ 
+                'name': 'Gemini'
+            }`; // Lỗi: JSON chuẩn phải dùng dấu ngoặc kép " 
+
+        try {
+            let user = JSON.parse(json);
+            console.log(user.name); // Đúng sẽ chạy nhưng sai sẽ chạy xuống dòng catch
+        } catch (error) {
+            console.log("Rất tiếc, dữ liệu bị hỏng!");
+            console.error("Chi tiết lỗi:", error);
+        } finally {
+            console.log("Hoàn tất quá trình kiểm tra.");
+        }
+
+        // 2. Từ khóa throw - Chủ động tạo lỗi  
+        // Đôi khi, dữ liệu không sai về cú pháp nhưng lại sai về logic nghiệp vụ. Bạn có thể dùng từ khóa throw để chủ động kích hoạt catch.
+        function checkTuoi(tuoi) {
+            if (tuoi < 18) {
+                throw new Error("Chưa đủ 18 tuổi, không cho vào!"); // Tự tạo lỗi
+            }
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("OK!");
+                }, 2000);
+            })
+        }
+        try {
+            checkTuoi(20)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            })
+        } catch (err) {
+            console.error("Thông báo: " + err.message);
+        }
+
+        // 3 Quy tắc "Vàng" cần ghi nhớ
+        // A. try...catch chỉ hoạt động với lỗi Runtime
+        // Nó không thể bắt được lỗi cú pháp (Syntax Error) khiến code không chạy nổi.
+
+        // B. try...catch hoạt động đồng bộ (Synchronous)
+        // Nó không thể bắt lỗi bên trong các hàm hẹn giờ như setTimeout trừ khi bạn dùng async/await.
+        // try {
+        //     setTimeout(() => {
+        //         noVariable; // Lỗi xảy ra sau khi try...catch đã chạy xong
+        //     }, 1000);
+        // } catch (e) {
+        //     console.log("Sẽ không bao giờ bắt được lỗi này!");
+        // }
+
+        // C. Khối finally là tối thượng
+        // Dù bạn có return trong khối try hay catch, khối finally vẫn sẽ thực thi trước khi hàm thực sự kết thúc. Đây là nơi lý tưởng để:
+        // Đóng kết nối Database. || Dừng icon quay quay (loading spinner) trên trang web.
+        
+        // Tổng kết nhanh:
+        // try: Thử nghiệm code.
+        // catch: Xử lý nếu "toang".
+        // finally: Dọn dẹp chiến trường.
+        // throw: Chủ động báo lỗi khi logic sai.
+    </script>
+</body>
+
+</html>

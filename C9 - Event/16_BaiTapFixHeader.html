@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Trạng thái bình thường của header */
+        header {
+            padding: 20px;
+            background: #333;
+            color: white;
+            width: 100%;
+            transition: 0.4s;
+            /* Tạo hiệu ứng mượt mà */
+            text-align: center;
+        }
+
+        /* Class này sẽ được JS thêm vào khi cuộn */
+        .sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+            /* Thu nhỏ header lại cho đẹp */
+            background: #222;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tạo khoảng trống cho nội dung không bị header đè lên */
+        .content {
+            padding: 100px 20px;
+            height: 2000px;
+            background: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="myHeader">
+        <div class="logo">MyBrand</div>
+        <nav>
+            <a href="#">Trang chủ</a>
+            <a href="#">Dịch vụ</a>
+            <a href="#">Liên hệ</a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <h1>Cuộn xuống để xem hiệu ứng</h1>
+        <p>Nội dung rất dài ở đây...</p>
+    </main>
+    <script>
+        // 1. Chọn phần tử header
+        const header = document.querySelector("#myHeader");
+
+        // 2. Lấy vị trí bắt đầu của header (thường là 0 nếu nó nằm trên cùng)
+        const stickyOffset = header.offsetTop;
+
+        // 3. Sử dụng addEventListener để lắng nghe sự kiện 'scroll'
+        window.addEventListener('scroll', () => {
+
+            // Kiểm tra vị trí cuộn hiện tại
+            if (window.scrollY > stickyOffset) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+
+        });
+    </script>
+</body>
+
+</html>

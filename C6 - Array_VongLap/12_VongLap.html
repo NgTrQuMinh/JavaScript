@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Vòng lặp truyền thống: for
+        for (let i = 1; i <= 5; i++) {
+            console.log("Lần thứ: " + i);
+        }
+
+        // 2. Vòng lặp kiểm tra điều kiện: while và do...while
+        // Lặp khi điều kiện còn đúng. Nếu điều kiện sai ngay từ đầu, code không chạy lần nào.
+        let i = 0;
+        while (i < 3) {
+            console.log(i);
+            i++;
+        }
+        // Tương tự while, nhưng nó sẽ chạy ít nhất một lần rồi mới kiểm tra điều kiện.
+        let j = 1;
+        do {
+            console.log("Ít nhất cũng chạy một lần!");
+            j++;
+        } while (j < 5);
+
+        // 3. Vòng lặp chuyên dụng cho Object và Array
+        // Đây là những "vũ khí" hiện đại và dễ đọc hơn rất nhiều
+        // for...in (Dùng cho Object) -- Dùng để duyệt qua các key (thuộc tính) của một đối tượng.
+        const person = { name: "Gemini", age: 1, dev: "Google" };
+        for (let key in person) {
+            console.log(key + ": " + person[key]);
+        }
+
+        // for...of (Dùng cho Array, String, Map...) -- Dùng để duyệt qua các value (giá trị) của một danh sách.
+        const fruits = ["Táo", "Xoài", "Mận"];
+        for (const [index, value] of fruits.entries()) {
+            console.log("Loại quả thứ", index, ":", value);
+        }
+
+        // 4. Phương thức Array: forEach
+        // Nếu bạn đang làm việc với mảng và muốn code trông "sang chảnh", hàm forEach là lựa chọn hàng đầu.
+        const numbers = [10, 20, 30];
+        numbers.forEach((num, index) => {
+            console.log(`Vị trí ${index} có giá trị là ${num}`);
+        });
+
+        // 5. Các từ khóa điều khiển vòng lặp
+        // Đôi khi bạn muốn thoát ngang hoặc nhảy cóc, hãy nhớ 2 từ khóa này:
+        // break: "Dừng cuộc chơi" ngay lập tức và thoát khỏi vòng lặp.
+        // continue: "Bỏ qua hiệp này", nhảy sang lần lặp kế tiếp luôn.
+
+    </script>
+</body>
+
+</html>

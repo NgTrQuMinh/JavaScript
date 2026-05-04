@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Constructor Function (hàm tạo) là một loại hàm đặc biệt được dùng để khởi tạo và tạo ra nhiều đối tượng (object) 
+        // có cùng cấu trúc và thuộc tính.
+
+        // Sử dụng Constructor Function
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.greet = function () {
+                console.log("Xin chào, tôi là " + this.name);
+            };
+        }
+
+        // Khởi tạo đối tượng
+        const person1 = new Person("John", 30);
+        person1.greet(); // Output: Xin chào, tôi là John
+
+        const person2 = new Person("Jane", 25);
+        person2.greet(); // Output: Xin chào, tôi là Jane
+    </script>
+</body>
+
+</html>

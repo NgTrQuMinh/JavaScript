@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // window.pageXOffset: Trả về số pixel mà tài liệu hiện đang được cuộn theo chiều ngang (từ trái sang phải).
+        // window.pageYOffset: Trả về số pixel mà tài liệu hiện đang được cuộn theo chiều dọc (từ trên xuống dưới).
+        window.addEventListener('scroll', function () {
+            console.log("Cuộn ngang:", window.pageXOffset);
+            console.log("Cuộn dọc:", window.pageYOffset);
+
+            if (window.pageYOffset > 500) {
+                console.log("Bạn đã cuộn quá 500px!");
+            }
+        });
+    </script>
+</body>
+
+</html>

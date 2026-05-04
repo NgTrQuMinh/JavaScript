@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const F = [];
+        // Tạo Hàm Fibonacci.
+        const Fibonacci = () => {
+            F[0] = 0;
+            F[1] = 1;
+            for (let i = 2; i <= 92; i++) {
+                F[i] = F[i - 1] + F[i - 2];
+            }
+        };
+
+        // Tạo Hàm Kiểm Tra Fibonaaci.
+        const Check_Fibonacci = (value_check) => {
+            // Duyệt qua mảng F đã có dữ liệu
+            for (let i = 0; i <= 92; i++) {
+                if (F[i] === value_check) {
+                    return 1;
+                }
+            }
+            return 0;
+        };
+
+        const Arr = [1597, 25358, 7318, 5878, 0, 2634];
+
+        // 1. QUAN TRỌNG: Phải gọi hàm này để nạp dữ liệu vào mảng F
+        Fibonacci();
+
+        for (let i = 0; i < Arr.length; i++) {
+            if (Check_Fibonacci(Arr[i])) {
+                console.log(Arr[i]);
+            }
+        }
+    </script>
+</body>
+
+</html>

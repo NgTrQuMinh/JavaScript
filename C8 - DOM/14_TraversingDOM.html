@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- BeforBegin -->
+    <h3>
+        <!-- afterBegin -->
+        <a href="#" class="demo">Link</a>
+        <span class="span">
+            <strong>NgTrQuMinh</strong>
+            <strong class="strong">NgTrQuMinh</strong>
+        </span>
+        <span class="span2">Tuan</span>
+        <!-- BeforEnd -->
+    </h3>
+
+    <!-- AfterEnd -->
+    <script>
+        // 1. Duyệt lên trên (Tìm tổ tiên)
+        // - ParentNode, ParentElment
+        const span = document.querySelector("span");
+        console.log(span.parentNode);      // . một cái sẽ ra phần tử span -> h3
+        console.log(span.parentElement.parentElement); //   span -> h3 -> body
+
+        // RemoveChild - xóa phần tử.
+        // cấu trúc selcter.parentNode.RemoveChild(span)
+        // span.parentNode.removeChild(span); 
+        // span.remove();
+
+        // 2. Duyệt sang ngang (Tìm anh chị em)
+        // nextElementSibling -> phần tử kế tiếp, previousElementSibling -> phần tử đứng sau
+        const nextSpan = span.nextElementSibling;
+        const previousElementSibling = span.previousElementSibling;
+        console.log(nextSpan);
+        console.log(previousElementSibling);
+
+        // 3. Duyệt xuống dưới (Tìm con cháu)
+        // children, firstElementChild, lastElementChild
+        console.log(span.childNodes); // Trả về danh sách tất cả các phần tử con trực tiếp -> text(NgTrQuMinh) - strong - text(space)
+        // console.log(span.firstChild); // text.
+        console.log(span.firstElementChild); // strong(NgTrQuMinh)
+        // console.log(span.lastChild); // text(space).
+        console.log(span.lastElementChild);// strong(NgTrQuMinh)
+    </script>
+</body>
+
+</html>

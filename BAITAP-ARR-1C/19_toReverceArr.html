@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 19: Lật ngược mảng
+        const Arr = [69, 94, 77, 28, 81];
+        console.log(Arr);
+        
+        // Cách 1: Dùng Hàm .toReversed() 
+        const newArr = ((arr) => {
+            return arr.toReversed();
+        });
+        console.log("Dùng toReversed:",newArr(Arr));
+
+        // Cách 2: Code Chay
+        const Reverences = ((arr) => {
+            let l = 0, r = arr.length - 1;
+            while(l <= r) {
+                let tmp = arr[l];
+                arr[l] = arr[r];
+                arr[r] = tmp;
+                ++l; --r;
+            }
+        })
+        Reverences(Arr);
+        console.log("Code Chay:",Arr);
+        
+    </script>
+</body>
+</html>

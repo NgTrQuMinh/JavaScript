@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  LocalStorage và SessionStorage đều thuộc Web Storage API, 
+        // dùng để lưu trữ dữ liệu dưới dạng key-value trực tiếp trên trình duyệt của người dùng.
+
+        // 1. So sánh chi tiết
+        // Đặc điểm 	                    LocalStorage	                                                        SessionStorage
+        // Thời hạn (Lifetime)	        Dữ liệu tồn tại mãi mãi, ngay cả khi đóng trình duyệt hoặc tắt máy.	    Dữ liệu bị xóa ngay khi đóng tab hoặc cửa sổ trình duyệt.
+        // Phạm vi (Scope)	            Chia sẻ giữa tất cả các tab/cửa sổ có cùng nguồn (cùng domain).	        Chỉ giới hạn trong tab hiện tại. Mở tab mới cùng link sẽ tạo session mới.
+        // Dung lượng	                Khoảng 5MB - 10MB (tùy trình duyệt).	                                Khoảng 5MB.
+        // Vị trí lưu trữ	            Phía client (trình duyệt).	                                            Phía client (trình duyệt).
+
+        // 2. Khi nào nên dùng cái nào?
+        // Dùng LocalStorage khi:
+        // Lưu các cài đặt người dùng (Giao diện tối/sáng, ngôn ngữ).
+        // Lưu thông tin đăng nhập (như Access Token) nếu muốn người dùng không phải login lại sau khi tắt máy.
+        // Lưu giỏ hàng tạm thời cho khách chưa đăng nhập.
+        // Dùng SessionStorage khi:
+        // Lưu dữ liệu nhạy cảm chỉ cần trong một phiên làm việc.
+        // Lưu trạng thái của một form nhiều bước (để nếu user tải lại trang trong cùng tab đó thì không mất dữ liệu).
+        // Lưu các giá trị tạm thời chỉ phục vụ cho một tác vụ cụ thể trong tab đó. 
+
+    </script>
+</body>
+</html>

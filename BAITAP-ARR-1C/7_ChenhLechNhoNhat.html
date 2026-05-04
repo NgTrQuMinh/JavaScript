@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 7. Cặp số 2
+        // Cho mảng số nguyên A[] gồm N phần tử, hãy tìm độ chênh lệch nhỏ nhất giữa 2 phần tử trong mảng.
+
+        const Arr = [69, 96, 93, 27, 84, 32, 78, 56];
+
+        const Sort = Arr.sort((a, b) => {
+            return a - b;
+        })
+
+        let min = Infinity;
+
+        for (let i = 0; i < Sort.length; i++) {
+            if (Math.abs(Sort[i] - Sort[i + 1]) < min) {
+                min = Math.abs(Sort[i] - Sort[i + 1]);
+            }
+        }
+        console.log(min);
+        
+        
+
+    </script>
+</body>
+</html>

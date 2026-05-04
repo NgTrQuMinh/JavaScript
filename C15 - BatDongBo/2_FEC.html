@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Function Execution Context (FEC) là ngữ cảnh thực thi được tạo ra mỗi khi một hàm được gọi.
+        // Nếu GEC là "sân khấu chính", thì mỗi FEC giống như một "vở kịch nhỏ" diễn ra trên sân khấu đó. Mỗi lần bạn gọi hàm, một "chiếc đĩa" FEC mới sẽ được chồng lên GEC trong Call Stack.
+
+        // 2. Thành phần bên trong một FEC
+        // Mỗi khi một hàm được thực thi, nó tạo ra một môi trường riêng chứa:
+        // Scope Chain (Chuỗi phạm vi): Cho phép hàm truy cập biến của chính nó và biến của các hàm cha (bao gồm cả GEC).
+        // Arguments Object: Một đối tượng giống mảng chứa tất cả các tham số được truyền vào hàm.
+        // Biến cục bộ: Các biến được khai báo bên trong hàm.
+        // Giá trị this: Được xác định tùy thuộc vào cách hàm được gọi.
+
+        var globalVar = "Toàn cầu";
+
+        function first() {
+            var a = 10;
+            second(); // Gọi hàm thứ hai
+            console.log("Xong hàm first");
+        }
+
+        function second() {
+            var b = 20;
+            console.log("Đang ở hàm second");
+        }
+
+        first(); // Bắt đầu kích hoạt chuỗi FEC
+        // Luồng chạy trong Call Stack:
+        // Bước 1: GEC được tạo và đẩy vào stack.
+        // Bước 2: Gọi first(). JS tạo FEC của first và đẩy lên trên GEC.
+        // Bước 3: Bên trong first, gọi second(). JS tạo FEC của second và đẩy lên trên cùng.
+        // Bước 4: Hàm second chạy xong và gặp dấu }, FEC của nó bị xóa (pop) khỏi stack.
+        // Bước 5: Điều khiển quay về hàm first, chạy nốt dòng cuối rồi FEC của first cũng bị xóa.
+        // Bước 6: Chỉ còn lại GEC.
+    </script>
+</body>
+
+</html>

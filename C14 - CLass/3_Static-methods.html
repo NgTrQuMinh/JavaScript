@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Static methods (phương thức tĩnh) là các hàm thuộc về chính Class đó, thay vì thuộc về các đối tượng (instances) được tạo ra từ class.
+        // Nói cách khác, bạn gọi chúng trực tiếp từ tên Class mà không cần dùng từ khóa new để tạo đối tượng.
+
+        class User {
+            static userCount = 0;
+
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+                User.userCount++;
+            }
+
+            static getUserCount() {
+                return User.userCount;
+            }
+
+            static renderUserCount() {
+                console.log(`User count: ${User.userCount}`); 
+            }
+
+            get name() {
+                return this._name;
+            }
+
+            get age() {
+                return this._age;
+            }
+
+            info() {
+                return `Name: ${this._name}, Age: ${this._age}`;
+            }
+
+            set name(newName) {
+                if (typeof(newName) !== "string" || newName.length === 0) {
+                    console.error("Name must be a non-empty string");
+                }
+                this._name = newName;
+            }
+
+            set age(newAge) {
+                if (typeof(newAge) === "number" && newAge > 0) {
+                    this._age = newAge;
+                } else {
+                    console.error("Age must be a positive number");
+                }
+            }
+        }
+        const user1 = new User("Minh", 19);
+        const user2 = new User("Nhat", 19);
+        const user3 = new User("Tuan", 19);
+        
+        console.log(user1._name) // Minh
+        console.log(user1._age) // 19
+        console.log(user1); // User {name: "Minh", age: 19} -> Object
+        console.log(user1.info());  // Name: Minh, Age: 19
+
+        console.log(User.getUserCount()); // Goi Class User.getUserCount() de lay so luong user = 3.
+        User.renderUserCount(); // Goi Class User.renderUserCount() de in ra so luong user = 3.
+
+        // class MathUtil {
+        //     static PI = 3.14159;
+        
+        //     static getDiameter(radius) {
+        //         return radius * 2;
+        //     }
+        //     static getCircumference(radius) {
+        //         return 2 * this.PI * radius;
+        //     }
+        //     static getArea(radius) {
+        //         return this.PI * radius * radius;
+        //     }
+            
+        // }
+        
+        // const MathUtil1 = new MathUtil();
+
+        // console.log(MathUtil.PI); // Truy cap thuoc tinh qua ten static
+        // console.log(MathUtil.getDiameter(10)); // 20
+        // console.log(MathUtil.getCircumference(10)); // 62.831853
+        // console.log(MathUtil.getArea(10)); // 314.159
+    </script>
+</body>
+
+</html>

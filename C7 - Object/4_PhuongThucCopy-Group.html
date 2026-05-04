@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Sử dụng Object.assign() - Cách truyền thống
+        // Cú pháp: Object.assign(target, ...sources)
+        const target = { a: 1, b: 2 };
+        const source = { b: 4, c: 5 };
+        const returnedTarget = Object.assign(target, source);
+
+        console.log(target);         // { a: 1, b: 4, c: 5 } (target bi thay đổi)
+        console.log(returnedTarget); // { a: 1, b: 4, c: 5 }
+
+        // Sử dụng Spread Operator (...) - Cách hiện đại nhất
+        const group1 = { name: "Gemini" };
+        const group2 = { version: "3.5" };
+        const merged = { ...group1, ...group2 }; // { name: "Gemini", version: "3.5" }
+
+        // Sao chép một "nhóm nhỏ" (Subset)
+        const bigObject = { id: 101, name: "Data", type: "System", secret: "12345" };
+
+        // Chỉ lấy nhóm 'name' và 'type'
+        const { name, type } = bigObject;
+        const smallGroup = { name, type };
+
+        console.log(smallGroup); // { name: "Data", type: "System" }
+
+        // Clone Object phức tạp
+        const user = {
+            name: "Minh",
+            age: 2007,
+            school: {
+                name: "Fpt Polytechnic",
+                class: "CNTT"
+            },
+            male: true
+        };
+
+        console.log(user);  
+
+        const cloneUser = JSON.parse(JSON.stringify(user)); 
+        // chuyển đổi thành JSON Lúc này, mọi mối liên kết tham chiếu (reference) đều bị cắt đứt, chỉ còn lại dữ liệu thô dạng chữ.
+        // Lấy chuỗi JSON vừa tạo và "xây dựng" lại nó thành một object JavaScript hoàn toàn mới. xây dựng lại từ đầu dựa trên văn bản, nên nó nằm ở một địa chỉ mới trong bộ nhớ.
+        cloneUser.male = undefined;
+        console.log(cloneUser);
+    </script>
+</body>
+
+</html>

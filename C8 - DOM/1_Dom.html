@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // DOM (Document Object Model) trong JS là một giao diện lập trình cho phép chúng ta thay đổi cấu trúc, 
+        // nội dung và định dạng của một trang web một cách linh hoạt.
+
+        // 1. Cấu trúc Cây DOM (DOM Tree)
+        // Hãy tưởng tượng trình duyệt đọc file HTML của bạn và vẽ lại nó dưới dạng một "cái cây". Mỗi thành phần là một Node (Nút):
+        // Document: Nút gốc (toàn bộ trang web).
+        // Element: Các thẻ HTML như <div>, <h1>, <a>.
+        // Attribute: Các thuộc tính như href, src, class.
+        // Text: Nội dung chữ bên trong các thẻ.
+
+        // 2. Các thao tác cơ bản
+        // A. Chọn phần tử (Selecting)
+        // Trước khi muốn thay đổi gì đó, bạn phải "tìm" thấy nó:
+        // document.getElementById('id'): Chọn theo ID (nhanh nhất).
+        // document.querySelector('.class'): Chọn theo CSS selector (linh hoạt nhất).
+        // document.querySelectorAll('li'): Chọn tất cả các phần tử khớp yêu cầu.
+
+        // B. Thay đổi nội dung và thuộc tính (Manipulation)
+        // const tieuDe = document.querySelector('h1');
+
+        // tieuDe.innerText = "Chào mừng bạn!"; // Thay đổi chữ
+        // tieuDe.style.color = "red";           // Thay đổi màu sắc
+        // tieuDe.setAttribute('align', 'center'); // Thay đổi thuộc tính
+
+        // C. Lắng nghe sự kiện (Event Listeners)
+        // Đây là cách bạn tạo ra tương tác khi người dùng làm gì đó:
+        // const nutBam = document.querySelector('#myBtn');
+
+        // nutBam.addEventListener('click', function () {
+        //     console.log("Bạn vừa click vào nút!");
+        // });
+
+        // 3. Tại sao DOM lại quan trọng?
+        // Nếu không có DOM, JavaScript sẽ không thể "giao tiếp" với giao diện người dùng. Nhờ có DOM, chúng ta có thể:
+        // Cập nhật dữ liệu mà không cần tải lại trang (giống như nút Like trên Facebook).
+        // Tạo hiệu ứng ẩn/hiện menu hoặc slide ảnh.
+        // Kiểm tra form (như báo lỗi khi người dùng quên nhập email).
+
+        // 4. Ví dụ thực tế
+        // const danhSach = document.querySelector('#myList');
+        // const nutThem = document.querySelector('#addBtn');
+
+        // nutThem.onclick = () => {
+        //     let li = document.createElement('li'); // Tạo thẻ <li> mới
+        //     li.textContent = "Mục mới được thêm";  // Thêm nội dung
+        //     danhSach.appendChild(li);              // Gắn vào danh sách
+        // };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // window.location (hay gọi tắt là Location) là một đối tượng thuộc BOM (Browser Object Model). 
+        // Nó được dùng để lấy thông tin về địa chỉ URL hiện tại của trang web hoặc điều hướng trình duyệt sang một trang mới.
+
+        // 1. Các thuộc tính phổ biến (URL Components)
+        // Giả sử URL hiện tại là: https://example.com
+        // location.href: Trả về toàn bộ URL của trang hiện tại.
+        // location.protocol: Trả về giao thức web (ví dụ: https: hoặc http:).
+        // location.hostname: Trả về tên miền (ví dụ: ://example.com).
+        // location.port: Trả về số cổng của URL (ví dụ: 8080).
+        // location.pathname: Trả về đường dẫn của file hoặc thư mục (ví dụ: /path/page.html).
+        // location.search: Trả về phần truy vấn (query string) bắt đầu bằng dấu ? (ví dụ: ?id=123).
+        // location.hash: Trả về phần định danh neo bắt đầu bằng dấu # (ví dụ: #section1). 
+        
+        // 2. Các phương thức điều hướng (Methods)
+        // location.reload(): Góp lặp trang.
+        // location.replace(): Thay đổi URL hien t'ai.
+        // location.assign(): Chuyển đổi URL hien t'ai.
+
+        // 3. Cách sử dụng cơ bản
+        // Để chuyển hướng người dùng sang trang khác bằng Javascript, bạn thường dùng cách đơn giản nhất:
+        window.location.href = "https://google.com";
+
+    </script>
+</body>
+</html>

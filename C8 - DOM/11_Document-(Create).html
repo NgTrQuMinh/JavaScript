@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .divImg {
+            width: fit-content;
+            height: auto;
+            border: 5px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Nhóm khởi tạo (Creation)
+        // Trước khi đưa thứ gì đó lên màn hình, bạn cần "khai sinh" ra nó trong bộ nhớ.
+        // 1. document.createElement(tagName)
+        // Bước 1: Khởi tạo (Trong bộ nhớ)
+        const divImg = document.createElement("div");
+        const cardImg = document.createElement("img");
+
+        // Bước 2: Thiết lập (Trang trí)
+        divImg.classList.add("divImg");
+        cardImg.src = "https://picsum.photos/200/300"
+        cardImg.classList.add("cardImg");
+
+        // Bước 3: Gắn kết (Render lên trình duyệt)
+        // appendChild, prepend, hoặc before/after
+        divImg.appendChild(cardImg);
+        document.body.appendChild(divImg);
+
+        // 2. document.createTextNode("string")
+        // Bước 1: Tạo thẻ cha
+        const paragraph = document.createElement("p");
+        // Bước 2: Tạo nội dung chữ
+        const content = document.createTextNode("Đây là một đoạn văn bản an toàn.");
+        // Bước 3: Gắn chữ vào thẻ cha
+        paragraph.appendChild(content);
+        document.body.appendChild(paragraph);   // Kết quả: <p>Đây là một đoạn văn bản an toàn.</p>
+
+
+        // 3. elment.cloneNode(true/false).
+        const cloneParagraph = paragraph.cloneNode(true);   // clone lại thẻ p có text.
+        document.body.appendChild(cloneParagraph);
+
+
+
+        // 4. fragment = document.createDocumentFragment();
+        const ul = document.querySelector("#itemList");
+        // 1. Tạo "xe đẩy" tạm thời
+        const fragment = document.createDocumentFragment();
+
+        const items = ["Apple", "Orange", "Banana", "Mango", "Grapes"];
+
+        items.forEach(text => {
+            const li = document.createElement("li");
+            li.textContent = text;
+            // 2. Xếp hàng vào "xe đẩy" (Chưa tác động đến giao diện)
+            fragment.appendChild(li);
+        });
+
+        // 3. Đưa cả "xe đẩy" vào cây DOM chính (Chỉ 1 lần duy nhất)
+        ul.appendChild(fragment);
+    </script>
+</body>
+
+</html>

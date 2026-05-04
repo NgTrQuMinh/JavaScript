@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .inputError {
+            border: 1px solid red;
+        }
+    </style>
+</head>jrr
+
+<body>
+    <h1>Hóa đơn</h1>
+    <form id="Form">
+        <input type="text" name="khachhang" id="khachhang" placeholder="Khách Hàng"><span
+            class="error errorkhachhang"></span>
+        <br><br>
+
+        <label for="loaihang">Loại Hàng</label><br>
+        <select name="loaihang" id="loaihang">
+            <option value="0">--Chọn--</option>
+            <option value="500000">Giá 1</option>
+            <option value="300000">Giá 2</option>
+            <option value="100000">Giá 3</option>
+        </select>
+
+        <label for="dongia">Đơn Giá</label>
+        <input type="text" name="donggia" id="donggia" disabled><span class="error errorloaihang"></span>
+        <br><br>
+
+        <label for="soluong">Số Lượng</label>
+        <input type="number" name="soluong" id="soluong" value="1"><br><br>
+        <label for="thanhtien">Thành Tiền</label>
+        <input type="text" name="thanhtien" id="thanhtien" disabled><br><br>
+
+        <label for="noinhanhang">Nơi Nhận Hàng</label>
+        <input type="radio" name="noinhanhang" id="noithanh" value="0">
+        <label for="noinhanhang">Nội thành</label>
+
+        <input type="radio" name="noinhanhang" id="ngoaithanh" value="30000">
+        <label for="noinhanhang">Ngoại thành</label><br><br>
+
+        <label for="phivanchuyen">Phí vận chuyển</label>
+        <input type="text" name="phivanchuyen" id="phivanchuyen" disabled><span class="error errorphivanchuyen"></span>
+        <br><br>
+
+        <button type="submit">Thanh Toán</button>
+
+    </form>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const loaihang = document.querySelector("#loaihang");
+            const dongia = document.querySelector("#donggia");
+            const soluong = document.querySelector("#soluong");
+            const thanhtien = document.querySelector("#thanhtien");
+            loaihang.addEventListener("change", () => { // su kien khi chon loai hang
+                donggia.value = loaihang.value;
+                thanhtien.value = donggia.value * soluong.value;
+            })
+            soluong.addEventListener("input", () => {   // su kien khi thay doi so luong
+                thanhtien.value = donggia.value * soluong.value;
+            })
+
+            const noithanh = document.querySelector("#noithanh");
+            const ngoaithanh = document.querySelector("#ngoaithanh");
+            const phivanchuyen = document.querySelector("#phivanchuyen");
+            noithanh.addEventListener("click", (e) => {
+                phivanchuyen.value = noithanh.value
+            });
+            ngoaithanh.addEventListener("click", (e) => {
+                phivanchuyen.value = ngoaithanh.value
+            });
+
+            const Form = document.getElementById("Form");
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const formData = new FormData(Form);
+                const data = Object.fromEntries(formData.entries());
+
+                let check = true;
+
+                // Khach hang
+                const khachhang = document.querySelector("#khachhang");
+                const errorkhachhang = document.querySelector(".errorkhachhang");
+                errorkhachhang.textContent = "";
+                if (data.khachhang === "") {
+                    khachhang.classList.add("inputError");
+                    errorkhachhang.textContent = "Vui lòng nhập tên";
+                    check = false;
+                } else {
+                    khachhang.classList.remove("inputError");
+
+                }
+
+                // Loai hang
+                const errorloaihang = document.querySelector(".errorloaihang");
+                errorloaihang.textContent = "";
+                if (data.loaihang === "0") {
+                    errorloaihang.textContent = "Vui lòng chọn loại hàng";
+                    loaihang.classList.add("inputError");
+                    check = false;
+                } else {
+                    loaihang.classList.remove("inputError");
+                }
+
+                // phi van chuyen
+                const errorphivanchuyen = document.querySelector(".errorphivanchuyen");
+                errorphivanchuyen.textContent = "";
+                if (!noithanh.checked && !ngoaithanh.checked) {
+                    errorphivanchuyen.textContent = "Vui lòng chọn phương thức nhận hàng";
+                    check = false;
+                }
+
+                if (check) {
+                    alert("Thanh toán thành công");
+                    Form.reset();
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

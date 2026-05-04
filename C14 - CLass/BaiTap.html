@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Mức 1: Cơ bản (Hiểu class + constructor)
+        // Bài 1
+        // Tạo class Person gồm:
+        // Thuộc tính: name, age
+        // Constructor để khởi tạo giá trị
+        // Method introduce() → in ra:
+        // "Tôi tên là ..., năm nay ... tuổi"
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            introduce() {
+                return `Tôi tên là ${this.name}, năm nay ${this.age} tuổi.`;
+            }
+        }
+
+        const person = new Person("Tiến", 20);
+        console.log(person.introduce());
+
+        // Bài 2
+        // Tạo class Rectangle:
+        // Thuộc tính: width, height
+        // Method:
+        // getArea() → tính diện tích
+        // getPerimeter() → tính chu vi
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            getArea() {
+                return this.width * this.height;
+            }
+
+            getPerimeter() {
+                return (this.width + this.height) * 2;
+            }
+        }
+
+        const rectangle = new Rectangle(10, 20);
+        console.log(rectangle.getArea());   // 200
+        console.log(rectangle.getPerimeter());  // 60
+
+        // Mức 2: Thêm method + logic
+        // Bài 3
+        // Tạo class Student:
+        // Thuộc tính: name, score
+        // Method:
+        // getGrade():
+        // ≥ 8 → "Giỏi"
+        // ≥ 6.5 → "Khá"
+        // ≥ 5 → "Trung bình"
+        // < 5 → "Yếu"
+        class Student {
+            constructor(name, score) {
+                this.name = name;
+                this.score = score;
+            }
+
+            set name(newName) {
+                this._name = newName;
+            }
+            get name() {
+                return this._name;
+            }
+            getGrade() {
+                if (this.score >= 8) {
+                    return "Giỏi";
+                } else if (this.score >= 6.5) {
+                    return "Khá";
+                } else if (this.score >= 5) {
+                    return "Trung bình";
+                } else {
+                    return "Yếu";
+                }
+            }
+        }
+        const student = new Student("Tiến", 8);
+        student.name = "Minh";
+        student.score = 10;
+        console.log(student.name + " - " + student.getGrade());  // "Giỏi"
+
+        // Bài 4
+        // Tạo class BankAccount:
+        // Thuộc tính: balance
+        // Method:
+        // deposit(amount)
+        // withdraw(amount) (không cho rút nếu không đủ tiền)
+        // getBalance()
+        class BankAccount {
+            constructor(balance) {
+                this.balance = balance;
+            }
+            deposit(amount) {
+                if (amount > 0) {
+                    this.balance += amount;
+                }
+            }
+            withdraw(amount) {
+                if (amount > 0 && this.balance >= amount) {
+                    this.balance -= amount;
+                } else {
+                    console.log("Không đủ tiền");
+                }
+            }
+            getBalance() {
+                return this.balance;
+            }
+        }
+
+        const bankAccount = new BankAccount(1000);
+        bankAccount.deposit(500);
+        bankAccount.withdraw(1000);
+        console.log(bankAccount.getBalance());  
+    </script>
+</body>
+
+</html>

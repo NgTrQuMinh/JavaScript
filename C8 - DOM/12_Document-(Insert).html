@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #Title {
+            font-size: 32px;
+            color: red;
+        }
+
+        .bold {
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Có phần .prepend(newNode) - Đầu tiên (trong cha) -->
+
+    <hr>
+    <!-- beforebegin -->
+    <div id="box">
+        <!-- afterbegin -->
+        <p>Nội dung hiện tại</p>
+        <p>insertAdjacentHTML ở đầu</p>
+        <!-- beforeend -->
+    </div>
+    <!-- afterend -->
+    <hr>
+
+    <!-- Có phần appendChild(newNode) - Cuối cùng (trong cha) -->
+    <script>
+        // 1. elment.appendChild(newNode) - Cuối cùng (trong cha)
+        const appendTitle = document.createElement("h1");
+        const Title_Header = document.createTextNode("Đây Là Tiêu Đề");
+
+        appendTitle.setAttribute("id", "Title");
+
+        appendTitle.appendChild(Title_Header);  // Chèn phần Title_Header vào Document.body.appendChild(appendTitle)
+        document.body.appendChild(appendTitle);
+
+        // 2. elment.prepend(newNode) - Đầu tiên (trong cha)
+        const NumberOne = document.createTextNode("NumberOne");
+        document.body.prepend(NumberOne);
+
+
+        // 3. element.insertAdjacentHTML
+        const box = document.getElementById('box');
+        box.insertAdjacentHTML('beforebegin', "<p>insertAdjacentHTML phía trên box</p>");
+        box.insertAdjacentHTML('afterbegin', '<p>insertAdjacentHTML ở đầu</p>');
+        box.insertAdjacentHTML('beforeend', '<p>insertAdjacentHTML ở cuối</p>');
+        box.insertAdjacentHTML('afterend', '<p>insertAdjacentHTML dưới cùng</p>');
+
+        // 4. element.insertAdjacentElement
+        const strong = document.createElement("strong");
+        strong.classList.add("bold");
+        strong.textContent = "Đây là thẻ strong mới chèn!"; // Thêm nội dung để dễ quan sát
+
+        // Truyền biến 'strong' (không có dấu ngoặc kép)
+        box.insertAdjacentElement("beforebegin", strong);
+    </script>
+</body>
+
+</html>

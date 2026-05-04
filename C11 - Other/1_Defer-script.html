@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Script defer: tải song song, chạy sau khi HTML xong -->
+    <script src="1_Defer-script.js" defer></script>
+</head>
+
+<body>
+    <!-- Giải thích ngắn gọn defer:
+    Tải script song song với việc phân tích HTML.
+    Chỉ chạy sau khi toàn bộ HTML đã được phân tích xong (DOMContentLoaded).
+    Các script có defer chạy theo đúng thứ tự xuất hiện trong mã HTML. -->
+
+    <!-- 2. Ví dụ để hiểu
+    Hãy tưởng tượng bạn đang lắp ráp một món đồ chơi phức tạp theo sách hướng dẫn:
+
+    Không có defer: Bạn đang đọc hướng dẫn, đến trang 2 thấy bảo "Đi mua pin", bạn phải bỏ cuốn sách xuống, đi ra cửa hàng mua pin 
+    về rồi mới quay lại đọc tiếp trang 3. (Trang web bị chậm).
+
+    Có defer: Bạn vừa đọc sách, vừa nhờ người thân đi mua pin hộ. Bạn cứ đọc hết cuốn sách cho đến trang cuối cùng, lúc đó người 
+    thân cũng đã mang pin về sẵn, bạn chỉ việc lắp vào là xong. (Trang web mượt mà). -->
+
+    <!-- Giả sử bạn muốn thay đổi chữ trong một thẻ <h1> có ID là title. -->
+    <h1 id="title">Đang tải...</h1>
+
+
+    <!-- 4. Tóm lại 3 cái "ĐƯỢC"
+    Được tốc độ: Trang web hiện ra nhanh hơn.
+    Được an toàn: Không bao giờ bị lỗi "không tìm thấy phần tử HTML" vì HTML luôn có trước.
+    Được thứ tự: Script 1 chạy xong mới đến Script 2.
+    Bạn có muốn so sánh thêm giữa defer và async để biết khi nào dùng cái nào không? -->
+
+    <!-- Khi nào dùng defer?
+    Khi script cần thao tác với DOM (phải đợi HTML xong).
+
+    Khi có nhiều script phụ thuộc lẫn nhau (thư viện trước, code sau).
+
+    Hầu hết các script ứng dụng nên dùng defer để không chặn hiển thị trang và vẫn đảm bảo thứ tự. -->
+</body>
+
+</html>

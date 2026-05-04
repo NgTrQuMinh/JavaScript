@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // super là một từ khóa đặc biệt được dùng để truy cập và gọi các thành phần của lớp cha từ một lớp con.
+        // super() (có ngoặc): Để khởi tạo các thuộc tính từ lớp cha.
+        // super.method() (có chấm): Để tận dụng lại các hàm của lớp cha.
+        class Animal {
+            constructor(name) {
+                this.name = name; // Gán tên riêng cho từng đối tượng
+                this.alive = true;
+            }
+
+            // Một phương thức chung để kiểm tra trạng thái
+            checkStatus() {
+                if (!this.alive) {
+                    console.error(`Con ${this.name} đã ngỏm, không thể làm gì.`);
+                    return false;
+                }
+                return true;
+            }
+
+            eat() {
+                if (this.checkStatus()) {
+                    console.log(`Con ${this.name} đang ăn...`);
+                }
+            }
+        }
+
+        class Rabbit extends Animal {
+            constructor(name, runSpeed) {
+                super(name); // BẮT BUỘC: Gọi constructor của cha để khởi tạo 'name'
+                this.runSpeed = runSpeed; // Thuộc tính riêng của thỏ
+            }
+
+            run() {
+                // Thỏ cũng cần sống mới chạy được
+                // Sử dụng lại logic kiểm tra từ lớp cha
+                if (super.checkStatus()) {
+                    console.log(`Con ${this.name} đang chạy ${this.runSpeed}km/h`);
+                }
+            }
+        }
+
+        class Fish extends Animal {
+            constructor(name, swimSpeed) {
+                super(name);
+                this.swimSpeed = swimSpeed;
+            }
+
+            swim() {
+                if (super.checkStatus()) {
+                    console.log(`Con ${this.name} đang bơi ${this.swimSpeed}km/h`);
+                }
+            }
+        }
+
+        // Bây giờ bạn có thể tạo ra các con vật cụ thể với thông số riêng
+        const rabbit1 = new Rabbit("Thỏ Bảy Màu", 25);
+        const rabbit2 = new Rabbit("Thỏ Trắng", 30);
+        const fish1 = new Fish("Cá Nemos", 10);
+
+        rabbit1.alive = false;
+        fish1.alive = false;
+        rabbit1.eat(); // Con Thỏ Bảy Màu đang ăn...
+        rabbit1.run(); // Con Thỏ Bảy Màu đang chạy 25km/h
+        fish1.eat(); // Con Cá Nemos đang ăn...
+        fish1.swim(); // Con Cá Nemos đang bơi 10km/h
+
+
+    </script>
+</body>
+
+</html>

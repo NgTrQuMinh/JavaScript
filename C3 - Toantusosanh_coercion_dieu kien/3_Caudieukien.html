@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Câu điều kiện (Conditional Statements)
+        // Cấu trúc if...else
+        let score = 85;
+
+        if (score >= 90) {
+            console.log("Xuất sắc");
+        } else if (score >= 80) {
+            console.log("Giỏi");
+        } else {
+            console.log("Cần cố gắng");
+        }
+
+
+        // Toán tử ba ngôi (Ternary Operator)  - Là cách viết tắt của if...else, thường dùng cho các gán giá trị đơn giản.
+        // Cú pháp: điều_kiện ? giá_trị_đúng : giá_trị_sai;
+        let age = 20;
+        let canVote = age >= 18 ? "Có thể bầu cử" : "Chưa đủ tuổi";
+
+
+        // Câu lệnh switch
+        // Dùng khi bạn có một giá trị và muốn so sánh nó với nhiều trường hợp (cases) khác nhau. switch sử dụng so sánh nghiêm ngặt (===).
+        let day = 2;
+        switch (day) {
+            case 2:
+                console.log("Thứ Hai");
+                break;
+            case 3:
+                console.log("Thứ Ba");
+                break;
+            default:
+                console.log("Ngày không xác định");
+        }
+        //         Mẹo nhỏ cho bạn:
+        // Luôn ưu tiên dùng === thay vì == để tránh những lỗi ép kiểu khó lường (ví dụ: [] == false là true).
+        // Tận dụng Truthy/Falsy để viết code ngắn gọn hơn, ví dụ: if (name) thay vì if (name !== "" && name !== null).
+    </script>
+</body>
+
+</html>

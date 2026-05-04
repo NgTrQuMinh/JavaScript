@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="contaier">
+
+        </div>
+    </header>
+
+    <main id="main">
+
+    </main>
+
+    <footer id="footer">
+
+    </footer>
+
+    <script>
+        // 1. Các phương thức chọn phổ biến 
+        // getElementById() - Đây là cách nhanh nhất để chọn một phần tử duy nhất thông qua thuộc tính id
+        const header = document.getElementById('header');
+
+        // getElementsByClassName() - Chọn tất cả các phần tử có cùng một class. Nó trả về một HTMLCollection
+        const items = document.getElementsByClassName('list-item');
+
+        // getElementsByTagName() - Chọn các phần tử dựa trên tên thẻ (như div, p, li).
+        const paragraphs = document.getElementsByTagName('p');
+
+        // 2. Các phương thức "Vạn năng" (Query Selectors)
+        // Đây là cách hiện đại và linh hoạt nhất vì bạn có thể sử dụng cú pháp của CSS Selector để chọn phần tử.
+
+        // querySelector()
+        // Trả về phần tử đầu tiên tìm thấy khớp với selector.
+        const firstButton = document.querySelector('.btn-primary');
+        const navItem = document.querySelector('nav ul li:first-child');
+
+        // querySelectorAll()
+        // Trả về tất cả các phần tử khớp với selector dưới dạng một NodeList. 
+        // Điểm cộng là bạn có thể sử dụng .forEach() trực tiếp trên danh sách này.
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(card => console.log(card));
+
+    </script>
+</body>
+
+</html>

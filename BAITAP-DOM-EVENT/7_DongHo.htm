@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .time-box {
+            background: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .time-box span {
+            font-size: 2.5rem;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="countdown-container">
+        <div class="time-box">
+            <span id="days">00</span>
+            <p>Ngày</p>
+        </div>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <p>Giờ</p>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <p>Phút</p>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <p>Giây</p>
+        </div>
+    </div>
+    <script>
+        // 1. Cài đặt thời điểm kết thúc (Bạn có thể sửa ngày ở đây)
+        const targetDate = new Date("Jan 1, 2027 00:00:00").getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // 2. Công thức tính toán
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // 3. Tạo mảng dữ liệu để duyệt qua (Sử dụng forEach như bạn muốn)
+            const timeUnits = [
+                { id: 'days', value: d },
+                { id: 'hours', value: h },
+                { id: 'minutes', value: m },
+                { id: 'seconds', value: s }
+            ];
+
+            // Duyệt qua từng đơn vị thời gian để cập nhật vào giao diện HTML
+            timeUnits.forEach(unit => {
+                const element = document.getElementById(unit.id);
+                if (element) {
+                    // Thêm số 0 ở trước nếu giá trị nhỏ hơn 10 (Ví dụ: 09 thay vì 9)
+                    element.innerText = unit.value < 10 ? '0' + unit.value : unit.value;
+                }
+            });
+
+            // 4. Xử lý khi đồng hồ chạy về 0
+            if (distance < 0) {
+                clearInterval(interval);
+                document.querySelector(".countdown-container").innerHTML = "<h1>CHÚC MỪNG NĂM MỚI!</h1>";
+            }
+        };
+
+        // Chạy hàm ngay lập tức và sau đó lặp lại mỗi 1 giây (1000ms)
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+
+</html>

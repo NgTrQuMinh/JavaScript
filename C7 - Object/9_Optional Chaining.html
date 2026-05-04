@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Optional Chaining (?.) là gì?
+        // cho phép bạn đọc giá trị của một thuộc tính nằm sâu bên trong một đối tượng mà không cần phải kiểm tra xem từng cấp trung gian có tồn tại hay không.
+        // Nếu giá trị trước dấu ?. là null hoặc undefined, biểu thức sẽ dừng lại và trả về undefined thay vì ném ra một lỗi làm dừng chương trình.
+
+        // Cách viết truyền thống vs. Optional Chaining
+        const user = {
+            name: "Hoàng",
+            address: {
+                street: "Lê Lợi"
+            }
+        };
+
+        // Nếu bạn muốn lấy tên thành phố (city), vốn không tồn tại trong address:
+        // Cách cũ:
+        if (user.address) {
+            if (user.address.city) {
+                console.log(user.address.city);
+            }
+        }
+        // Cách mới (Optional Chaining):
+        const city_Optional = user?.address?.street;
+        console.log(city_Optional); // Lê lợi
+
+        // 2. Các trường hợp sử dụng phổ biến
+        // Truy cập thuộc tính đối tượng
+        // Dùng để truy cập các thuộc tính lồng nhau một cách an toàn.
+        // obj?.prop hoặc obj?.[prop]
+        // Gọi một phương thức (Method)
+        // Nếu user.sayHi tồn tại, nó sẽ được thực thi. Nếu không, trả về undefined.
+        user.sayHi?.();
+
+        // Truy cập phần tử mảng
+        // const firstItem = arr?.[0];
+
+        // 3. Kết hợp với Nullish Coalescing (??)
+        // Optional Chaining thường "song kiếm hợp bích" với toán tử ?? để cung cấp một giá trị mặc định thay vì nhận về undefined.
+        const userCity = user?.address?.city ?? "Thành phố chưa xác định";
+        console.log(userCity); // Kết quả: "Thành phố chưa xác định"
+
+        
+        // 4. Những lưu ý quan trọng (Cẩn thận khi dùng!)
+        // Chỉ dùng để đọc, không dùng để gán
+        // Đừng lạm dụng: Chỉ nên dùng ?. ở những nơi mà thuộc tính thực sự có khả năng không tồn tại (Optional)
+        // Ngắt mạch (Short-circuiting): Ngay khi ?. gặp null/undefined, phần còn lại bên phải sẽ không chạy nữa.
+        const data = {
+            products:
+                [
+                    {
+                        id: 1,
+                        info:
+                        {
+                            price: 100
+                        }
+                    },
+                    { id: 2 } // Không có object info
+                ]
+        };
+
+        // Truy cập an toàn vào giá của sản phẩm thứ 2
+        const price2 = data.products[1]?.info?.price;
+        console.log(price2); // undefined (không gây lỗi)
+
+        // Truy cập sản phẩm không tồn tại
+        const price10 = data.products[9]?.info?.price;
+        console.log(price10); // undefined
+
+    </script>
+</body>
+
+</html>

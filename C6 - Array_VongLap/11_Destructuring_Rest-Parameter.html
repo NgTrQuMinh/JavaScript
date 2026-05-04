@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Destructuring (Phân rã) - là một cách cực kỳ gọn nhẹ để lấy các phần tử ra khỏi mảng và gán vào các biến riêng biệt
+        // 1. Cú pháp cơ bản
+        const traicay = ['Táo', 'Chuối', 'Xoài'];
+
+        // Cú pháp: arr = [1, 2, 3, ...];
+        // const [index0, index1, index2, ...] = arr
+        const [tao, chuoi, xoai] = traicay;
+
+        console.log(tao);   // "Táo"
+        console.log(chuoi); // "Chuối"
+
+        // 2. Các thủ thuật hữu ích
+        // Bỏ qua phần tử -- Nếu bạn không cần lấy hết các giá trị, hãy để trống vị trí đó giữa hai dấu phẩy.
+        const number = [10, 20, 30, 40];
+        const [index0, , index2] = number;
+
+        console.log(index2); // 30 (số 20 đã bị bỏ qua)
+
+        // Giá trị mặc định -- Phòng trường hợp mảng không có đủ phần tử, bạn có thể gán sẵn một giá trị "phòng hờ".
+        const mau = ['Đỏ'];
+        const [m1, m2 = 'Xanh'] = mau;
+
+        console.log(m2); // "Xanh" (vì mảng chỉ có 1 phần tử)
+
+        // Sử dụng toán tử Rest (...) -- Dùng để gom tất cả các phần tử còn lại vào một mảng mới.
+        const sinhVien = ['An', 'Bình', 'Chi', 'Dũng'];
+        const [lopTruong, ...thanhVien] = sinhVien;
+
+        console.log(lopTruong);  // "An"
+        console.log(thanhVien); // ["Bình", "Chi", "Dũng"]
+
+        // 3. Ứng dụng thực tế: Hoán đổi biến
+        // Đây là cách nhanh nhất để đổi chỗ hai giá trị mà không cần biến trung gian temp.
+        let a = "Bánh mì";
+        let b = "Phở";
+
+        [a, b] = [b, a];
+
+        console.log(a); // "Phở"
+        console.log(b); // "Bánh mì"
+
+        // Lưu ý nhỏ: Destructuring không làm thay đổi hay xóa phần tử trong mảng gốc, 
+        // nó chỉ đơn thuần là "copy" giá trị ra các biến mới mà thôi.
+    </script>
+</body>
+
+</html>

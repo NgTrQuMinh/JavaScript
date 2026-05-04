@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Đầu tiên</h1>
+    </div>
+    <h3>referenceNode</h3>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <div>
+        <h2>Cuối cùng</h2>
+    </div>
+    <script>
+        // 1. Cấu trúc phương thức insertBefore() (Cổ điển)
+        // Đây là phương thức truyền thống, yêu cầu bạn phải xác định cả phần tử cha.
+        // Cú pháp: parentNode.insertBefore(newNode, referenceNode);
+        
+        // parentNode: Node cha chứa phần tử mà bạn muốn chèn trước đó.
+        // newNode: Phần tử mới mà bạn muốn chèn vào.
+        // referenceNode: Phần tử hiện có. newNode sẽ đứng ngay trước Phần tử hiện có.
+
+        const ul = document.querySelector("ul");
+        const h3 = document.querySelector("h3");
+        document.body.insertBefore(ul, h3.nextElementSibling); // phần tử ul sẽ di chuyển lên trước h3 nhưng có (nextElementSibling) lên nó sẽ đứng sau h3.
+
+        // 2. Cấu trúc phương thức before() (Hiện đại)
+        // Cú pháp: referenceElement.before(newNode1, newNode2, ... "Text");
+
+        // referenceElement: Phần tử mới mà bạn muốn chèn thứ gì đó lên trước nó.
+        // newNode: Có thể là một đối tượng Element hoặc đơn giản là một chuỗi văn bản (String). Bạn có thể chèn nhiều thứ cùng lúc.
+
+    </script>
+</body>
+</html>

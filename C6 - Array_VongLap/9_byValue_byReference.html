@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Pass by Value (Kiểu dữ liệu nguyên thủy)
+        // Áp dụng cho: string, number, boolean, null, undefined, symbol.
+        let quaCam = 5;
+        let tuiCuaBan = quaCam; // Bạn copy số 5 vào túi của bạn
+
+        tuiCuaBan = 10; // Bạn lấy thêm cam vào túi bạn
+
+        console.log(quaCam);   // 5 (Túi của mình không đổi)
+        console.log(tuiCuaBan); // 10
+
+        // 2. Pass by Reference (Kiểu dữ liệu phức tạp) --> Giống con trỏ trong C
+        // Áp dụng cho: Object, Array, Function.
+        // Khi bạn gán một object cho một biến, bạn không copy nội dung của object đó. 
+        // Thay vào đó, bạn đang copy địa chỉ vùng nhớ (reference) nơi object đó được lưu trữ. 
+        // Cả hai biến giờ đây đều trỏ chung vào một "hộp" dữ liệu trên bộ nhớ.
+        let hopQua = { giayGoi: "Màu Đỏ" };
+        let cuaBan = hopQua; // Bạn cầm cái "chìa khóa" mở chung hộp quà với mình
+
+        cuaBan.giayGoi = "Màu Xanh"; // Bạn thay giấy gói
+
+        console.log(hopQua.giayGoi); // "Màu Xanh" (Hộp quà của mình cũng thành màu xanh luôn!)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 10. Cân bằng nguyên tố
+        // hãy liệt kê các chỉ số i trong mảng thỏa mãn : Tổng các phần tử bên trái i và tổng các phần tử bên phải i là các số nguyên tố
+
+        const Arr = [53, 5, 69, 47, 19];
+
+        const PrimeNumber = ((value) => {
+            for (let i = 2; i <= Math.sqrt(value); i++) {
+                if (value % i === 0) {
+                    return 0;
+                }
+            }
+            return value > 1;
+        })
+
+        for (let i = 0; i < Arr.length; i++) {
+            let left = 0, right = 0;
+            for (let j = 0; j < i; j++) {
+                left += Arr[j];
+            }
+            for (let j = i + 1; j < Arr.length; j++) {
+                right += Arr[j];
+            }
+            if (PrimeNumber(left) && PrimeNumber(right)) {
+                console.log(i);
+            }
+        }
+    </script>
+</body>
+
+</html>

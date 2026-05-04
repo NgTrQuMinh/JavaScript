@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Copy Arr dùng For.
+        const Number = [1, 2, 3, 4, 5];
+
+        let copyArr = new Array().fill(0);
+        for (const value of Number) {
+            copyArr.push(value);
+        }
+        console.log("CopyArr:", copyArr);
+
+        // 2. Đảo ngược từ "i love" -> "evol i"
+        const str = "i love";
+        let result = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+            // console.log(str[i]);
+            result += str[i];
+        }
+        console.log(result);
+
+        // 3. Loại bỏ giá trị falsy ra khỏi mảng chỉ giữ lại truthy
+        const B3 = [1, false, null, "NgTrQuMinh", "", undefined, "JS", [1, 2, 3]];
+
+        const filterTruthy = B3.filter((value, index) => {
+            return Boolean(value);
+        });
+        console.log(filterTruthy);
+
+        // 4. Làm Phẳng Arr .flat().
+        const flatArr = B3.flat(2);
+        console.log(flatArr);
+
+        // 5. Đảo ngược Number.
+        function ReverseNumber(n) {
+            let lat = 0;
+            while (n) {
+                lat = lat * 10 + n % 10;
+                n = Math.floor(n / 10);
+            }
+            return lat;
+        }
+        console.log(ReverseNumber(123));
+
+        // 6. Đếm kí tự
+        function countChar(string) {
+            let cnt = 0;
+            const char = "minh";
+            for (const value of string) {
+                if (char.includes(value)) { // check "minh" === "s/t/r/i/n/g" ++cnt.
+                    ++cnt;
+                }
+            }
+            return cnt;
+        }
+        console.log(countChar("minh"));
+
+        // 7. Chỉ in ra giá trị 1 lần
+        // Cách 1: 
+        function unique(arr) {
+            const newArr = [];
+            arr.forEach(value => {
+                if (!newArr.includes(value)) {
+                    newArr.push(value);
+                }
+            });
+            return newArr;
+        }
+        console.log(unique([1, 2, 3, 4, 5, 5, 2, 1]));
+
+        // Cách 2: MẢNG ĐÁNH DẤU
+        function arrFighting(arr) {
+            let DEM = new Array(100).fill(0);
+
+            for (let i = 0; i < arr.length; i++) {
+                DEM[arr[i]] = 1;
+            }
+
+            for (let i = 0; i < DEM.length; i++) {
+                if (DEM[i] != 0) {
+                    console.log(i, DEM[i]);
+                }
+            }
+        }
+        arrFighting([1, 2, 3, 4, 5, 5, 2]);
+
+        // Xử lý 1 mảng ghành mảng con [1, 2, 3, 4, 5, 6] = [1, 2, 3], [4, 5, 6]
+        function chunkArray(arr, size) {
+            let result = [];
+
+            for (let i = 0; i < arr.length; i += size) {
+                result.push(arr.slice(i, i + size));
+            }
+            return result;
+        }
+        const numbers = [1, 2, 3, 4, 5, 6];
+        console.log(chunkArray(numbers, 3));    // Kết quả: [[1, 2, 3], [4, 5, 6]]
+        
+    </script>
+</body>
+
+</html>

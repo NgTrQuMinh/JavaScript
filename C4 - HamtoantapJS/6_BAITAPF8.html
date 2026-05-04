@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // canAttendTechSeminar
+        function canAttendTechSeminar(age, itEmployee, hasRegistered) {
+            return age >= 18 && itEmployee && hasRegistered ? true : false;
+        }
+        console.log(canAttendTechSeminar(18, true, true));  // true
+        console.log(canAttendTechSeminar(20, false, true)); // false
+
+        // 1. Viết hàm canPurchase CarInsurance (age, hasLicense, noAccidents) kiểm tra xem một người có thể mua bảo hiểm xe không. 
+        // Điều kiện: trên 21 tuổi, có giấy phép lái xe và không có hồ sơ tai nạn trong quá khứ.
+        function canPurchaseCarInsurance(age, hasLicense, noAccidents) {
+            return age >= 21 && hasLicense && noAccidents ? true : false;
+        }
+        console.log(canPurchaseCarInsurance(22, true, false)); // true
+        console.log(canPurchaseCarInsurance(20, false, true)); // false 
+        
+        // 2. Viết hàm can JoinFootballTeam(age, hasExperience)
+        // kiểm tra xem một người có được tham gia đội bóng không. Điều kiện: tuổi từ 18 đến 35 và có kinh nghiệm chơi bóng.
+        function JoinFootballTeam(age, hasExperience) {
+            return age >= 18 && age <= 35 && hasExperience ? true : false;
+        }
+        console.log(JoinFootballTeam(18, true)); // true
+
+        // 3. Viết hàm isBankAccountValid(isIdentityVerified, balance) kiểm tra xem tài khoản ngân hàng có hợp lệ. 
+        // Điều kiện: đã xác minh danh tính và số dư tài khoản trên 100 đô.
+        function isBankAccountValid(isIdentityVerified, balance) {
+            return isIdentityVerified && balance > 100
+        }
+        console.log(isBankAccountValid(true, 100)); // true
+        console.log(isBankAccountValid(false, 100)); // false
+
+        // 4. Viết hàm canParticipateInMarathon (age, has Trained) kiểm tra xem một người có thể tham gia giải chạy bộ. 
+        // Điều kiện: tuổi từ 18 trở lên và đã tập luyện.
+        function canParticipateInMarathon(age, hasTrained) {
+            return age >= 18 && hasTrained ? true : false
+        }
+        console.log(canParticipateInMarathon(18, true)); // true
+
+        // 5. Viết hàm canEnrollCooking Class (loves Cooking, noFoodAllergies) kiểm tra xem một người có thể tham gia khóa học nấu ăn. 
+        // Điều kiện: yêu thích nấu ăn và không bị dị ứng thực phẩm.
+        function canEnrollCookingClass(lovesCooking, noFoodAllergies) {
+            return lovesCooking && noFoodAllergies ? true : false
+        }
+        console.log(canEnrollCookingClass(true, true)); // true
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cú pháp Biến hóa (Syntax Variations)
+        const tong = (a, b) => {
+            const result = a + b;
+            return result;
+        };
+
+        // Rút gọn (Short-hand)
+        const gapDoi = n => n * 2;
+
+        // Trả về một Object: Phải bao Object trong ngoặc đơn () để tránh nhầm lẫn với thân hàm.
+        const user = (id) => {
+            return { id: id, Aname: "Admin" };
+        };
+
+        // 2. Đặc tính "Lexical This" (Quan trọng nhất)
+        // Trong hàm truyền thống, this được xác định tại thời điểm gọi hàm (Dynamic scoping). 
+        // Trong Arrow Function, this được xác định tại thời điểm định nghĩa hàm (Lexical scoping).
+
+        // Hàm thường: this là đối tượng gọi nó.
+        // Arrow Function: this là this của phạm vi bao quanh nó (thường là window/global hoặc một class).
+
+        // 3. Những thứ Arrow Function "KHÔNG CÓ"
+        // Để tối ưu bộ nhớ và đơn giản hóa, Arrow Function bị lược bỏ các thành phần sau:
+        // Không có this riêng: Nó "mượn" từ bên ngoài.
+        // Không có arguments: Bạn không thể dùng biến arguments để lấy danh sách tham số. Thay vào đó hãy dùng ...rest.
+        // Không có super: Không thể dùng để gọi hàm cha trong kế thừa theo cách thông thường.
+        // Không có new.target: Không dùng để kiểm tra xem hàm có được gọi bằng new hay không.
+
+        // 4. Các hạn chế và Sai lầm thường gặp
+        // A. Không làm Constructor - Bạn không thể dùng new với Arrow Function. Nếu cố tình, JavaScript sẽ báo lỗi: TypeError: ... is not a constructor.
+        // B. Vấn đề với Method trong Object - Nếu dùng Arrow Function làm phương thức của Object, this sẽ trỏ ra ngoài (thường là window), dẫn đến kết quả undefined.
+        // C. Không có Prototype - Arrow Function không có thuộc tính prototype, vì vậy nó không thể dùng để tạo ra các bản thiết kế cho đối tượng.
+
+        // 5. Khi nào nên dùng cái nào?
+        //------- Nên dùng Arrow Function khi:
+        // Làm callback cho các hàm xử lý mảng (map, filter, reduce).
+        // Xử lý sự kiện hoặc định thời (setTimeout) mà muốn giữ nguyên ngữ cảnh this.
+        // Viết các hàm nhỏ, logic đơn giản.
+
+        //------- Nên dùng Hàm truyền thống khi:
+        // Định nghĩa phương thức (Methods) trong Object.
+        // Cần sử dụng tính năng Hoisting (gọi hàm trước khi khai báo).
+        // Cần dùng this động hoặc làm hàm khởi tạo (Constructor).
+    </script>
+</body>
+
+</html>

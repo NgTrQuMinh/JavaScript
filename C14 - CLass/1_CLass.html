@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Construct function
+        function PersonConstruct(name) {
+            this.name = name;
+        }
+        PersonConstruct.prototype.getName = function () {
+            console.log(this.name);
+        }
+        // const Minh = new Person("Minh"); 
+
+        // Class trong JavaScript (giới thiệu từ phiên bản ES6) là một "khuôn mẫu" (blueprint) dùng để tạo ra các đối tượng (objects)
+        // Keyword class: Dùng để khai báo lớp.
+        // constructor(): Phương thức đặc biệt dùng để khởi tạo thuộc tính khi một đối tượng mới được tạo ra bằng từ khóa new.
+        // Methods: Các hàm định nghĩa hành vi cho đối tượng
+        class Products {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+            render() {  // nhu 1 function render
+                console.log(`Products: ${this.name}`);
+                console.log(`Price: ${this.price.toFixed(2)}`);
+            }
+
+            calculateTotal(salesTax) {  // tinh thue
+                return this.price + (this.price * salesTax);
+            }
+
+
+        }
+
+        const salesTax = 0.05; // thue 0.05
+
+        const Product1 = new Products("iPhone 13", 12000000);
+        const Product2 = new Products("iPhone 14", 13000000);
+
+        Product1.render(); // Products: iPhone 13 Price: 12000000
+
+        const total = Product1.calculateTotal(salesTax);
+        console.log(total); // 12600000
+
+
+    </script>
+</body>
+
+</html>

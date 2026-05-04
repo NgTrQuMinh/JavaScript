@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --item-height: 50px;
+            --item-count: 6;
+            /* Radius = height / (2 * tan(PI / count)) */
+            --radius: 50px;
+        }
+
+        .wheel-container {
+            height: 200px;
+            perspective: 1000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .wheel {
+            position: relative;
+            width: 200px;
+            height: var(--item-height);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .wheel-item {
+            position: absolute;
+            width: 100%;
+            height: var(--item-height);
+            line-height: var(--item-height);
+            text-align: center;
+            color: white;
+            backface-visibility: hidden;
+        }
+
+        /* Arrange items in a circle */
+        .wheel-item:nth-child(1) {
+            transform: rotateX(0deg) translateZ(var(--radius));
+        }
+
+        .wheel-item:nth-child(2) {
+            transform: rotateX(60deg) translateZ(var(--radius));
+        }
+
+        .wheel-item:nth-child(3) {
+            transform: rotateX(120deg) translateZ(var(--radius));
+        }
+
+        .wheel-item:nth-child(4) {
+            transform: rotateX(180deg) translateZ(var(--radius));
+        }
+
+        .wheel-item:nth-child(5) {
+            transform: rotateX(240deg) translateZ(var(--radius));
+        }
+
+        .wheel-item:nth-child(6) {
+            transform: rotateX(300deg) translateZ(var(--radius));
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wheel-container">
+        <div class="wheel" id="wheel">
+            <div class="wheel-item">Option 1</div>
+            <div class="wheel-item">Option 2</div>
+            <div class="wheel-item">Option 3</div>
+            <div class="wheel-item">Option 4</div>
+            <div class="wheel-item">Option 5</div>
+            <div class="wheel-item">Option 6</div>
+        </div>
+    </div>
+    <script>
+        const wheel = document.getElementById('wheel');
+        let currentRotation = 0;
+
+        window.addEventListener('wheel', (event) => {
+            // Determine direction of scroll
+            const delta = event.deltaY > 0 ? -30 : 30;
+
+            currentRotation += delta;
+
+            // Apply the rotation to the wheel
+            wheel.style.transform = `rotateX(${currentRotation}deg)`;
+
+            // Optional: Prevent page scroll while using the wheel
+            event.preventDefault();
+        }, { passive: false });
+
+    </script>
+</body>
+
+</html>

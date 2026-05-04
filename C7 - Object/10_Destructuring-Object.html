@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Destructuring Assignment (Phân rã cấu trúc)
+        const user = {
+            name: 'Gemini',
+            age: 1,
+            country: 'Vietnam'
+        };
+
+        // Cách truyền thống
+        const name = user.name;
+        const age = user.age;
+        // (Phân rã cấu trúc)
+        const { name: userName, age: userAge, country } = user;
+
+        console.log(userName); // 'Gemini'
+
+        // 2. Các kỹ thuật nâng cao
+        // Đổi tên biến (Renaming)
+        const { name: fullName, age: yearsOld } = user;
+        console.log(fullName); // 'Gemini'
+
+        // Giá trị mặc định (Default Values) -- không phải gán vào object
+        const { job = 'AI Assistant' } = user;
+        console.log(job); // 'AI Assistant' (vì user không có property job)
+
+        // Destructuring trong tham số hàm
+        const displayUser = ({ name, age, job }) => {
+            console.log(`User: ${name}, Age: ${age}, country: ${country}`);
+        };
+        displayUser(user);
+    
+        // 3. Lợi ích của Destructuring
+        // Ngắn gọn: Giảm bớt lượng code boilerplate (code lặp lại vô nghĩa).
+        // Dễ bảo trì: Nhìn vào dòng khai báo là biết ngay biến đó lấy dữ liệu từ đâu.
+        // Linh hoạt: Dễ dàng xử lý các Object phức tạp hoặc lồng nhau (nested objects).
+        // Lưu ý: Khi destructuring Object, thứ tự các biến không quan trọng (vì nó tìm theo key), khác với Array destructuring vốn dựa vào thứ tự phần tử.
+    </script>
+</body>
+
+</html>

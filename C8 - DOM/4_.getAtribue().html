@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a>
+    <ul>
+        <li class="item item1">a</li>
+        <li class="item item2">b</li>
+        <li class="item item3">c</li>
+        <li class="item item4">d</li>
+        <li class="item item5">e</li>
+    </ul>>
+    <script>
+        // 1. getAttribute() - Lấy giá trị của atribute selecter
+        const link = document.querySelector('a');
+        const url = link.getAttribute('href'); // Lấy đường dẫn của thẻ <a>
+        console.log(url);
+
+        const list = document.querySelectorAll('.item');
+        list.forEach((value, index) => {
+            console.log(value.getAttribute("class"));   // lấy các tên thẻ class ul > li
+        });
+    </script>
+</body>
+
+</html>

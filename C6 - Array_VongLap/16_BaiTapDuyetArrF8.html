@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 1. Viết hàm countGreater Than nhận vào một mảng số và một số value, hàm trả về số lượng phần tử trong mảng lớn hơn value.
+    function countGreater(arr, value) {
+        let cnt = 0;
+        return arr.filter((value) => {
+            if (value > value) {
+                cnt++;
+            }
+            return cnt;
+        })
+    }
+    // 2. Viết hàm alternateSum để tính "tổng xen kẽ" từ một mảng số. Trong "tổng xen kẽ", bạn sẽ cộng số ở vị trí chẳn và trừ số ở vị trí lẻ trong mảng.
+    function alternateSum(arr) {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (i % 2 === 0) {
+                sum += arr[i];
+            } else {
+                sum -= arr[i];
+            }
+        }
+        return sum;
+    }
+
+    // 4. Viết hàm filterEvensAndSum để lọc ra các số chẵn từ một mảng số nguyên đầu vào và tính tổng của chúng.
+    function filterEvensAndSum(arr) {
+        let sum = 0;
+        return arr.filter((value) => {
+            if (value % 2 === 0) {
+                sum += value;
+            }
+            return sum;
+        })
+    }
+    </script>
+</body>
+</html>

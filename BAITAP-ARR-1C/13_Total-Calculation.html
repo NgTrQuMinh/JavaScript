@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 13. Tính tổng và tích các phần tử
+        // Tính tổng, tích của các phần tử trong mảng và lấy dư với 10^9+7
+
+        const Arr = [997893, 995053, 997553, 996212, 998316, 992144];
+        const MOD = BigInt(1e9 + 7); // 1,000,000,007n
+
+        // Chuyển mảng sang BigInt để tính toán chính xác
+        const BigArr = Arr.map(item => BigInt(item));
+
+        // Tính Tổng (Total)
+        const Total = BigArr.reduce((acc, item) => {
+            return (acc + item) % MOD;
+        }, 0n);
+
+        // Tính Tích (Calculation)
+        const Calculation = BigArr.reduce((acc, item) => {
+            return (acc * item) % MOD;
+        }, 1n);
+
+        console.log("Tổng dư:", Total.toString());
+        console.log("Tích dư:", Calculation.toString());
+
+
+    </script>
+</body>
+
+</html>l

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Đăng Nhập</title>
+    <style>
+        /* Reset mặc định và căn giữa toàn bộ trang */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Căn giữa theo chiều dọc */
+        }
+
+        .form-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="password"] {
+            display: block;
+            width: 100%;
+            height: 55px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 0 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-container input:focus {
+            outline: none;
+            border-color: #8a8aff;
+            background-color: #fff;
+        }
+
+        /* Tùy chỉnh cụm Remember Me */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .form-container button {
+            width: 100%;
+            height: 55px;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #574bdf;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm">
+            <input type="text" name="email" placeholder="Email hoặc Tên đăng nhập" required>
+            <input type="password" name="password" placeholder="Mật khẩu" required>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="remember_me" id="rememberMe">
+                <label for="rememberMe">Ghi nhớ đăng nhập</label>
+            </div>
+
+            <button type="submit">Đăng Nhập</button>
+        </form>
+    </div>
+
+    <script>
+        const VALID_USER = {
+            email: "admin",
+            password: "123"
+        };
+
+        // Hàm lấy dữ liệu từ Form và trả về object chứa dữ liệu
+        function getFormData(formElement) {
+            const data = new FormData(formElement); // FormData là một Web API mạnh mẽ được thiết kế để thu thập các cặp key/value từ các phần tử form (input, select, textarea).
+            // data.entries(): Tạo ra cấu trúc tương đương [['user', 'Alice'], ['age', '25']].
+            // Object.fromEntries: Chuyển mảng đó thành { user: "Alice", age: "25" }.
+            return Object.fromEntries(data.entries()); 
+        }
+
+        // Hàm kiểm tra logic đăng nhập
+        function validateLogin(inputEmail, inputPassword) {
+            return inputEmail === VALID_USER.email && inputPassword === VALID_USER.password;
+        }
+
+        // Hàm xử lý khi nhấn nút Submit
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Chặn load lại trang
+
+            // Gọi hàm lấy dữ liệu
+            const values = getFormData(event.target);
+
+            // Gọi hàm kiểm tra
+            const isValid = validateLogin(values.email, values.password);
+
+            if (isValid) {
+                alert("✅ Đăng nhập thành công!");
+            } else {
+                alert("❌ Sai tài khoản hoặc mật khẩu.");
+            }
+        }
+
+        // 5. Gán sự kiện cho form
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", handleFormSubmit);
+    </script>
+</body>
+
+</html>

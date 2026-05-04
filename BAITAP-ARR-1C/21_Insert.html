@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 21. Chèn 1.
+        // chèn phần tử X vào vị trí K trong mảng sau đó in ra mảng.
+        const Arr = [343, 473, 572, 525, 210, 2, 874, 318];
+        let X = 292;
+        let K = 5;
+
+        // Tạo Hàm Chèn.
+        const Insert_Element = ((Arr) => {
+            return Arr.toSpliced(K, 0, X);
+        })
+        console.log(Insert_Element(Arr));
+
+
+
+    </script>
+</body>
+</html>

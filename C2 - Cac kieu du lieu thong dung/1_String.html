@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách khai báo String
+        let name = "Gemini";
+        let greeting = `Chào ${name}, chúc bạn một ngày tốt lành!`; // Chèn biến bằng ${}
+
+        // 2. Các thuộc tính và phương thức thông dụng
+        // A. Kiểm tra độ dài chuỗi
+        let textLength = "ABCDE";
+        console.log(textLength.length); // Kết quả: 5
+
+        // B. Thay đổi hoa/thường
+        let message = "chúc mừng sinh nhật!";
+        let loudMessage = message.toUpperCase();
+        console.log(loudMessage);   // Kết quả: "CHÚC MỪNG SINH NHẬT!"
+        console.log(message);   // Kết quả: "chúc mừng sinh nhật!" (Chuỗi gốc vẫn giữ nguyên)
+
+
+        // C. Cắt và trích xuất chuỗi
+        // 1. Phương thức .slice(start, end)
+        let textSlice = "Apple, Banana, Kiwi";
+
+        let fruit = textSlice.slice(7, 13);     // Lấy từ index 7 đến trước index 13
+        console.log(fruit); // "Banana"
+        let rest = textSlice.slice(7);  // ko co end sẽ lấy hết chuỗi.
+        console.log(rest); // "Banana, Kiwi"    // Nếu bạn truyền số âm, JS sẽ đếm ngược từ cuối chuỗi lại.
+
+        // 2. Phương thức .trim() - Cắt khoảng trắng 2 đầu chuỗi.
+        let username = "   gemini_user   ";
+        console.log(username.trim()); // "gemini_user"
+
+
+        // D. Tìm kiếm và thay thế
+        // 1. Tìm kiếm vị trí .indexOf() và .lastIndexOf()
+        let str = "Học lập trình JS tại JS Center";
+        console.log(str.indexOf("JS"));     // 14 (Chữ JS đầu tiên)
+        console.log(str.lastIndexOf("JS")); // 21 (Chữ JS cuối cùng)
+        console.log(str.indexOf("Python")); // -1 (Không tìm thấy)
+
+        // 2. Kiểm tra sự tồn tại với .includes()
+        const str_includes = "Học lập trình JavaScript";
+        console.log(str_includes.indexOf("lập trình")); // Kết quả: 4 (Chữ 'l' nằm ở vị trí số 4)
+        console.log(str_includes.indexOf("Python"));    // Kết quả: -1 (Không tìm thấy)
+
+        // 3. Thay thế nội dung với  và 
+        let p = "Mèo thích cá. Mèo cũng thích ngủ.";
+        // .replace() Chỉ thay chữ Mèo đầu tiên         // .replaceAll() Thay tất cả chữ Mèo
+        console.log(p.replace("Mèo", "Chó"));   // Kết quả: "Chó thích cá. Mèo cũng thích ngủ."
+        
+    </script>
+</body>
+
+</html>

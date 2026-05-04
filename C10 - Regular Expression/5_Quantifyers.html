@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 5. Quantifyers: {n} {n,nm} + ? *
+        // string.match(regex) "abc".match(/\w/) -> []
+        // {n}: số lượng nhất định
+        // {n, m}: số lượng trong khoảng từ n->m
+        // +: lấy 1 hoặc nhiều kí tự thỏa đk
+        const str1 = "Welcome to 20260123";
+        console.log(str1.match(/\d\d\d\d/)[0]); // 2026 
+        console.log(str1.match(/\d{4}/)[0]);    // 2026
+        console.log(str1.match(/\d{2,3}/)[0]);    // 202
+        console.log(str1.match(/\d+/)); // 20260123
+
+        const str2 = "color or colour?"
+        // ?: có thể có hoặc ko có kí tự nào đó
+        console.log(str2.match(/colou?r/g)); // [color, colour]
+
+        // flag
+        // g: global
+        // i: case insensitive
+        // m: multipe lines
+        // *: ko có hoặc là nhiều
+        const str3 = "12345";
+        console.log(str3.match(/\d*/g)); // [12345, ""]
+    </script>
+</body>
+
+</html>

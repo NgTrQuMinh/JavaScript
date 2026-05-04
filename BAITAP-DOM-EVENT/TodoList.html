@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* APP */
+        .app {
+            background: white;
+            width: 380px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* TITLE */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* INPUT */
+        .todo-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        .todo-input button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* SEARCH */
+        #search {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* FILTER */
+        #filters {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        #filters button {
+            flex: 1;
+            margin: 0 3px;
+            padding: 6px;
+            border: none;
+            border-radius: 6px;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        /* COUNT */
+        #count {
+            margin-top: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+
+        /* LIST */
+        #list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        /* TEXT */
+        .text {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        /* BUTTONS */
+        .item button {
+            border: none;
+            padding: 5px 8px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle {
+            background: #4caf50;
+            color: white;
+        }
+
+        .del {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .edit {
+            background: #f39c12;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <h1>Todo List</h1>
+
+        <form class="todo-input">
+            <input type="text" id="input" name="input" placeholder="Nhập công việc...">
+            <button id="addBtn">Thêm</button>
+        </form>
+
+        <input type="text" id="search" name="search" placeholder="Tìm kiếm...">
+
+        <div id="filters">
+            <button data-filter="all">All</button>
+            <button data-filter="active">Active</button>
+            <button data-filter="completed">Done</button>
+        </div>
+
+        <p id="count"></p>
+
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", (e) => {
+            const form = document.querySelector(".todo-input");
+            const input = document.getElementById("input");
+            const list = document.getElementById("list");
+            const search = document.getElementById("search");
+            const count = document.getElementById("count");
+            const filters = document.getElementById("filters");
+
+            const STORAGE_KEY = "todos";
+
+            let todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            let currentFilter = "all";
+            let keyword = "";
+
+            // ================= RENDER =================
+            function Render() {
+                let data = [...todos];
+
+                // search
+                if (keyword) {
+                    data = data.filter(todo =>
+                        todo.text.toLowerCase().includes(keyword)
+                    );
+                }
+
+                // filter
+                if (currentFilter === "active") {
+                    data = data.filter(todo => !todo.checked);
+                }
+
+                if (currentFilter === "completed") {
+                    data = data.filter(todo => todo.checked);
+                }
+
+                // render list
+                list.innerHTML = data.map(todo => `
+                    <li class="item" data-id="${todo.id}">
+                        <span class="text ${todo.checked ? "checked" : ""}">
+                            ${todo.text}
+                        </span>
+                        <button class="toggle">✔</button>
+                        <button class="del">X</button>
+                        <button class="edit">Sửa</button>
+                    </li>
+                `).join("");
+
+                // count
+                const left = todos.filter(t => !t.checked).length;
+                count.textContent = `Còn ${left} việc chưa làm`;
+            }
+
+            // ================= ADD =================
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const value = input.value.trim();
+                if (!value) return;
+
+                todos.push({
+                    id: Date.now(),
+                    text: value,
+                    checked: false
+                });
+
+                save();
+                Render();
+                form.reset();
+            });
+
+            // ================= CLICK =================
+            list.addEventListener("click", (e) => {
+                const item = e.target.closest(".item");
+                if (!item) return;
+
+                const id = Number(item.dataset.id);
+                const index = todos.findIndex(t => t.id === id);
+                if (index === -1) return;
+
+                if (e.target.classList.contains("toggle")) {
+                    todos[index].checked = !todos[index].checked;
+                }
+
+                if (e.target.classList.contains("del")) {
+                    todos.splice(index, 1);
+                }
+
+                if (e.target.classList.contains("edit")) {
+                    const newText = prompt("Sửa:");
+                    if (newText && newText.trim()) {
+                        todos[index].text = newText.trim();
+                    }
+                }
+
+                save();
+                Render();
+            });
+
+            // ================= SEARCH =================
+            search.addEventListener("input", (e) => {
+                keyword = e.target.value.toLowerCase();
+                Render();
+            });
+
+            // ================= FILTER =================
+            filters.addEventListener("click", (e) => {
+                const btn = e.target.closest("button");
+                if (!btn) return;
+
+                currentFilter = btn.dataset.filter;
+                Render();
+            });
+
+            // ================= SAVE =================
+            function save() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+            }
+
+            // load
+            Render();
+        })
+    </script>
+</body>
+
+</html>

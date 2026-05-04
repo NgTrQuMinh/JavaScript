@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Sử dụng Closure trong vòng lặp (closure in loop) là một trong những tình huống dễ gây lỗi nhất trong JavaScript 
+        // nếu bạn không nắm vững cơ chế hoạt động của phạm vi biến (scope).
+
+        for (var i = 0; i < 3; i++) {
+            setTimeout(function () {
+                console.log(i); // Bạn mong đợi: 0, 1, 2
+            }, 1000);
+        }
+        // Kết quả thực tế: 3, 3, 3
+
+        // Tại sao? Khi các hàm setTimeout thực thi (sau 1 giây), vòng lặp đã chạy xong và giá trị của i lúc này đã là 3. 
+        // Vì tất cả closures đều trỏ chung vào một biến i, chúng đều in ra giá trị cuối cùng đó.
+
+        // 2. Các cách giải quyết
+        // Cách 1: Sử dụng let (Khuyên dùng)
+        // Từ ES6, let có block scope. Trong mỗi lần lặp, JavaScript tạo ra một "phiên bản" biến i mới hoàn toàn cho khối mã đó.
+        for (let i = 0; i < 3; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, 1000);
+        }
+        // Kết quả: 0, 1, 2 (Mỗi callback "ghi nhớ" một giá trị i riêng biệt)
+
+    </script>
+</body>
+
+</html>

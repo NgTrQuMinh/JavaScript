@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách thực hiện tính trừu tượng trong JS
+        // Sử dụng Class: Nhóm các thuộc tính và phương thức liên quan.
+        // Hạn chế truy cập: Giấu đi các logic bên trong (thường dùng # cho Private Class Features).
+        // Tạo bản thiết kế (Template): Định nghĩa các phương thức chung nhưng để các lớp con tự triển khai chi tiết.
+
+        // 2. Ví dụ thực tế: Hệ thống thanh toán
+        // Hãy tưởng tượng bạn xây dựng một lớp ThanhToan. Người dùng chỉ cần gọi hàm thucHien(), 
+        // còn việc kết nối ngân hàng hay kiểm tra số dư là việc "nội bộ".
+
+        class ThanhToan {
+            constructor(soTien) {
+                this.soTien = soTien;
+            }
+            // Phương thức trừu tượng (Bản thiết kế)
+            xacThuc() {
+                throw new Error("Phương thức 'xacThuc()' phải được thực thi ở lớp con!");
+            }
+            // Quy trình chung đã được trừu tượng hóa
+            thucHien() {
+                if (this.xacThuc()) {
+                    console.log(`Đang xử lý thanh toán: ${this.soTien} VNĐ`);
+                    this.#luuLichSu(); // Chi tiết ẩn
+                }
+            }
+            // Private method - Chi tiết phức tạp được ẩn đi
+            #luuLichSu() {
+                console.log("Đã ghi nhận giao dịch vào cơ sở dữ liệu.");
+            }
+        }
+        // Lớp con cụ thể hóa logic
+        class ThanhToanThe extends ThanhToan {
+            xacThuc() {
+                console.log("Đang kiểm tra mã PIN và số dư thẻ...");
+                return true;
+            }
+        }
+
+        const giaoDich = new ThanhToanThe(500000);
+        giaoDich.thucHien();
+
+        // 3. Lợi ích của tính Trừu tượng
+        // Giảm sự phức tạp: Người sử dụng Class không cần đọc hàng nghìn dòng code logic bên trong, chỉ cần gọi các phương thức công khai.
+        // Dễ bảo trì: Khi bạn thay đổi cách xử lý bên trong (ví dụ: đổi nhà cung cấp API ngân hàng), code của người dùng gọi hàm thucHien() vẫn không thay đổi.
+        // Tránh sai sót: Việc ẩn đi các biến quan trọng bằng # (Private) giúp ngăn chặn việc dữ liệu bị can thiệp trái phép từ bên ngoài.
+    </script>
+</body>
+
+</html>

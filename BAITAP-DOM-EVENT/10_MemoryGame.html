@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game {
+            width: 240px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 50px);
+            gap: 10px;
+        }
+
+        .card {
+            width: 50px;
+            height: 50px;
+            background: #444;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .flipped {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🧠 Memory Game</h2>
+    <div id="game"></div>
+    <script>
+        const game = document.getElementById("game");
+
+        // 🎯 Bước 1: tạo mảng (cặp giống nhau)
+        let cards = ["A", "A", "B", "B", "C", "C", "D", "D"];
+
+        // 🎯 Bước 2: trộn mảng (random)
+        cards.sort(() => Math.random() - 0.5);
+
+        // 🎯 Biến trạng thái
+        let firstCard = null;
+        let secondCard = null;
+        let lock = false; // khóa khi đang kiểm tra
+
+        // 🎯 Tạo thẻ
+        cards.forEach((value) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.dataset.value = value; // lưu giá trị
+
+            // 👉 Khi click
+            card.addEventListener("click", () => {
+                // nếu đang khóa hoặc đã lật thì bỏ qua
+                if (lock || card.classList.contains("flipped")) return;
+
+                // lật thẻ
+                card.textContent = value;
+                card.classList.add("flipped");
+
+                // chọn thẻ
+                if (!firstCard) {
+                    firstCard = card;
+                } else {
+                    secondCard = card;
+                    lock = true;
+
+                    // kiểm tra
+                    setTimeout(checkMatch, 500);
+                }
+            });
+
+            game.appendChild(card);
+        });
+
+        // 🎯 Hàm kiểm tra
+        function checkMatch() {
+            if (firstCard.dataset.value === secondCard.dataset.value) {
+                // đúng → giữ nguyên
+            } else {
+                // sai → úp lại
+                firstCard.textContent = "";
+                secondCard.textContent = "";
+                firstCard.classList.remove("flipped");
+                secondCard.classList.remove("flipped");
+            }
+
+            // reset
+            firstCard = null;
+            secondCard = null;
+            lock = false;
+        }
+    </script>
+</body>
+
+</html>

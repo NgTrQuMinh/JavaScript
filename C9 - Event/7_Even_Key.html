@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sự khác biệt Keydown và Keyup</title>
+    <style>
+        .input_keydown, .input_up {
+            padding: 15px;
+            border: 2px solid #ccc;
+            font-size: 17px;
+            width: 300px;
+            margin: 20px auto;
+            display: block;
+            outline: none;
+        }
+        .input_keydown:focus { border-color: #007bff; }
+        .input_up:focus { border-color: #28a745; }
+    </style>
+</head>
+<body>
+
+    <input type="text" class="input_keydown" placeholder="Nhấn phím (Keydown)">
+    <input type="text" class="input_up" placeholder="Thả phím (Keyup)">
+
+    <script>
+        // 1. keydown - Kích hoạt ngay khi vừa nhấn phím xuống
+        const inputKeydown = document.querySelector(".input_keydown");
+        
+        inputKeydown.addEventListener("keydown", (event) => {
+            console.log(`[KeyDown]: Bạn đang nhấn phím ${event.key}`);
+        });
+
+        // 2. keyup - Kích hoạt khi bạn nhấc ngón tay khỏi phím
+        const inputKeyUp = document.querySelector(".input_up");
+
+        inputKeyUp.addEventListener("keyup", (event) => {
+            console.log(`[KeyUp]: Bạn vừa thả phím ${event.key} ra`);
+            
+            // Ví dụ: Tự động biến chữ thường thành chữ hoa khi gõ xong
+            event.target.value = event.target.value.toUpperCase();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Khởi tạo đối tượng Date
+        // Trước khi dùng các hàm, bạn cần tạo một thực thể (instance) của Date:
+        const now = new Date();     // Thời gian hiện tại
+        new Date("2026-03-29");     // Từ một chuỗi (String)
+        console.log(new Date(2007, 8, 21, 9, 21, 27)); // new Date(Năm - tháng + 1 - ngày - /p - /s - /ms)
+        // Lưu ý quan trọng: Trong JS, tháng (monthIndex) bắt đầu từ 0 (Tháng 1 là 0, Tháng 12 là 11).
+
+
+        // 2. Timestamp.
+        // 1. Timestamp chuẩn (Mili giây)
+        // Cách hiện đại và nhanh nhất
+        // Đây là cách phổ biến nhất, trả về số mili giây tính từ ngày 01/01/1970 (Giờ chuẩn UTC).
+        const timestamp = Date.now();
+
+        // Cách truyền thống (thông qua đối tượng Date)
+        const timestampAlt = new Date().getTime();
+
+        // 2. Timestamp tính bằng Giây
+        // Nhiều hệ thống API (như Unix/Linux) yêu cầu thời gian tính bằng giây. Bạn chỉ cần chia cho 1.000 và làm tròn xuống.
+        const seconds = Math.floor(Date.now() / 1000);
+
+        // 3. Timestamp độ phân giải cao (High-Resolution)
+        // Nếu bạn cần đo hiệu năng hoặc thời gian chạy của code với độ chính xác cực cao (đến hàng micro giây), hãy dùng performance.now().
+        const highRes = performance.now();
+        // Kết quả dạng số thực: ví dụ 1234.56789 (mili giây)
+    </script>
+</body>
+
+</html>

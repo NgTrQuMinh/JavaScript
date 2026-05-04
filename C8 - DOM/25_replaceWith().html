@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="myList">
+        <li>Trứng</li>
+        <li id="change">Sữa</li>
+        <li>Bánh mì</li>
+    </ul>
+
+    <ul id="myList2">
+        <li>Trứng</li>
+        <li id="target2">Sữa</li>
+        <li>Bánh mì</li>
+    </ul>
+    <script>
+        // CHuyển HTML COlection và NodeList thành Arr = [... HTMLColection], [...NodeList] ---- Array.from(HTML or NodeList).
+
+        // Phương thức replaceChild()
+        // // Cấu trúc: parent.replaceChild(newChild, oldChild);
+
+        // 1. Chọn phần tử cha và phần tử cần thay thế
+        const list = document.getElementById("myList");
+        const oldItem = document.getElementById("change");
+
+        // 2. Tạo phần tử mới
+        const newItem = document.createElement("li");
+        newItem.textContent = "Cà phê";
+        newItem.style.color = "red";
+
+        // 3. Thực hiện thay thế: parent.replaceChild(newNode, oldNode)
+        list.replaceChild(newItem, oldItem);
+
+
+        // Phương thức replaceWith()
+        // Cấu trúc: oldChild.replaceWith(newChild);
+
+        // 1. Chọn phần tử cần thay thế
+        // Bạn đã khai báo biến này cho danh sách thứ 2
+        const list2 = document.getElementById("myList2");
+        const oldItem2 = document.getElementById("target2");        
+
+        // 2. Tạo phần tử mới
+        const newItem2 = document.createElement("li");
+        newItem2.textContent = "Nước cam";
+        newItem2.style.color = "red"
+
+        // 3. Thực hiện thay thế trực tiếp
+        oldItem2.replaceWith(newItem2);
+    </script>
+</body>
+
+</html>

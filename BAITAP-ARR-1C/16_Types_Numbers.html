@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 16. Liệt kê:
+        // 1. Số lượng số nguyên tố trong dãy
+        // 2. Số lượng số thuận nghịch trong dãy
+        // 3. Số lượng số chính phương trong dãy
+        // 4. Số lượng số có tổng chữ số của nó là số nguyên tố.
+
+        // Nguyên Tố
+        const Prime = (value) => {
+            for (let i = 2; i <= Math.sqrt(value); i++) {
+                if (value % i === 0) {
+                    return false;
+                }
+            }
+            return value > 1;
+        }
+
+        // Thuận Nghịch
+        const Reversible = (value) => {
+            let tmp = value;
+            let flip = 0;
+            while (tmp) {
+                flip = flip * 10 + tmp % 10;
+                tmp = Math.floor(tmp / 10);
+            }
+            return flip === value;
+        };
+
+        // Chính Phương
+        const isPerfectSquare = (value) => {
+            if (value < 0) return false;
+            const root = Math.round(Math.sqrt(value));
+            return root * root === value;
+        };
+
+        // Số Lượng Có Tổng Chữ Số Là Số Nguyên Tố.
+        const Check_Number_Prime = ((value) => {
+            let tmp = value;
+            let sum = 0;
+            while (tmp) {
+                sum += tmp % 10;
+                tmp = Math.floor(tmp / 10);
+            }
+            return Prime(sum);
+        });
+
+        const Arr = [4, 1682, 5972, 6331, 9872, 3956];
+
+        let cntPrime = 0,
+            cntReversible = 0,
+            cntPerfectSquare = 0,
+            cntSumPrime = 0;
+
+        Arr.forEach((num) => {
+            if (Prime(num)) cntPrime++;
+            if (Reversible(num)) cntReversible++;
+            if (isPerfectSquare(num )) cntPerfectSquare++;
+            if (Check_Number_Prime(num)) cntSumPrime++;
+        });
+
+        console.log("1. Số lượng số nguyên tố:", cntPrime);
+        console.log("2. Số lượng số thuận nghịch:", cntReversible);
+        console.log("3. Số lượng số chính phương:", cntPerfectSquare);
+        console.log("4. Số lượng số có tổng chữ số là SNT:", cntSumPrime);
+
+
+    </script>
+</body>
+
+</html>

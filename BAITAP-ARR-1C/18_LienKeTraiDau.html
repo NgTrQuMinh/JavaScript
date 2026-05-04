@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 18. Liền kề trái dấu
+        const Arr = [-992414, 993205, 998602, 990785, -993397, 990527, 995429, 991288, -992221];
+
+        // Cách 1:
+        for (let i = 0; i < Arr.length; i++) {
+            if (i === 0) {
+                if (Arr[i] * Arr[i + 1] < 0) {
+                    console.log(Arr[i]);
+                }
+            }
+            else if (i === Arr.length - 1) {
+                if (Arr[i] * Arr[i - 1] < 0) {
+                    console.log(Arr[i]);
+                }
+            }
+            else {
+                if (Arr[i] * Arr[i + 1] < 0 || Arr[i] * Arr[i - 1] < 0) {
+                    console.log(Arr[i]);
+                }
+            }
+        }
+
+        // Cách 2: 
+        const result = Arr.filter((value, index) => {
+            const traiDauTruoc = index > 0 && value * Arr[index - 1] < 0;
+            const traiDauSau = index < Arr.length - 1 && value * Arr[index + 1] < 0;
+
+            return traiDauTruoc || traiDauSau;
+        });
+
+        console.log(result);
+    </script>
+</body>
+
+</html>

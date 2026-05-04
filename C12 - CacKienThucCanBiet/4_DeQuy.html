@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Đệ quy là một cách tạo ra một bài toán lớn bằng cách chia nhỏ vào cách bài toán con tương tự.
+        // 1. Cấu trúc của một hàm đệ quy
+        // Mọi hàm đệ quy chuẩn cần có hai thành phần để chạy đúng cách:
+        // Điểm dừng (Base Case): Điều kiện để hàm ngừng tự gọi lại chính nó. Nếu thiếu phần này, hàm sẽ rơi vào vòng lặp vô tận
+        // Bước đệ quy (Recursive Step): Phần thân hàm thực hiện logic và gọi lại chính nó với các tham số mới (thường là dữ liệu nhỏ hơn hoặc đơn giản hơn)
+
+        // 2. Ví dụ minh họa: Tính Giai thừa
+        // Giai thừa của một số được tính bằng n x (n - 1) x ... x 1
+        function dequy(n) {
+            if (n === 1) {
+                return 1;
+            }
+            return n * dequy(n - 1);
+        }
+        console.log(dequy(5));
+
+        // BÀI TẬP 1: 
+        const Arr = [
+            [1, 2, 3],
+            [3, 4, 5],
+            [
+                [2, 3],
+                [2, 3, 5], [9999],
+                [1, 2],
+            ],
+        ];
+        //  [1, 2, 3, 3, 4, 5, 2, 3, 2, 3, 5, 1, 2];
+        // console.log(Arr.flat(Infinity));
+
+        // a [1, 2, 3] b [4, 5, 6] -> [1, 2, 3, 4, 5, 6] -> a.concat(b)
+        // [1, 2, 3].slice()
+
+        function flatArr(arr, deep) {
+            const result = depp > 0 ?
+                arr.reduce((a, b) => {
+                    a.concat(Array.isArray(b) ? flatArr(b, deep - 1) : b);
+                }, [])
+                : arr.slice();
+            return result;
+        }
+    </script>
+</body>
+
+</html>

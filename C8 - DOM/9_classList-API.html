@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. classList.add() - Thêm lớp class
+        // Cú pháp: element.classList.add('className1', 'className2', ...);
+        const box = document.querySelector('.box');
+        box.classList.add('highlight', 'rounded-border');   // Thêm class 'highlight' và 'rounded-border'
+
+        // 2. classList.remove() - Xóa lớp class
+        // Cú pháp: element.classList.remove('className1', 'className2', ...);
+        const errorMsg = document.querySelector('.error-text');
+        // Xóa class 'visible' để ẩn thông báo
+        errorMsg.classList.remove('visible');
+
+        // 3. classList.toggle() - Bật/Tắt lớp
+        // Đây là phương thức "thông minh" nhất. Nếu phần tử đang có class đó thì nó sẽ xóa đi; nếu chưa có thì nó sẽ thêm vào.
+        // Cú pháp: element.classList.toggle('className', force);
+        // Ví dụ: Tạo nút bật/tắt đèn (Dark Mode).
+        const themeBtn = document.querySelector('#btn-theme');
+        themeBtn.addEventListener('click', () => {
+            // Nhấn 1 lần: thêm 'dark-mode', nhấn lần nữa: xóa 'dark-mode'
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // 4. classList.contains() - Kiểm tra có class ko
+        // Cú pháp: element.classList.contains('className');
+        // Ví dụ: Kiểm tra xem menu có đang mở hay không trước khi thực hiện hành động khác.
+        const menu = document.querySelector('.side-menu');
+        if (menu.classList.contains('is-open')) {
+            console.log("Menu đang mở, chuẩn bị đóng nó lại...");
+        } else {
+            console.log("Menu đang đóng.");
+        }
+
+        // 5. classList.replace() - Thay thế lớp
+        // Dùng để đổi một class cũ sang một class mới một cách nhanh chóng mà không cần gọi remove rồi mới add.
+        // Cú pháp: element.classList.replace('oldClass', 'newClass');
+        // Ví dụ: Đổi trạng thái nút bấm từ "Chưa gửi" sang "Đã gửi".
+        const submitBtn = document.querySelector('.btn-submit');
+
+        // Thay class 'btn-warning' (màu vàng) thành 'btn-success' (màu xanh)
+        submitBtn.classList.replace('btn-warning', 'btn-success');
+        submitBtn.textContent = "Đã gửi thành công!";
+    </script>
+</body>
+
+</html>

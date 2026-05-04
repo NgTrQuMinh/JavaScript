@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .Btn {
+            width: 200px;
+            height: 150px;
+            background-color: aliceblue;
+            border-radius: 2px;
+            border: 1px solid gray;
+            font-size: 24px;
+            color: rgb(255, 173, 173);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="Btn">
+        <span>Click Me!</span>
+    </button>
+    <script>
+        const Btn = document.querySelector(".Btn");
+        // addEvenListener
+        const clickBtn = (() => {
+            // alert("Bạn Đã Click Me!");
+            console.log("Click button!");
+        })
+        Btn.addEventListener("click", clickBtn);
+
+        // Bubbling - Sự kiện nổi bọt
+        // Nó mô tả cách một sự kiện di chuyển xuyên qua các phần tử cha khi nó được kích hoạt trên một phần tử con.
+        // Ví dụ: Nó như một hộp lồng nhau -> tác động vào hộp nhỏ nhất nó sẽ tác động tất cả hộp lớn chữa nó
+        const Btn_Span = document.querySelector(".Btn span");
+
+        Btn_Span.addEventListener('click', (event) => {
+            event.stopImmediatePropagation();
+            console.log('Click span stopImmediatePropagation');
+        });
+        
+        Btn_Span.addEventListener('click', (event) => {
+            event.stopPropagation(); // Sự kiện dừng lại tại đây, không nổi lên thẻ Btn
+            console.log('Click span stopPropagation');
+        });
+    </script>
+</body>
+
+</html>

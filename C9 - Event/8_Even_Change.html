@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h3>Chọn màu chữ:</h3>
+  
+  <select id="chonMau">
+    <option value="black">Đen</option>
+    <option value="red">Đỏ</option>
+    <option value="blue">Xanh dương</option>
+    <option value="green">Xanh lá</option>
+  </select>
+
+  <p id="vanBan">Nội dung này sẽ đổi màu!</p>
+
+  <script>
+    //Điểm mấu chốt: Nó chỉ kích hoạt khi bạn đã hoàn tất sự thay đổi (ví dụ: gõ xong chữ rồi nhấn Enter hoặc bấm chuột ra chỗ khác).
+    const menu = document.getElementById("chonMau");
+    const chu = document.getElementById("vanBan");
+
+    // Lắng nghe sự kiện CHANGE
+    menu.addEventListener("change", function() {
+      // Đổi màu chữ dựa trên giá trị (value) vừa chọn
+      chu.style.color = menu.value;
+    });
+  </script>
+
+</body>
+</html>

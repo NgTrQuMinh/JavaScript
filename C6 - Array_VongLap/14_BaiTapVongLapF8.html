@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Viết hàm list EvenNumbers nhận vào hai tham số là start và end, sau đó in ra tất cả các số chẵn từ start đến end sử dụng vòng lập for.
+        function listEvenNumbers(start, end) {
+            for (let i = start; i <= end; i++) {
+                if (i % 2 === 0) {
+                    console.log(i);
+                }
+            }
+        }
+
+        // 2. Viết hàm sumOddNumbers nhận vào một mảng số và trả về tổng của tất cả các số lẻ trong mảng đó sử dụng vòng lặp for.
+        function sumOddNumbers(arr) {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] % 2 !== 0) {
+                    sum += arr[i];
+                }
+            }
+            return sum;
+        }
+
+        // 3. Viết hàm findMin nhận vào một mảng số và trả về số nhỏ nhất trong mảng đó sử dụng vòng lặp for.
+        function findMin(arr) {
+            let min = Infinity;
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < min) {
+                    min = arr[i];
+                }
+            }
+            return min;
+        }
+        // 4. Viết hàm countPositiveNumbers nhận vào một mảng số và trả về số lượng số dương trong mảng đó.
+        function countPositiveNumbers(arr) {
+            let count = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] > 0) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        // 5. Viết hàm sumArray nhận vào một mảng số và trả về tổng của tất cả các số trong mảng đó.
+        function sumArray(arr) {
+            return arr.reduce((total, num) => total + num, 0);
+        }
+
+        // 6. Viết hàm calculateAverage nhận vào một mảng số và trả về trung bình cộng của các số trong mảng đó.
+        function calculateAverage(arr) {
+            return sumArray(arr) / arr.length;
+        }
+
+        // 7. Viết hàm isAscending nhận vào một mảng số và kiểm tra xem mảng đó có phải là dãy số tăng dần không. Trường hợp mảng chỉ có một phần tử hoặc mảng rồng không được coi là mảng tăng dần.
+        function isAscending(arr) {
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < arr[i - 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // 8. Viết hàm isPrime nhận vào một số nguyên n và trả về true nếu n là số nguyên tố, ngược lại trả về false.
+        function isPrime(n) {
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    return false;
+                }
+            }
+            return n > 1;
+        }
+
+        // 9. Viết hàm sumPrimes nhận vào hai số nguyên start và end, sau đó tính và trả về tổng của tất cả các số nguyên tổ trong khoảng từ start đến end.
+        function sumPrimes(start, end) {
+            let sum = 0;
+            for (let i = start; i <= end; i++) {
+                if (isPrime(i)) {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+    </script>
+</body>
+
+</html>

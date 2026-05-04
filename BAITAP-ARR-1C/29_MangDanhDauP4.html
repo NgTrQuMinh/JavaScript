@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 29. Mảng đánh dấu 4
+        // hãy tìm giá trị có số lần xuất hiện nhiều nhất trong mảng, 
+        // nếu có nhiều giá trị có cùng số lần xuất hiện thì lấy số có giá trị nhỏ nhất
+
+        const Arr = [9, 4, 0, 4, 5];
+
+        const Mark = new Array(1000).fill(0);
+
+        let Max = -Infinity;
+        Arr.forEach(value => {
+            Mark[value]++;
+            if (value > Max) {
+                Max = value;
+            }
+        });
+
+        let Maxcnt = -1e9, indexMax;
+        for (let i = 0; i <= Max; i++) {
+            if (Mark[i] !== 0) {
+                if (Mark[i] > Maxcnt) {
+                    Maxcnt = Mark[i];
+                    indexMax = i;
+                }
+            }
+        }
+        console.log(Maxcnt, indexMax);
+
+
+    </script>
+</body>
+
+</html>

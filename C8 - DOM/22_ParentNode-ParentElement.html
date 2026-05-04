@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // parentNode và parentElement đều được dùng để tìm phần tử cha của một node hiện tại. 
+        // Đa số trường hợp chúng trả về kết quả giống hệt nhau, nhưng có một sự khác biệt nhỏ nhưng quan trọng ở "đỉnh" của cây thư mục.
+
+        // parentNode: Trả về bất kỳ node cha nào (có thể là một Element, Document, hoặc DocumentFragment).
+
+
+        // parentElement: Chỉ trả về node cha nếu đó là một Element (các thẻ HTML như <div>, <body>, v.v.). Nếu cha không phải là Element, nó trả về null.
+
+
+        // 2. Khi nào chúng khác nhau?
+        // Điểm khác biệt duy nhất nằm ở node cao nhất: thẻ <html> (Document Element).
+        // Cha của <html> là document.
+        // document là một Node, nhưng không phải là một Element.
+
+        const htmlTag = document.documentElement; // Đây là thẻ <html>
+
+        console.log(htmlTag.parentNode);    // Trả về: #document (Node cha tồn tại)
+        console.log(htmlTag.parentElement); // Trả về: null (Vì document không phải là thẻ HTML/Element)
+
+    </script>
+</body>
+
+</html>

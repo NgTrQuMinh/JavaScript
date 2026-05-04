@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 50px 0px 20px 0px;
+        }
+
+        #Form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Form input {
+            width: 500px;
+            padding: 10px 20px;
+            margin: 10px 0px;
+        }
+
+        #Form button {
+            width: 500px;
+            padding: 10px 20px;
+            margin: 10px 0px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .inputError {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ĐỔi MẬT KHẨU</h1>
+    <form id="Form">
+        <input type="text" name="user" id="user" placeholder="UserName">
+        <span class="error errorUser"></span>
+
+        <input type="password" name="password" id="password" placeholder="Password">
+        <span class="error errorPassword"></span>
+
+        <input type="password" name="newPassworld" id="newPassword" placeholder="NewPassword">
+        <span class="error errorNewPassword"></span>
+
+        <input type="password" name="confirmPassworld" id="confirmPassworld" placeholder="confirmPassworld">
+        <span class="error errorconfirmPassworld"></span>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const Form = document.getElementById("Form");
+
+            const userForm = "abc@gmail.com";
+            const userPass = "Abc@123hehe";
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const formData = new FormData(Form);
+                const data = Object.fromEntries(formData.entries());
+
+                const user = document.querySelector("#user");
+                const password = document.querySelector("#password");
+                const newPassword = document.querySelector("#newPassword");
+                const confirmPassworld = document.querySelector("#confirmPassworld");
+
+                const errorUser = document.querySelector(".errorUser");
+                const errorPass = document.querySelector(".errorPassword");
+                const errorNewPass = document.querySelector(".errorNewPassword");
+                const errorConfirmPass = document.querySelector(".errorconfirmPassworld");
+
+                // reset lỗi
+                errorUser.textContent = "";
+                errorPass.textContent = "";
+                errorNewPass.textContent = "";
+                errorConfirmPass.textContent = "";
+
+                let check = true;
+                if (data.user === "") {
+                    errorUser.textContent = "Vui lòng nhập User";
+                    user.classList.add("inputError");
+                    check = false;
+                } 
+                else {
+                    user.classList.remove("inputError");
+                }
+                if (data.password === "") {
+                    errorPass.textContent = "Vui lòng nhập Password";
+                    password.classList.add("inputError");
+                    check = false;
+                } 
+                else {
+                    password.classList.remove("inputError");
+                }
+                function checkPassNew(value) {
+                    return value.length >= 8 && /(?=.*[A-Z])(?=.*\d)/.test(value);
+                }
+
+                if (data.newPassworld === "") {
+                    errorNewPass.textContent = "Vui lòng nhập mật khẩu mới";
+                    newPassword.classList.add("inputError");
+                    check = false;
+                }
+                else if (!checkPassNew(data.newPassworld)) {
+                    errorNewPass.textContent = "Phải >=8 ký tự, có chữ hoa và số";
+                    newPassword.classList.add("inputError");
+                    check = false;
+                }
+                else {
+                    newPassword.classList.remove("inputError");
+                }
+                
+                // confirm password
+                if (data.confirmPassworld === "") {
+                    errorConfirmPass.textContent = "Vui lòng nhập lại mật khẩu";
+                    confirmPassworld.classList.add("inputError");
+                    check = false;
+                }
+                else if (data.confirmPassworld !== data.newPassworld) {
+                    errorConfirmPass.textContent = "Mật khẩu không khớp";
+                    confirmPassworld.classList.add("inputError");
+                    check = false;
+                }
+                else {
+                    confirmPassworld.classList.remove("inputError");
+                }
+                if (check) {
+                    if (data.user === userForm && data.password === userPass) {
+                        alert("ĐỔi mẫt khẨu thanh cong");
+                    }
+                    else {
+                        alert("User hoac password khong dung");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

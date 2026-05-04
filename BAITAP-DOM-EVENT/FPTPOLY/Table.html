@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 0px;
+        }
+
+        #Form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Form input {
+            width: 300px;
+            margin: 5px 0px;
+            padding: 10px 15px;
+        }
+
+        #Form button {
+            width: 300px;
+            padding: 10px 15px;
+            margin: 5px 0px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        th,
+        td {
+            border: 1px solid gray;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            border: 0px;
+        }
+
+        .error {
+            border: 1px solid red;
+        }
+
+        .errorUser {
+            color: red;
+        }
+
+        .errorPhone {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Đơn hàng</h1>
+    <form id="Form">
+        <input type="text" name="user" id="user" placeholder="User"><span class="errorUser"></span>
+        <input type="text" name="Phone" id="Phone" placeholder="Phone"><span class="errorPhone"></span>
+        <button type="submit">Đặt hàng</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>STT</td>
+                <th>Tên sản phẩm</td>
+                <th>Giá</td>
+                <th>Số lượng</td>
+                <th>Thành tiền</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="stt">1</td>
+                <td class="name">Bánh ngọt phomai</td>
+                <td class="price">1000</td>
+                <td><input type="number" class="cnt" value="1" min="0"></td>
+                <td class="total">1000</td>
+            </tr>
+            <tr>
+                <td class="stt">2</td>
+                <td class="name">Bánh ngọt phomai</td>
+                <td class="price">500</td>
+                <td><input type="number" class="cnt" value="1" min="0"></td>
+                <td class="total">500</td>
+            </tr>
+            <tr>
+                <td class="stt">3</td>
+                <td class="name">Bánh ngọt phomai</td>
+                <td class="price">2000</td>
+                <td><input type="number" class="cnt" value="1" min="0"></td>
+                <td class="total">2000</td>
+            </tr>
+            <tr>
+                <td colspan="4">Tổng Tiền</td>
+                <td class="sumAll"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        window.addEventListener("DOMContentLoaded", (e) => {
+            // Form 
+            const Form = document.querySelector("#Form");
+            const user = document.querySelector("#user");
+            const Phone = document.querySelector("#Phone");
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const userValue = document.querySelector("#user").value.trim();
+                const PhoneValue = document.querySelector("#Phone").value.trim();
+
+                function checkPhone(Phone) {
+                    return /^[0-9]+$/.test(Phone) && Phone.length === 10;
+                }
+
+                const errorUser = document.querySelector(".errorUser");
+                const errorPhone = document.querySelector(".errorPhone");
+                errorPhone.textContent = "";
+                errorUser.textContent = "";
+                let check = true;
+                if (userValue === "") {
+                    user.classList.add("error");
+                    errorUser.textContent = "Vui lòng nhập User";
+                    check = false;
+                } else {
+                    user.classList.remove("error");
+                }
+                if (PhoneValue === "") {
+                    Phone.classList.add("error");
+                    errorPhone.textContent = "Vui lòng nhập Phone";
+                    check = false;
+                } else if (!checkPhone(PhoneValue)) {
+                    Phone.classList.add("error");
+                    errorPhone.textContent = "Số điện thoại phải có đúng 10 chữ số";
+                    check = false;
+                } else {
+                    Phone.classList.remove("error");
+                }
+                if (check === true) {
+                    alert(`Đặt hàng thành công!\n --- Thông tin khách hàng là --- \n --- User: ${userValue} --- \n --- Phone: ${PhoneValue} ---`);
+                    Form.reset(); 
+                }
+            });
+
+            // table
+            const row = document.querySelectorAll("tbody tr");
+            row.forEach((value) => {
+                let price = value.querySelector(".price");
+                let cnt = value.querySelector(".cnt");
+                let total = value.querySelector(".total");
+                
+                cnt.addEventListener("input", () => {
+                    total.textContent  = price.innerText * cnt.value;
+
+                    let sum = 0;
+                    let totalAll = document.querySelectorAll(".total");
+                    totalAll.forEach(value => {
+                        sum += Number(value.textContent);
+                    });
+                    document.querySelector(".sumAll").textContent = sum;
+                });
+            });
+        })
+    </script>
+</body>
+
+</html>

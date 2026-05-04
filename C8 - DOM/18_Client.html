@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 10px solid #3498db;
+            overflow: scroll;
+            /* Ép hiện thanh cuộn */
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="myBox" class="box">
+            Nội dung rất dài... <br>
+            Nội dung rất dài... <br>
+            Nội dung rất dài... <br>
+            Nội dung rất dài...
+        </div>
+    </div>
+
+
+    <script>
+        // client (như clientWidth, clientHeight, clientLeft, clientTop) dùng để đo lường không gian bên trong của một phần tử, 
+        // tức là phần không gian mà nội dung thực sự hiển thị.
+
+        // 1. CLIENT: Vùng nội dung thực tế (Bao gồm Content + Padding - Scrollbar)
+        const box = document.getElementById('myBox');
+
+        // 2. CLIENT: Vùng nội dung thực tế (Bao gồm Content + Padding - Scrollbar)
+        const cWidth = box.clientWidth;
+        const cHeight = box.clientHeight;
+
+        // 3. Đo độ dày Border (clientLeft/Top)
+        const bLeft = box.clientLeft;
+
+        console.log(`CLIENT: ${cWidth}x${cHeight}`);
+        console.log(`Độ dày Border trái: ${bLeft}px`);
+
+    </script>
+</body>
+
+</html>

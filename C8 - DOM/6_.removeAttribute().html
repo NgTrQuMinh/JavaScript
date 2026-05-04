@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://www.youtube.com/@NgTrQuMinh" target="_parent">NgTrQuMinh</a><br><br>
+    <button id="myButton" type="submit">Summit</button><br><br>
+
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh" target="_blank">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh" target="_blank">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh" target="_blank">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh" target="_blank">NgTrQuMinh</a><br><br>
+    <script>
+        // 1. Cú pháp
+        // element.removeAttribute(name);
+        // name: Tên của thuộc tính bạn muốn xóa (ví dụ: 'class', 'href', 'disabled', 'style').
+
+        // 2. Ví dụ thực tế
+        const myLink = document.querySelector('a');
+        const btn = document.querySelector('#myButton');
+
+        // Hoặc xóa màu sắc/định dạng đã set trực tiếp trong thẻ:
+        myLink.removeAttribute('target'); // xóa _parent
+
+        // Giả sử trước đó bạn đã vô hiệu hóa nút bấm:
+        btn.setAttribute('disabled', '');
+        // Bây giờ, để kích hoạt lại nút bấm, bạn xóa thuộc tính 'disabled' đi:
+        btn.removeAttribute('disabled');
+
+        // removeAtributeAll.
+        const allLink = document.querySelectorAll("#allLink");  // Xóa hết các thẻ href trong thẻ a 
+        allLink.forEach(element => {
+            element.removeAttribute('href');
+        });
+        console.log(allLink);
+
+
+    </script>
+</body>
+
+</html>

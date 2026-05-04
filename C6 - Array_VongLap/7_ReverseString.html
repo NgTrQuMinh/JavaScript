@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // My name is Minh -> Minh is name My.
+        function reverseStr(str) {
+            const strArr = str.split(" ");
+            return strArr.reverse().join(" ");
+        }
+        console.log(reverseStr("My name is Minh"));
+
+        // i love -> evol i.
+        function reverseText(str) {
+            const reve = str
+                .split(" ")     // [i] [love]
+                .reverse();      // [love] [i]
+            const processedArr = reve.map(word => {
+                return word.split("").reverse().join(""); // Đảo ngược từng chữ trong từ
+            });
+            const finalResult = processedArr.join(" ");
+            console.log(finalResult);
+        }
+        reverseText("i love");
+
+        // i love you -> I Love You.
+        function charAtUpperCase(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function all_charatUpercase(str) {
+            const strArr = str.split(" ").map((value) => {  // i love you -> ["i", "love", "you"]
+                return charAtUpperCase(value);  // ["I", "Love", "You"]. -> map duyệt các phần tử bên trong và thay đổi.
+            })
+            return strArr.join(" ");    // I Love You.
+        }
+        console.log(all_charatUpercase("i love you"));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a><br><br>
+    <button id="myButton" type="submit">Summit</button>
+
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a><br><br>
+    <a id="allLink" href="https://www.youtube.com/@NgTrQuMinh">NgTrQuMinh</a><br><br>
+    <script>
+        // setAttribute() được dùng để thêm một thuộc tính mới hoặc thay đổi giá trị của một thuộc tính đã tồn tại trên một phần tử HTML.
+        // 1. Cú pháp cơ bản
+        // element.setAttribute(name, value);
+        // name: Tên của thuộc tính bạn muốn thiết lập (ví dụ: class, href, src, style, disabled).
+        // value: Giá trị mà bạn muốn gán cho thuộc tính đó.
+
+        // 2. Ví dụ thực tế
+        // Chọn phần tử
+        const myLink = document.querySelector('a');
+        const btn = document.querySelector('#myButton');    
+
+        // Thiết lập thuộc tính
+        myLink.setAttribute('href', 'https://www.google.com');  // Từ YouTube chuyển thành Google
+        console.log(myLink);
+
+        btn.setAttribute('disabled', ''); // Thêm thuộc tính disabled
+
+        // setAltribute All
+        const allLink = document.querySelectorAll('#allLink');
+        allLink.forEach((value) => {
+            value.setAttribute('target', '__blank')
+        })
+        console.log(allLink);
+
+
+
+        // 3. Một số lưu ý quan trọng
+        // Ghi đè giá trị: Nếu thuộc tính đã tồn tại, setAttribute() sẽ ghi đè giá trị cũ bằng giá trị mới.
+        // Tên thuộc tính: Không phân biệt chữ hoa chữ thường (tuy nhiên nên viết thường theo chuẩn HTML).
+        // Sự khác biệt với cách truy cập trực tiếp:
+        // Bạn có thể dùng element.id = "newId" (truy cập property).
+        // Nhưng với các thuộc tính tùy chỉnh (custom attributes) như data-*,
+        // dùng setAttribute sẽ đảm bảo hoạt động ổn định hơn trên mọi trình duyệt.
+
+
+    </script>
+</body>
+
+</html>

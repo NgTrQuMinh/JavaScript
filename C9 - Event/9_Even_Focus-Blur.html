@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Focus và Blur là hai sự kiện quan trọng dùng để theo dõi sự tương tác của người dùng với các phần tử có thể nhập liệu 
+        // (như <input>, <textarea>, <select>) hoặc các phần tử có thuộc tính tabindex.
+
+        // 1. Sự kiện Focus (Tập trung)
+        // Xảy ra khi người dùng "nhắm" vào một đối tượng (click chuột vào ô nhập liệu, dùng phím Tab di chuyển tới).
+
+        // Khi người dùng bấm vào ô
+        input.addEventListener('focus', () => {
+            console.log("Đang nhập liệu...");
+        });
+
+        // 2. Sự kiện Blur (Mất tập trung)
+        // Xảy ra khi người dùng "rời bỏ" đối tượng đó (click ra ngoài, tab sang ô khác).
+
+        // Khi người dùng bấm ra ngoài (thường dùng để check lỗi ngay lập tức)
+        input.addEventListener('blur', () => {
+            if (input.value === "") {
+                console.log("Không được để trống ô này!");
+            }
+        });
+
+        // 3. Ứng dụng thực tế nhất
+        // Focus: Làm nổi bật ô đang nhập (thêm viền màu, hiện hướng dẫn).
+        // Blur: Kiểm tra dữ liệu (Validate) ngay khi khách vừa nhập xong mà không cần chờ họ bấm nút "Gửi".
+    </script>
+</body>
+
+</html>

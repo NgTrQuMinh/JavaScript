@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Cách khởi tạo một Object
+        // Có 2 kiểu khởi tạo là: Object Literal và Object Constructor
+        const Object_Literal = {};
+        const Object_Constructor = new Object();
+
+        const user = {
+            name: "Hoàng",
+            age: 25,
+            isLoggedIn: true,
+            // Phương thức (Method)
+            sayHi: function () {
+                console.log("Xin chào!");
+            }
+        };
+
+        // 2. Cách truy xuất dữ liệu, Tính linh hoạt (Dynamic)": cập nhật, xóa, thêm.
+        // Bạn có hai cách chính để lấy giá trị từ một Object:
+        // 2.1 Dot Notation (Dấu chấm)
+        console.log(user.name); // Kết quả: Hoàng
+
+        // 2.2 Bracket Notation (Dấu ngoặc vuông): Dùng khi tên key có khoảng trắng hoặc được lưu trong một biến khác.
+        console.log(user["age"]); // Kết quả: 25
+
+        // Tính linh hoạt (Dynamic)": cập nhật, xóa, thêm.
+        console.log(user.name = "Minh");    // Cập nhật user.name = "Minh".
+        delete user.isLoggedIn;;  // Xóa function trong Object.
+        user.email = "contact@example.com"; // Thêm vào object.
+        console.log(user);
+
+        // 3. Các đặc điểm quan trọng trong JS
+        // Tham chiếu (Reference) --- Trong JS, Object không được lưu giá trị trực tiếp mà lưu địa chỉ ô nhớ.
+        // Lưu ý: Nếu bạn gán objA = objB, cả hai sẽ cùng trỏ vào một "ngôi nhà". Nếu bạn thay đổi nội dung trong objA, objB cũng sẽ thay đổi theo.
+
+        // 4. Object lồng nhau (Nested Objects)
+        // Object có thể chứa các Object khác bên trong, tạo thành cấu trúc dữ liệu dạng cây phức tạp
+        const student = {
+            id: 1,
+            info: {
+                fullName: "Nguyễn Văn A",
+                address: "Hà Nội"
+            }
+        };
+        console.log(student?.info?.address); // Kết quả: Hà Nội
+    </script>
+</body>
+
+</html>

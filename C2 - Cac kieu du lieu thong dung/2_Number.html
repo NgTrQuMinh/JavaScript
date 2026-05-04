@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /////---------  Đối tượng Number và các hằng số quan trọng ----------   
+        // P1. Kiểm tra và Chuyển đổi (Static Methods)
+        // 1. Number.parseInt() – Trích xuất số nguyên
+        console.log(Number.parseInt("42px"));       // 42 (Rất hay dùng để lấy giá trị CSS) (Chỉ lấy phần nguyên, không làm tròn)
+        // 2. Number.parseFloat() – Trích xuất số thực
+        console.log(Number.parseFloat("3.14abc")); // 3.14
+
+        // 3. Number.isNaN() – Kiểm tra "Không phải là số"
+        let result = "Hello" / 2; // NaN
+        console.log(Number.isNaN(result)); // true (Đúng là không phải số rồi)
+        console.log(Number.isNaN(100));    // false (Đây là số đàng hoàng)
+
+        // 4. Number.isInteger() – Kiểm tra số nguyên
+        console.log(Number.isInteger(10.5));  // false
+        console.log(Number.isInteger(10.0));  // true (Vì 10.0 về bản chất vẫn là 10)
+
+        // P2. Định dạng số (Instance Methods)
+        // 1. .toFixed(n) – Cố định số chữ số thập phân
+        let price = 199.5678;
+        console.log(price.toFixed(0)); // "200" (Làm tròn thành số nguyên)
+        console.log(price.toFixed(2)); // "199.57" (Làm tròn đến 2 chữ số thập phân)
+        let total = +price.toFixed(2); // 199.57 (Số)   // Lưu ý: Kết quả là String, muốn tính toán tiếp phải ép kiểu lại
+
+        // 2. .toPrecision(n) – Định dạng theo tổng độ dài
+        let num = 12.3456;
+        console.log(num.toPrecision(2)); // "12"
+        console.log(num.toPrecision(5)); // "12.346" (Làm tròn chữ số cuối)
+
+        // 3. toString(radix) – Chuyển số thành chuỗi
+        let myNumber = 255;
+        console.log(myNumber.toString());    // "255"
+        console.log(myNumber.toString(16));  // "ff" (Chuyển sang hệ thập lục phân - Hex)
+        console.log(myNumber.toString(2));   // "11111111" (Chuyển sang hệ nhị phân)
+
+        // 4. .toLocaleString() – Định dạng theo quốc gia (Cực hay!)
+        let salary = 15000000;
+        // Định dạng kiểu Việt Nam (dùng dấu chấm ngăn cách)
+        console.log(salary.toLocaleString('vi-VN')); // "15.000.000"
+        // Định dạng kiểu Mỹ (dùng dấu phẩy) kèm đơn vị tiền tệ USD
+        console.log(salary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })); // "$15,000,000.00"
+
+        // P3. Đối tượng Math (Người bạn đồng hành không thể thiếu)
+        // 1. Nhóm làm tròn (The Rounding Trio)
+        let n = 4.7;
+        let m = 4.2;
+        // Math.round(x): Làm tròn tới số nguyên gần nhất (0.5 trở lên là lên, dưới 0.5 là xuống).
+        console.log(Math.round(n)); // 5
+        console.log(Math.round(m)); // 4
+        // Math.ceil(x): Luôn luôn làm tròn Lên (Ceiling - trần nhà).
+        console.log(Math.ceil(m));  // 5 (Dù là 4.1 cũng lên 5)
+        // Math.floor(x): Luôn luôn làm tròn Xuống (Floor - sàn nhà).
+        console.log(Math.floor(n)); // 4 (Dù là 4.9 cũng xuống 4)
+        // Math.trunc(x): Đơn giản là "chặt bỏ" phần thập phân, giữ lại phần nguyên.
+        console.log(Math.trunc(4.9)); // 4
+
+        // 2. Nhóm cực trị (Min/Max)
+        // Math.max(...numbs)
+        console.log(Math.max(10, 20, 5, 100)); // 100
+        console.log(Math.min(10, 20, 5, 100)); // 5
+        // Mẹo: Dùng với mảng bằng Spread Operator (...)
+        const nums = [1, 2, 3, 4, 5];
+        console.log(Math.max(...nums)); // 5
+
+        // 3. "Siêu sao" Math.random()
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        console.log(getRandomInt(1, 10)); // Trả về số từ 1 đến 10
+
+        // 4. Các hàm toán học
+        // 1. Math.abs(x) - Trị tuyệt đối (Absolute)
+        // Ứng dụng thực tế: Tính khoảng cách giữa 2 điểm
+        let player1 = 5;
+        let player2 = 12;
+        let distance = Math.abs(player1_pos - player2_pos); // Kết quả là 7 (thay vì -7 nếu không dùng abs)
+
+        // 2. Math.sqrt(x) - Căn bậc hai (Square Root)
+        console.log(Math.sqrt(9));    // 3  (Vì 3 * 3 = 9)
+        console.log(Math.sqrt(64));   // 8  (Vì 8 * 8 = 64)
+
+    </script>
+</body>
+
+</html>

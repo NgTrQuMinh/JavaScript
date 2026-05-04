@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // setTimeout: Chạy một lần duy nhất sau một khoảng thời gian chờ. (Giống như hẹn giờ nấu mì).
+        // Ứng dụng: Thông báo ẩn đi sau 5s, chờ người dùng ngừng nhập liệu (debounce).
+        let timeoutID = setTimeout(function () {
+            console.log("Set Timeout.");
+        }, 1000);
+
+
+        // setInterval: Chạy lặp đi lặp lại sau mỗi khoảng thời gian nhất định. (Giống như chuông báo thức lặp lại mỗi sáng).
+        // Ứng dụng: Đồng hồ hiển thị giây, cập nhật dữ liệu tự động từ server (polling).
+        let count = 0;
+        let intervalID = setInterval(function () {
+            count++;
+            console.log("Interval count: " + count);
+
+            // Nếu count chạy đến 5 sẽ dựng lại.
+            if (count === 5) {
+                clearInterval(intervalID);
+                console.log("Interval stopped!");
+            }
+        }, 1000); // 1s sẽ chạy 1 console.
+
+
+    </script>
+</body>
+
+</html>

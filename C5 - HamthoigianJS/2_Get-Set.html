@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. Các hàm "Get" (Lấy thông tin)
+        const BithDay = new Date(2007, 9, 21, 1, 2, 3);
+        
+        // .getFullYear() - Lấy năm
+        console.log(BithDay.getFullYear());     // 2007
+        
+        // .getMonth() - Lấy tháng
+        console.log(BithDay.getMonth());    // 9
+        
+        // .getDate() - Lấy ngày trong tháng
+        console.log(BithDay.getDate())      // 21
+        
+        // .getDay() - Lấy thứ trong tuần	0 (Chủ nhật) - 6 (Thứ 7)
+        console.log(BithDay.getDate()); 
+        
+        // d.getHours()	Lấy giờ	0 - 23
+        console.log(BithDay.getHours());
+        
+        // d.getMinutes()	Lấy phút	0 - 59
+        console.log(BithDay.getMinutes());
+
+        // d.getTime()	Lấy Timestamp	Số miligiây tính từ 01/01/1970
+        console.log(BithDay.getTime()); // 1190307600000
+
+        // 2. Các hàm "Set" (Thiết lập thông tin)
+        // Bạn có thể thay đổi các thành phần của một đối tượng Date hiện có
+        BithDay.setFullYear(2025);
+        BithDay.setMonth(5);    // (Đổi thành tháng 6)
+        BithDay.setDate(15);
+        console.log(BithDay);
+
+    </script>
+</body>
+</html>

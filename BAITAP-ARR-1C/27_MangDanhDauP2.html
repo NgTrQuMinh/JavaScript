@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 27. Mảng đánh dấu 2
+        // Hãy liệt kê các giá trị xuất hiện trong mảng theo thứ tự từ nhỏ đến lớn kèm theo tần suất của nó
+
+        const Arr = [6, 6, 4, 6, 0, 8];
+
+        const Mark = new Array(1000).fill(0);
+
+        let Max = -Infinity;
+        Arr.forEach((value) => {
+            Mark[value]++; 
+            if (value > Max) {
+                Max = value; 
+            }
+        });
+
+        for (let i = 0; i <= Max; i++) {
+            if (Mark[i] != 0) {
+                console.log(i, Mark[i]);
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

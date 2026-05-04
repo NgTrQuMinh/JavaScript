@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. Viết function so sánh 2 số a và b, trả về số lớn hơn
+        function Max(a, b) {
+            if (typeof(a) !== "number" || typeof(b) !== "number") return 0;
+            return a > b ? a : b;
+        }
+        let a = 100, b = 200; 
+        console.log("Số lơn nhất trong 2 số", a,b,"là", Max(100, 200));
+       
+        // 2. In hoa chữ cái đầu.
+        function oneToUpercase(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1); 
+        }
+        console.log(oneToUpercase("hello"));
+
+        // 3. Viết hàm Callback(function là paramenter của function khác) in ra kết quả của hàm compare đã viết ở trên.
+        function Callback(a, b, Max) {
+            return function() {
+                return Max(a, b) * 2;
+            }();
+        }
+        console.log(Callback(10, 20, Max));
+    </script>
+</body>
+</html>

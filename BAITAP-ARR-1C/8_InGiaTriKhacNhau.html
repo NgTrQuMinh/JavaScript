@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 8. Liệt kê các giá trị khác nhau
+        
+        const Arr = [1, 2, 3, 4, 1, 2, 3, 4, 5];
+
+        Arr.sort((a, b) => {
+            return a - b;
+        });
+
+        for (let i = 0; i < Arr.length; i++) {
+            let check = 0;
+            for (let j = 0; j < i; j++) {
+                if (Arr[i] === Arr[j]) {
+                    check = 1;
+                    break;
+                }
+            }
+            if (check == 0) {
+                console.log(Arr[i]);  
+            }
+        }
+        // Cách 2: Dùng Hàm [...new Set(mảng)].
+        const uniqueValues = [...new Set(Arr)];
+        console.log(uniqueValues);
+        
+    </script>
+</body>
+</html>

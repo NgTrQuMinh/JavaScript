@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Phương thức .map() dùng để tạo ra một mảng mới bằng cách thực thi một hàm lên từng phần tử của mảng cũ.
+        // Quy tắc vàng: Nó không thay đổi mảng ban đầu. Nó luôn trả về một mảng mới có cùng độ dài với mảng gốc.
+
+        // 2. Cú pháp cơ bản
+        // const newArray = Arr.map((element, index, array) => {
+        //     return element * 2;  Trả về giá trị mới cho phần tử này
+        // });
+
+        // element: Value hiện tại đang được xử lý.
+        // index(tùy chọn): Index của Value đó trong mảng.
+        // array(tùy chọn): Chính cái mảng gốc mà bạn đang gọi.map().
+
+        // 3. Ví dụ thực tế (Dễ hiểu nhất)
+        // Ví dụ 1: Nhân đôi các con số
+        const numbers = [1, 2, 3, 4];
+        const doubled = numbers.map(num => num * 2);
+        console.log(doubled); // [2, 4, 6, 8]
+        console.log(numbers); // [1, 2, 3, 4] (Mảng gốc vẫn nguyên vẹn)
+
+        // Ví dụ 2: Trích xuất dữ liệu từ danh sách Object
+        const products = [
+            { id: 1, name: 'iPhone', price: 1000 },
+            { id: 2, name: 'Samsung', price: 900 },
+            { id: 3, name: 'Xiaomi', price: 500 }
+        ];
+        const productNames = products.map(item => item.name);
+        console.log(productNames); // ["iPhone", "Samsung", "Xiaomi"]
+
+        // Ví dụ 3: Bạn chỉ muốn lấy tên của các khóa học có phí (Price > 0) để hiển thị cho khách hàng.
+        const courses = [
+            { id: 1, title: 'HTML/CSS cơ bản', price: 0 },
+            { id: 2, title: 'JavaScript nâng cao', price: 500 },
+            { id: 3, title: 'ReactJS cho người mới', price: 800 },
+            { id: 4, title: 'Node.js thực chiến', price: 0 }
+        ];
+        // Cách kết hợp: Filter trước -> Map sau - Filter vai trò là "người gác cổng", đảm bảo dữ liệu đi vào Map là dữ liệu sạch và đúng yêu cầu.
+        const filterCourse = ((arr) => {
+            const filter = arr.filter((value) => {
+                return value.price > 0;
+            })
+            return filter.map((arr) => {
+                return arr.title;
+            })
+        })
+        console.log(filterCourse(courses));     // Kết quả: ["JavaScript nâng cao", "ReactJS cho người mới"]
+        
+        // 4. Phân biệt .map() và .forEach()
+        // Đây là câu hỏi phỏng vấn "kinh điển":
+        // Đặc điểm	                .map()	                                    .forEach()
+        // Giá trị trả về	        Trả về một mảng mới.	                    Trả về undefined.
+        // Mục đích	                Biến đổi dữ liệu.	                        Thực hiện hành động (như log, lưu DB).
+        // Khả năng nối chuỗi	    Có thể nối tiếp với .filter(), .sort()...	Không thể nối chuỗi.
+
+        // 5. Lưu ý "xương máu"
+        // Đừng quên return: Nếu bạn không return bên trong hàm callback, mảng mới của bạn sẽ toàn là undefined.
+        // Đừng dùng map nếu không cần mảng mới: Nếu bạn chỉ muốn in dữ liệu ra màn hình, hãy dùng forEach để tiết kiệm bộ nhớ.
+
+    </script>
+</body>
+
+</html>

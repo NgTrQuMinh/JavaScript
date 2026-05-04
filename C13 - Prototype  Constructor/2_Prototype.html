@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Prototype là một cơ chế cho phép các đối tượng (objects) kế thừa các tính năng từ nhau
+        // Mọi đối tượng trong JS đều có một thuộc tính nội bộ gọi là [[Prototype]] (thường được truy cập qua __proto__ trong các trình duyệt).
+        // Prototype của hàm: Là một đối tượng được đính kèm mặc định vào mỗi hàm khi khởi tạo
+        // Prototype của đối tượng: Là đối tượng mà từ đó đối tượng hiện tại kế thừa các thuộc tính và phương thức.
+
+        // function constructor
+        function Character(name, hp, atk, defense) {
+            this.name = name;
+            this.hp = hp;
+            this.atk = atk;
+            this.defense = defense;
+            this.attack = function (target) {
+                const dame = Math.max(this.atk - target.defense, 0);
+                target.hp -= dame;
+            }
+            this.isAlive = (() => {
+                return this.hp > 0;
+            })
+        }
+
+        const Tom = new Character('Tom', 100, 50, 50);
+        Tom.speed = 100; // add spped cho Tom
+
+        const Jerry = new Character('Jerry', 50, 20, 20);
+        console.log(Tom);
+        console.log(Jerry);
+
+    </script>
+</body>
+
+</html>

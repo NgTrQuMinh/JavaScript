@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="Title__Lab">TONIGHT</h1>
+    <button class="Btn">Click Me</button>
+    <br><br>
+    <button class="Back__Btn">Back Me</button>
+    <hr>
+    <div class="Form">
+        <label for="name">Your Name: </label>
+        <input class="Input__Form" type="text" name="name" id="name">
+        <button type="button" class="Summit__Form">Xác Nhận</button>
+    </div>
+    <br>
+    <span>Your Name Is: <span class="Output__Form"></span></span>
+    <br><br>
+    <span>Your Name Preview is: <span class="OutPut__Preview"></span></span>
+    <script>
+        // Truy cập HTML DOM.
+        const Title__Lab = document.getElementById("Title__Lab");
+
+        // Sử Lý Sự Kiện
+        const Btn__Listening = document.querySelector(".Btn");
+
+        // Thay Đổi HTML CSS DOM.
+        // 1.Change.
+        const Click__Btn__Change = () => {
+            Title__Lab.innerHTML = `<em>Đã Thay Đổi Tiêu Đề</em>`;
+            Title__Lab.style.color = "red";
+            console.log("Bạn đã Change Title");
+        }
+        Btn__Listening.addEventListener(`click`, Click__Btn__Change);
+
+        // 2.Back
+        const Back__Btn__Listening = document.querySelector(".Back__Btn");
+        const Click__Btn__Back = () => {
+            Title__Lab.innerText = "Lab - 04";
+            Title__Lab.style.color = "black";
+            console.log("Bạn đã Back Title");
+        }
+
+        Back__Btn__Listening.addEventListener("click", Click__Btn__Back);
+
+        // Local Storage 
+        const Input__Form = document.querySelector(".Input__Form");
+        const Summit__Form = document.querySelector(".Summit__Form");
+        const Output__Form = document.querySelector(".Output__Form");
+
+        const Input__Form__Btn = () => {
+            const value__Input = Input__Form.value;
+            localStorage.setItem("Name", value__Input);
+            Output__Form.innerHTML = `<b>${value__Input}</b>`;
+        }
+        Summit__Form.addEventListener("click", Input__Form__Btn);
+
+        const OutPut__Preview = document.querySelector(".OutPut__Preview");
+        const Preview__Name = localStorage.getItem("Name");
+        if (Preview__Name !== null) {
+            OutPut__Preview.innerHTML = `<b>${Preview__Name}</b>`;
+        }
+    </script>
+</body>
+
+</html>

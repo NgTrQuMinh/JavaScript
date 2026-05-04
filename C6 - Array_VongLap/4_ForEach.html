@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. For-each: dùng để Duyệt toàn bộ mảng/danh sách.
+        // Dùng forEach khi bạn chỉ muốn lặp qua để thực hiện câu lệnh nào đó mà không cần tạo ra mảng mới.
+        const fruits = ['Táo', 'Chuối', 'Xoài'];
+        fruits.forEach((item, index) => {
+            console.log(`Vị trí ${index} là quả: ${item}`);
+        });
+        /* Kết quả in ra:
+        Vị trí 0 là quả: Táo
+        Vị trí 1 là quả: Chuối
+        Vị trí 2 là quả: Xoài
+        */
+
+        // Hàm entries() – Lấy cả "Chìa khóa" và "Ổ khóa"
+        for (const [index, value] of fruits.entries()) {
+            console.log(index, value);
+        }
+        // 0 "Táo"
+        // 1 "Chuối"
+        // 2 "Xoài"
+
+        // 2. Sự khác biệt "đắt giá" với vòng lặp For thường
+        // Đặc điểm                         Vòng lặp for thường                                 Phương thức forEach
+        // Cú pháp	                Rườm rà, dễ sai sót ở i++ hoặc điều kiện dừng.	        Ngắn gọn, súc tích, đọc vào hiểu ngay.
+        // Kiểm soát	            Có thể dùng break, continue để dừng nửa chừng.	        Không thể dùng break hay continue.
+        // Hiệu suất	            Nhanh hơn một chút (nhưng thường không đáng kể).	    Chậm hơn xíu nhưng code "sạch" hơn nhiều.
+        // Async/Await	            Hoạt động tốt với các tác vụ bất đồng bộ.	            Không đợi các tác vụ await xong mới chạy tiếp.
+
+        // 3. Những "cạm bẫy" cần lưu ý
+        // Dù rất tiện lợi, nhưng forEach có vài điểm "tính cách" hơi khó chịu mà bạn cần nhớ:
+        // Không thể dừng lại: Một khi đã chạy forEach, nó sẽ đi hết từ đầu đến cuối mảng.Nếu bạn muốn tìm một phần tử rồi dừng lại, hãy dùng.find() hoặc.some().
+        // Giá trị trả về là undefined: Khác với.map()(tạo ra mảng mới), forEach không trả về gì cả.Nó chỉ thực hiện hành động thôi.
+        // Bỏ qua phần tử trống: Nếu mảng có các lỗ hổng(empty slots), forEach sẽ "ngó lơ" chúng luôn.
+
+        // 4. Ví dụ thực tế: Cập nhật danh sách đi học
+        const students = ['An', 'Bình', 'Chi'];
+        students.forEach((name, index) => {
+            console.log(`${index + 1}. Học sinh ${name} đã có mặt.`);
+        });
+        /* Kết quả:
+        1. Học sinh An đã có mặt.
+        2. Học sinh Bình đã có mặt.
+        3. Học sinh Chi đã có mặt.
+        */
+    </script>
+</body>
+
+</html>

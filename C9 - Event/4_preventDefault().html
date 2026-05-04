@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            font-size: 24px;
+            font-weight: 700;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://www.google.com/?hl=vi">Google</a>
+    <script>
+        // preventDefault() là một phương thức dùng để chặn hành vi mặc định của trình duyệt khi một sự kiện xảy ra.
+        const Link = document.querySelector("a");
+        Link.addEventListener("click", ((event) => {
+            event.preventDefault(); // Ngăn chặn ko cho vào đường link nữa
+            console.log("Click me");
+        }))
+    </script>
+</body>
+</html>

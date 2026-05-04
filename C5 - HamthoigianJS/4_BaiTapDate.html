@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Chuyển hóa stringdate = number date.
+        const now = new Date("Fri Sep 21 2007 12:0:0");
+
+        function MyDate(Time) {
+            const year = Time.getFullYear();
+            const month = Time.getMonth() + 1;
+            const day = Time.getDate().toString().padStart(2, '0');
+
+            const check_month = month > 10 ? "0" : "";  // nếu tháng < 10 + thêm 0.
+
+            return `${year}-${check_month}${month}-${day}`;
+        }
+        console.log(MyDate(now));
+
+
+        function MyTime(Time) {
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            return Time.toLocaleTimeString('vi-VN', options);
+        }
+        console.log(MyTime(now));
+    </script>
+</body>
+
+</html>

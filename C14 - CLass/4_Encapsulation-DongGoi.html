@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Tính đóng gói (Encapsulation) với Private fields là cách bạn "che giấu" các dữ liệu nhạy cảm bên trong class, 
+        // không cho phép mã bên ngoài truy cập hoặc chỉnh sửa trực tiếp.
+
+        // 1. Cú pháp cơ bản
+        // Khi một thuộc tính có dấu #, nó chỉ có thể được truy cập bên trong các dấu ngoặc nhọn {} của class đó.
+        class BankAccount {
+            // Khai báo thuộc tính private
+            // Thuộc tính private (không thể truy cập từ bên ngoài)
+            #balance = 0;
+
+            constructor(owner, initialAmount) {
+                this.owner = owner;
+                this.#balance = initialAmount;
+            }
+            // Phương thức public để nạp tiền
+            deposit(amount) {
+                if (amount > 0) {
+                    this.#balance += amount;
+                    console.log(`Đã nạp ${amount}. Số dư mới: ${this.#balance}`);
+                }
+            }
+            // Getter để xem số dư (nhưng không cho sửa trực tiếp)
+            get balance() {
+                return `Số dư của bạn là: ${this.#balance} VNĐ`;
+            }
+        }
+
+        const myAcc = new BankAccount("An", 1000);
+
+        // TRUY CẬP HỢP LỆ: thông qua method hoặc getter
+        myAcc.deposit(500);
+        console.log(myAcc.balance);
+
+        // LỖI: Truy cập trực tiếp từ bên ngoài
+        // console.log(myAcc.#balance); // SyntaxError: Private field '#balance' must be declared in an enclosing class
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="product-list">
+        <li data-id="p1" class="item">Điện thoại iPhone</li>
+        <li data-id="p2" class="item">Máy tính MacBook</li>
+        <li data-id="p3" class="item">Tai nghe AirPods</li>
+    </ul>
+
+    <script>
+        const list = document.getElementById('product-list');
+        list.addEventListener('click', function (e) {
+            // 1. Kiểm tra xem người dùng có click đúng vào thẻ <li> không
+            if (e.target.classList.contains('item')) {
+                // 2. Lấy dữ liệu ID từ thuộc tính data-id
+                const productId = e.target.dataset.id;
+                // 3. Lấy tên sản phẩm từ nội dung chữ
+                const productName = e.target.innerText;
+                console.log(`Bạn đã chọn: ${productName} (Mã: ${productId})`);
+            }
+        });
+    </script>
+</body>
+
+</html>

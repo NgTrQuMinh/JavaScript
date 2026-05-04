@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Các thành phần chính
+        // Để Event Loop hoạt động, nó phối hợp giữa 4 khu vực quan trọng:
+        // Call Stack: Nơi chứa các hàm đang được thực thi. Hàm nào vào sau cùng sẽ được xử lý trước (LIFO - Last In, First Out).
+        // Web APIs: Các tính năng do trình duyệt cung cấp (như setTimeout, fetch, DOM events). Khi bạn gọi một hàm bất đồng bộ, nó sẽ được chuyển qua đây để "chờ".
+        // Callback Queue (Task Queue): Khi các tác vụ ở Web APIs hoàn thành, chúng được đưa vào hàng đợi này để chờ được quay lại Call Stack.
+        // Event Loop: Một vòng lặp liên tục kiểm tra xem Call Stack có trống không. Nếu trống, nó sẽ bốc tác vụ đầu tiên từ Queue và đẩy vào Stack để chạy.
+
+        // 2. Luồng hoạt động (Workflow)
+        // 1-Chạy code đồng bộ: Các dòng code bình thường sẽ được đẩy thẳng vào Call Stack và thực hiện ngay lập tức.
+        // 2-Gặp tác vụ bất đồng bộ: Ví dụ một lệnh setTimeout. Nó sẽ được đẩy sang Web APIs để đếm ngược thời gian. Call Stack lúc này giải phóng để làm việc khác (không bị "đứng" trình duyệt).
+        // 3-Xếp hàng: Khi hết thời gian chờ, callback của setTimeout sẽ nhảy vào Callback Queue.
+        // 4-Event Loop kiểm tra: Nếu Call Stack đang bận xử lý code khác, callback vẫn phải đợi trong Queue. Chỉ khi Stack hoàn toàn sạch bóng, Event Loop mới "ship" callback đó lên Stack để thực thi.
+
+        // 3. Microtasks vs. Macrotasks
+        // Trong thế giới JS, không phải hàng đợi nào cũng như nhau. Có một sự ưu tiên nhẹ ở đây:
+        // Microtasks: Bao gồm Promise.then, MutationObserver, process.nextTick (trong Node.js).
+        // Macrotasks (Tasks): Bao gồm setTimeout, setInterval, setImmediate, I/O tasks.
+        // Quy tắc vàng: Event Loop sẽ ưu tiên giải quyết hết sạch danh sách Microtasks 
+        // trước khi đụng đến bất kỳ một Macrotask nào.
+
+        console.log('1'); // Đồng bộ
+
+        setTimeout(() => {
+            console.log('2'); // Macrotask
+        }, 0);
+
+        Promise.resolve().then(() => {
+            console.log('3'); // Microtask
+        });
+
+        console.log('4'); // Đồng bộ
+
+        // Kết quả sẽ là: 1 -> 4 -> 3 -> 2.
+        // Dù setTimeout có thời gian là 0ms, nó vẫn phải nhường chỗ cho Microtask (Promise) và code đồng bộ.
+
+
+        // 4. Tại sao cần hiểu Event Loop?
+        // Tránh chặn (Blocking): Giúp bạn không viết code làm đơ giao diện người dùng.
+        // Debug chính xác: Hiểu tại sao một đoạn code chạy sau dù nó nằm ở dòng trên.
+        // Tối ưu hiệu suất: Biết cách sắp xếp tác vụ nặng để ứng dụng mượt mà hơn.
+    </script>
+</body>
+
+</html>

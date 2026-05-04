@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thực hành DOM</title>
+    <style>
+        /* Bạn có thể thêm CSS nhẹ nhàng cho đẹp */
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .active {
+            border: 2px solid red;
+            background: lightyellow;
+        }
+
+        .B3 {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .warningB7 {
+            color: red;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nội dung của từng bài tập sẽ thay đổi ở đây -->
+    <!-- Bài 1 -->
+    <h1 id="B1">Chào bạn</h1>
+    <hr>
+
+    <!-- Bài 2 -->
+    <button class="B2 card">Đổi màu</button>
+    <hr>
+
+    <!-- Bài 3 -->
+    <p id="B3" class="B3">Nội dung bí mật</p>
+    <button class="switch">Bật/Tắt</button>
+    <hr>
+    <!-- Bài 4 -->
+    <span id="count">0</span><br>
+    <button class="B4">Thêm +1</button>
+    <hr>
+    <!-- Bài 5 6 -->
+    <ul id="list">
+        <li>SV1</li>
+        <li>SV2</li>
+        <li>SV3</li>
+        <li>SV4</li>
+    </ul>
+    <input type="text" class="inputB5" name="inputB5">
+    <button class="B5">Thêm</button>
+    <button class="B6">Xóa</button>
+    <hr>
+
+    <!-- Bài 7 -->
+    <form id="B7">
+        <input type="text" class="data" name="data" id="data" placeholder="Data:">
+        <button type="submit" class="submitB7">Gửi</button>
+    </form>
+    <hr>
+
+    <!-- Bài 8 -->
+    <input type="text" id="userInput" placeholder="Nhập nội dung vào đây...">
+    <p id="display"></p>
+
+    <!-- Bài 9 -->
+    <ul class="B9">
+        <li>SV1</li>
+        <li>SV2</li>
+        <li>SV3</li>
+        <li>SV4</li>
+        <li>SV5</li>
+    </ul>
+    <button class="BtnB9">Đổi Màu</button>
+
+    <script>
+        // Code JavaScript của bạn viết ở đây
+        // Bài 1: Thay đổi nội dung thẻ <h1>
+        // Yêu cầu:
+        // Tạo một trang HTML có thẻ <h1 id="title">Chào bạn</h1>. Viết JS để khi trang tải xong, nội dung thẻ <h1> chuyển thành "Học DOM thật vui!".
+        // Gợi ý: Dùng document.getElementById và innerText hoặc textContent.
+
+        const B1 = document.getElementById("B1");
+        B1.textContent = "Học DOM thật vui!";
+
+        // Bài 2: Thay đổi màu nền khi nhấn nút
+        // Yêu cầu:
+        // Thêm một nút “Đổi màu”. Khi nhấn, màu nền của <body> thay đổi thành một màu ngẫu nhiên.
+        // Gợi ý: Dùng document.body.style.backgroundColor, tạo màu ngẫu nhiên bằng Math.random().
+        const B2 = document.querySelector("body");
+        const changeColor = document.querySelector(".B2");
+        const colors = [
+            "#FF0000", // Đỏ (Red)
+            "#00FF00", // Xanh lá (Lime) [12]
+            "#0000FF", // Xanh dương (Blue)
+            "#FFFF00", // Vàng (Yellow) [18]
+            "#FF00FF", // Hồng cánh sen (Magenta)
+            "#00FFFF", // Xanh lơ (Cyan/Aqua) [17]
+            "#000000", // Đen (Black) [14]
+            "#FFFFFF", // Trắng (White) [11]
+            "#808080", // Xám (Gray)
+            "#F5F5F5"  // Trắng khói (Whitesmoke) [15]
+        ];
+        let colorIndex = 0;
+        changeColor.addEventListener("click", () => {
+            B2.style.backgroundColor = colors[colorIndex];
+            colorIndex++;
+            if (colorIndex >= colorIndex.length) {
+                colorIndex = 0;
+            }
+        })
+
+        // Bài 3: Ẩn/hiện một đoạn văn
+        // Yêu cầu:
+        // Có một đoạn văn <p id="text">Nội dung bí mật</p> và một nút “Bật/tắt”. Nhấn nút để ẩn hoặc hiện đoạn văn đó.
+        // Gợi ý: Dùng display: none hoặc visibility: hidden, kiểm tra trạng thái hiện tại.
+        const B3 = document.querySelector("#B3");
+        const switchBtn = document.querySelector(".switch");
+        switchBtn.addEventListener("click", () => {
+            B3.classList.toggle("B3");
+        })
+
+        // Bài 4: Đếm số lần nhấn nút
+        // Yêu cầu:
+        // Hiển thị số 0 trong thẻ <span id="count">0</span>. Thêm nút “Nhấn +1”. Mỗi lần nhấn, số tăng lên 1.
+        // Gợi ý: Lấy nội dung hiện tại, chuyển thành số, cộng thêm 1 rồi gán lại.
+        const cnt = document.getElementById("count");
+        const B4 = document.querySelector(".B4");
+
+        B4.addEventListener("click", () => {
+            // Lấy chữ "0" ra và biến nó thành số 0
+            let count = Number(cnt.textContent);
+            let newValue = ++count;
+            cnt.textContent = newValue;
+        });
+
+        // Bài 5: Thêm mục mới vào danh sách
+        // Bài 6: Xóa mục cuối cùng của danh sách
+        const List = document.querySelector("#list");
+        const inputB5 = document.querySelector(".inputB5");
+        const B5 = document.querySelector(".B5");
+        const B6 = document.querySelector(".B6");
+
+        B5.addEventListener("click", () => {
+            const Value = inputB5.value;
+            const addLi = document.createElement("li");
+            addLi.textContent = Value;
+            List.appendChild(addLi);
+        })
+
+        B6.addEventListener("click", () => {
+            const elmentEnd = List.lastElementChild; // phần tử cuối
+            if (elmentEnd) {
+                elmentEnd.remove();
+            } else {
+                alert("Danh sách trống");
+            }
+        })
+
+        List.addEventListener("click", (e) => {
+            const item = e.target.closest("li"); // Tìm thẻ li gần nhất tính từ chỗ click
+            if (item && List.contains(item)) {
+                item.remove(); // Xóa nó luôn!
+            }
+        });
+
+        // Bài 7: Kiểm tra ô nhập có để trống không
+        // Tạo một ô input và nút “Gửi”. Nếu input rỗng, hiển thị một thẻ < p > màu đỏ báo “Vui lòng nhập dữ liệu”. 
+        // Nếu có dữ liệu, hiển thị thông báo màu xanh “Đã nhận: [nội dung]”.
+        // Gợi ý: Dùng if (input.value.trim() === ""), tạo hoặc thay đổi nội dung thẻ thông báo.
+        const B7 = document.querySelector("#B7")
+        const data = document.querySelector(".data");
+        const submitB7 = document.querySelector(".submitB7");
+
+        B7.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const ValueData = data.value.trim();
+            const oldWarning = document.querySelector(".warningB7");
+            if (ValueData === "") {
+                // 2. Chỉ tạo cảnh báo nếu chưa có cái nào
+                if (!oldWarning) {
+                    const warning = document.createElement("p");
+                    warning.textContent = "Vui lòng nhập dữ liệu";
+                    warning.classList.add("warningB7");
+                    B7.appendChild(warning);
+                }
+            } else {
+                if (oldWarning) {
+                    oldWarning.remove();
+                }
+                const OutPut = document.createElement("p");
+                OutPut.textContent = `Đã nhận: ${ValueData}`;
+                B7.appendChild(OutPut);
+            }
+        })
+
+
+        // Bài 8: Sao chép nội dung input sang một thẻ khác (real-time)
+        const inputField = document.querySelector("#userInput");
+        const displayTag = document.querySelector("#display");
+
+        inputField.addEventListener("input", (e) => {
+            // Gán nội dung của thẻ p bằng giá trị hiện tại của input
+            displayTag.textContent = e.target.value;
+        });
+
+        // Bài 9: Tô màu xen kẽ cho các mục trong danh sách
+        // Cho một danh sách <ul> có 5 mục. Viết JS để tự động tô màu nền các mục chẵn (index 1,3,…) thành #eee, các mục lẻ thành #fff.
+        // Sau đó thêm một nút “Đổi màu” để đổi thành màu khác (ví dụ: chẵn thành lightblue, lẻ thành lightgreen).
+        // Gợi ý: Dùng document.querySelectorAll('li') và vòng lặp for. Khi nhấn nút, thêm/xóa class hoặc gán style trực tiếp.
+        const B9 = document.querySelector(".B9");
+        const li = document.querySelectorAll("li");
+        const BtnB9 = document.querySelector(".BtnB9");
+
+        BtnB9.addEventListener("click", (e) => {
+            [...li].forEach((element, index) => {
+                if (index % 2 === 0) {
+                    element.style.color = "red";
+                } else {
+                    element.style.color = "yellow";
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

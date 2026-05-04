@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function checkText(Email = "") {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (Email === "") {
+                        reject("Không có nội dung Email");
+                        return; // Stop execution
+                    }
+                    if (Email.includes("@")) {
+                        resolve("Email hợp lệ: " + Email);
+                    } else {
+                        reject("Email không đúng định dạng (thiếu @)");
+                    }
+                }, 1000);
+            });
+        }
+
+        async function check() {
+            try {
+                let Email = await checkText("ntqm@gmail.com");
+                console.log(Email);
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        check();
+    </script>
+</body>
+
+</html>

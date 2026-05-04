@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. alert() - Thông báo
+        // Dùng để hiển thị một thông điệp đơn giản cho người dùng.
+        alert("Chào mừng bạn đến với website!");
+
+        // 2. confirm() - Xác nhận
+        // Hiển thị một thông báo cùng với hai lựa chọn: OK và Cancel.
+        let xacNhan = confirm("Bạn có chắc chắn muốn xóa bài viết này không?");
+        if (xacNhan) {
+            console.log("Đã xóa thành công.");
+        } else {
+            console.log("Đã hủy thao tác.");
+        }
+
+        // 3. prompt() - Nhập liệu
+        // Hiển thị một thông báo kèm theo một ô nhập văn bản (input field).
+
+        // Cú pháp: prompt(thông_báo, giá_trị_mặc_định);
+        let ten = prompt("Tên của bạn là gì?", "Khách");
+        alert("Chào " + ten);
+
+    </script>
+</body>
+
+</html>

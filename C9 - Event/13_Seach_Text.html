@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* Khung bao ngoài */
+        .search-container {
+            width: 300px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Ô nhập liệu */
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Giúp padding không làm tăng chiều rộng */
+        }
+
+        /* Danh sách kết quả */
+        #resultList {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        #resultList li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Lớp ẩn phần tử khi không khớp */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Nhập tên phim, món ăn...">
+
+        <ul id="resultList">
+            <li>Bún chả Hà Nội</li>
+            <li>Phở bò Nam Định</li>
+            <li>Bánh mì Sài Gòn</li>
+            <li>Cơm tấm Long Xuyên</li>
+            <li>Gỏi cuốn tôm thịt</li>
+        </ul>
+    </div>
+    <script>
+        // 1. Chọn các phần tử cần thiết
+        const searchInput = document.querySelector('#searchInput');
+        const items = document.querySelectorAll('#resultList li');
+
+        // 2. Lắng nghe sự kiện "input" (chạy mỗi khi người dùng gõ chữ)
+        searchInput.addEventListener('input', function () {
+            const keyword = searchInput.value.toLowerCase(); // Chuyển chữ nhập về chữ thường
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase(); // Lấy nội dung của từng dòng
+
+                // 3. Kiểm tra xem từ khóa có nằm trong nội dung hay không
+                if (text.includes(keyword)) {
+                    item.classList.remove('hidden'); // Hiện nếu khớp
+                } else {
+                    item.classList.add('hidden');    // Ẩn nếu không khớp
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

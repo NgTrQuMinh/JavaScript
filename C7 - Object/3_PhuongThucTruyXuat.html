@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Các phương thức Static của Object (Xử lý hàng loạt)
+        // biến đổi Object thành Array, giúp chúng ta xử lý dữ liệu linh hoạt hơn
+        // 1. Object.keys(obj)
+        const user = { name: "Hoàng", age: 25, role: "Admin" };
+        const keys = Object.keys(user);
+
+        console.log(keys); // ["name", "age", "role"]
+
+        // 2. Object.values(obj)
+        const scores = { math: 9, english: 8, physics: 10 };
+        const total = Object.values(scores).reduce((sum, score) => sum + score, 0);
+
+        console.log(total); // 27
+
+        // 3. Object.entries(obj)
+        const settings = { theme: "dark", notifications: true };
+
+        for (const [key, value] of Object.entries(settings)) {
+            console.log(`${key} đang được đặt là: ${value}`);
+        }
+        // Kết quả:
+        // "theme đang được đặt là: dark"
+        // "notifications đang được đặt là: true"
+    </script>
+</body>
+
+</html>

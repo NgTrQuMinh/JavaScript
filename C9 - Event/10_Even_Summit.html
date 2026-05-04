@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #myForm {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label.section-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .option-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myForm">
+        <div class="form-group">
+            <label class="section-title">Tên đăng nhập:</label>
+            <input type="text" name="username" placeholder="UserName:" required>
+        </div>
+
+        <div class="form-group">
+            <label class="section-title">Sở thích:</label>
+            <div class="option-group">
+                <input type="checkbox" name="hobby" id="football" value="Bóng Đá">
+                <label for="football">Bóng Đá</label>
+
+                <input type="checkbox" name="hobby" id="game" value="Chơi Game">
+                <label for="game">Chơi Game</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="section-title">Giới tính:</label>
+            <div class="option-group">
+                <input type="radio" name="gender" id="male" value="Nam" checked>
+                <label for="male">Nam</label>
+
+                <input type="radio" name="gender" id="female" value="Nữ">
+                <label for="female">Nữ</label>
+            </div>
+        </div>
+
+        <button type="submit">Gửi thông tin</button>
+    </form>
+    <script>
+        // Thay vì gắn vào nút bấm, bạn gắn sự kiện vào chính thẻ <form>. Cách này bắt được cả khi người dùng nhấn Enter hoặc bấm nút Submit.
+        // Chặn load lại trang: Luôn dùng e.preventDefault(). Nếu không, trang web sẽ tải lại và bạn mất hết dữ liệu vừa nhập.
+        // Gắn sự kiện vào Form: Đừng gắn vào nút, hãy gắn addEventListener('submit', ...) vào thẻ <form>.
+        // Lấy dữ liệu nhanh: Dùng new FormData(form).
+
+        const Form = document.querySelector("#myForm");
+
+        Form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Chặn load lại trang
+
+            // 1. Khởi tạo FormData từ form hiện tại
+            const data = new FormData(this);
+
+            // 2. Chuyển đổi sang Object đơn giản
+            const values = Object.fromEntries(data.entries());
+
+            // 3. Xử lý riêng cho Checkbox (Vì entries() chỉ lấy 1 giá trị cuối cùng của hobby)
+            values.hobby = data.getAll('hobby');
+
+            console.log("Dữ liệu thu được:", values);
+        });
+
+    </script>
+</body>
+
+</html>

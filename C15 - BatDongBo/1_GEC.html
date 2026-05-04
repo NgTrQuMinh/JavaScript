@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Global Execution Context (GEC) (Ngữ cảnh thực thi toàn cầu)
+        // là môi trường mặc định được tạo ra đầu tiên trước khi bất kỳ dòng code nào được chạy. Bạn có thể coi nó là "sân khấu chính" nơi toàn bộ chương trình của bạn bắt đầu.
+        // 1. GEC được tạo ra khi nào?
+        // 1. Tạo đối tượng Global: Trong trình duyệt là window, trong Node.js là global.
+        // 2. Tạo biến this: Trong ngữ cảnh toàn cầu, this sẽ trỏ thẳng vào đối tượng Global đó.
+
+        // 2. Hai giai đoạn của GEC
+        // Giai đoạn 1: Khởi tạo (Creation Phase)
+        // Biến (var): Được cấp bộ nhớ và gán giá trị tạm thời là undefined.
+        // Hàm (Function Declaration): Toàn bộ nội dung hàm được đưa vào bộ nhớ.
+        // Biến (let, const): Cũng được cấp bộ nhớ nhưng không được khởi tạo (nằm trong "Temporal Dead Zone").
+
+        // Giai đoạn 2: Thực thi (Execution Phase)
+        // Lúc này JS Engine mới chạy từng dòng code từ trên xuống dưới:
+        // Gán giá trị thực tế cho các biến.
+        // Thực hiện các lời gọi hàm.
+
+        // 3. GEC và Call Stack (Ngăn xếp thực thi)
+        // GEC luôn nằm ở dưới cùng của Call Stack.
+        // --- GIAI ĐOẠN 1: KHỞI TẠO (CREATION PHASE) ---
+        // Lúc này JS Engine chưa chạy dòng nào, nhưng nó đã làm các việc sau:
+        // 1. Tạo Global Object (window).
+        // 2. Thiết lập 'this' = window.
+        // 3. Quét qua code để cấp bộ nhớ (Hoisting):
+        //    - Biến 'userName' được cấp chỗ, gán giá trị = undefined.
+        //    - Hàm 'showWelcome' được lưu toàn bộ nội dung vào bộ nhớ.
+        //    - Biến 'year' (let) được cấp chỗ nhưng KHÔNG khởi tạo (nằm trong vùng TDZ).
+
+        console.log("1. Biến userName lúc này là:", userName); // Kết quả: undefined (do hoisting)
+        // console.log(year); // Nếu bỏ comment dòng này sẽ lỗi ngay: ReferenceError
+
+        var userName = "Gemini"; // --- GIAI ĐOẠN 2: THỰC THI (EXECUTION PHASE) ---
+        // Dòng này chạy: giá trị "Gemini" được gán đè lên 'undefined' trong bộ nhớ.
+
+        let year = 2026;
+        // Dòng này chạy: biến 'year' chính thức được khởi tạo với giá trị 2026.
+
+        // Gọi hàm showWelcome
+        showWelcome(userName);
+
+        function showWelcome(name) {
+            // Khi dòng này được gọi, một "Function Execution Context" (FEC) 
+            // được tạo ra và đẩy lên trên GEC trong Call Stack.
+
+            var message = "Chào mừng bạn đến với JS!";
+            console.log("2.", message, name);
+
+            // Sau khi hàm chạy xong, FEC này bị xóa (pop) khỏi Call Stack.
+        }
+
+        console.log("3. Kết thúc chương trình, GEC vẫn nằm trong Call Stack.");
+    </script>
+</body>
+
+</html>

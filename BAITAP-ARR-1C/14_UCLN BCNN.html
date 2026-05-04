@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 14. Tìm UCLN và BCNN của mọi phần tử trong mảng
+
+        const Arr = [994626, 994448, 996097, 995790, 999692,993222, 991401, 999038, 997163, 990016, 993004, 990549];
+        
+        const UCLN = ((a, b) => {
+            while (b) {
+                a = Math.abs(a);
+                b = Math.abs(b);
+                let r = a % b;
+                a = b;
+                b = r;
+            }
+            return a;
+        })
+
+        const BCNN = ((a, b) => {
+            if (a === 0 || b === 0) {
+                return 0;
+            }
+            return a / UCLN(a, b) * b;
+        })
+
+        let UC = Arr[0];
+        let BC = Arr[0];
+        for (let i = 0; i < Arr.length; i++) {
+            UC = UCLN(UC, Arr[i]);
+            BC = BCNN(BC, Arr[i]);
+        }
+        console.log(UC);
+        console.log(BC);
+        
+        
+
+    </script>
+</body>
+</html>

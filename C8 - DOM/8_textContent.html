@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="myDiv">
+        Xin chào <b>JavaScript</b>!
+        <span style="display: none">Đây là nội dung ẩn.</span>
+    </div>
+
+    <div id="demo-container">
+        Xin chào!
+        <span style="display: none;">Đoạn chat bí mật.</span>
+        <p class="innerHTML">Học <strong>JavaScript</strong> rất vui!</p>
+    </div>
+
+    <script>
+        // 1. textContent (Thuộc tính của Node)
+        // Cơ chế:  Lấy toàn bộ nội dung, bao gồm cả nội dung ẩn trong mã HTML.
+        // Cú pháp:
+        let text = document.getElementById("myDiv");
+        console.log(text.textContent);
+        text.textContent = "Chào mừng bạn đến với textContent!";
+
+        // 2. innerText "được hiển thị"
+        // Cơ chế: Lấy nội dung hiển thị (human-readable), bỏ qua nội dung ẩn.
+        const box = document.getElementById("demo-container");
+
+        console.log(box.textContent);   // lấy cả nội dung ẩn
+        console.log(box.innerText); // ko lấy nội dung ẩn
+
+        // 3. innerHTML ""
+        // Cơ chế: Lấy toàn bộ nội dung bao gồm cả thẻ HTML
+        // Gán nội dung mới (Trình duyệt sẽ "render" các thẻ HTML)
+        const TxtinnerHTML = document.querySelector("#demo-container .innerHTML");
+        TxtinnerHTML.innerHTML = `<button style="background-color: aqua; border: none; padding: 20px">Click Me</button>`;
+
+        // Su dung voi Array
+        const Arr = ["HTML", "CSS", "JavaScript"];
+        const result = Arr.map((item) => {
+            return `<li> ${item} </li>`;
+        });
+        const ul = document.createElement("ul");
+        ul.innerHTML = result.join("");
+        document.body.appendChild(ul);
+    </script>
+</body>
+
+</html>

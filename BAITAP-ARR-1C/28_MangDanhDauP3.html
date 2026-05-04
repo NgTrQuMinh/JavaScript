@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Bài 28. Mảng đánh dấu 3
+        // Hãy liệt kê các giá trị xuất hiện trong mảng theo thứ tự xuất hiện trong mảng kèm theo tần suất của nó
+
+        const Arr = [1, 6, 6, 9, 0, 6, 4, 9, 3];
+
+        const Mark = new Array(1000).fill(0);
+
+        // Bước 1: Đếm tần suất
+        Arr.forEach(value => {
+            Mark[value]++;
+        });
+
+        // Bước 2: Duyệt lại Arr để in theo đúng thứ tự xuất hiện
+        Arr.forEach(value => {
+            if (Mark[value] !== 0) {
+                console.log(value, Mark[value]);
+                Mark[value] = 0; // Đánh dấu đã in để không in lặp lại
+            }
+        });
+
+
+        /// SU DUNG MAP
+        // const countMap = new Map();
+
+        // // 1. Đếm số lần xuất hiện
+        // for (let x of Arr) {
+        //     if (countMap.has(x)) {
+        //         // Nếu đã có trong Map, lấy số cũ cộng thêm 1
+        //         countMap.set(x, countMap.get(x) + 1);
+        //     } else {
+        //         // Nếu chưa có, đặt nó là 1
+        //         countMap.set(x, 1);
+        //     }
+        // }
+
+        // // 2. In kết quả theo thứ tự
+        // for (let [giaTri, tanSuat] of countMap) {
+        //     console.log(giaTri, tanSuat);
+        // }
+
+    </script>
+</body>
+
+</html>

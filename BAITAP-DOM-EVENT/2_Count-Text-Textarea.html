@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2: Đếm ký tự</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 400px;
+            height: 100px;
+            padding: 8px;
+        }
+
+        .counter {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Bài 2: Đếm số ký tự còn lại (giới hạn 200 ký tự)</h2>
+    <textarea id="message" placeholder="Nhập nội dung..."></textarea>
+    <div class="counter">
+        Đã nhập: <span id="charCount">0</span>
+        / 200 ký tự. Còn lại: <span id="remaining">200</span>
+    </div>
+
+    <script>
+        // Yêu cầu: Mỗi khi gõ, cập nhật số ký tự đã nhập và số còn lại.
+        // Nếu vượt quá 200, tự động cắt bớt (hoặc hiển thị cảnh báo đỏ).
+        const message = document.getElementById("message");
+        const charCount = document.querySelector("#charCount");
+        const remaining = document.querySelector("#remaining");
+        const MAX_CHARS = 200;
+
+        message.addEventListener("input", () => {
+            const currentLength = message.value.length;
+
+            charCount.textContent = currentLength;
+            remaining.textContent = MAX_CHARS - currentLength;
+
+            if (currentLength >= MAX_CHARS) {
+                charCount.style.color = "red";
+            } else {
+                charCount.style.color = "black";
+            }
+        });
+
+    </script>
+</body>
+
+</html>

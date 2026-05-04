@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Callback Hell (Pyramid of Doom), bạn đang nói về một trong những nỗi ám ảnh lớn nhất của lập trình viên JavaScript thời xưa.
+        // Nó xảy ra khi bạn có quá nhiều tác vụ bất đồng bộ phải thực hiện tuần tự (cái này xong mới đến cái kia), dẫn đến việc các hàm callback bị lồng vào nhau quá sâu.
+        // 1. Hình dáng của Callback Hell
+        getData(function (a) {
+            getMoreData(a, function (b) {
+                getEvenMoreData(b, function (c) {
+                    getEvenMoreMoreData(c, function (d) {
+                        console.log("Cuối cùng cũng xong: " + d);
+                    });
+                });
+            });
+        });
+        // 2. Tại sao nó lại "tệ"?
+        // Cực kỳ khó đọc, Khó bảo trì. Xử lý lỗi (Error Handling), Tính phụ thuộc
+
+        // 3. Cách "diệt" Callback Hell qua từng thời kỳ
+        // Cách 1: Sử dụng Promises (ES6)
+        // Thay vì lồng vào nhau, chúng ta sử dụng chuỗi .then(). Code sẽ dàn hàng dọc, dễ nhìn hơn nhiều.
+        getData()
+            .then(a => getMoreData(a))
+            .then(b => getEvenMoreData(b))
+            .then(c => console.log(c))
+            .catch(err => console.error(err)); // Xử lý lỗi tập trung tại một chỗ
+
+        // Cách 2: Async/Await (ES2017) - "Chân ái"
+        async function handleData() {
+            try {
+                const a = await getData();
+                const b = await getMoreData(a);
+                const c = await getEvenMoreData(b);
+                console.log(c);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // 4. Liên hệ với Event Loop
+        
+    </script>
+</body>
+
+</html>

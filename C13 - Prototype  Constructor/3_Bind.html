@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Đặc điểm chính của bind()
+        // Trả về hàm mới: Nó không chạy hàm ngay mà tạo ra một bản sao của hàm cũ với this đã được "trói" vào đối tượng bạn truyền vào.
+        // Cố định this: Dù sau này bạn gọi hàm đó ở đâu, this vẫn sẽ luôn trỏ về đối tượng đã được bind ban đầu.
+        // Truyền tham số trước (Currying): Bạn có thể truyền sẵn một số đối số cho hàm mới ngay khi dùng bind().
+
+        // 2. Cú pháp
+        // const newFunction = oldFunction.bind(thisArg, arg1, arg2, ...);
+        // thisArg: Đối tượng mà bạn muốn this trỏ tới.
+        // arg1, arg2: Các tham số muốn truyền sẵn vào hàm (không bắt buộc).
+
+        const person = {
+            name: "Minh",
+            sayHello: function () {
+                console.log("Chào, mình là " + this.name);
+            }
+        };
+
+        // Trường hợp lỗi: this sẽ bị lạc mất ngữ cảnh (thường là undefined hoặc window)
+        const greet = person.sayHello;
+        greet(); // Kết quả: "Chào, mình là undefined"
+
+        // Dùng bind để sửa:
+        const boundGreet = person.sayHello.bind(person);    // là một bản sao của person.sayHello, this trỏ về person
+        boundGreet(); // Kết quả: "Chào, mình là Tiến"
+
+        // 1. Xử lý mất ngữ cảnh this trong Callback
+        const machine = {
+            name: "Robot X",
+            start: function () {
+                console.log(this.name + " đang khởi động...");
+            }
+        };
+
+        // SỬA: Dùng bind để "buộc" this vào object machine
+        const secureStart = machine.start.bind(machine);
+        setTimeout(secureStart, 1000); // Kết quả: "Robot X đang khởi động..."
+
+        // 2. Truyền sẵn tham số (Partial Function / Currying)
+        function tinhThue(phanTram, giaTien) {
+            return giaTien * phanTram;
+        }
+
+        // Tạo một hàm chuyên tính thuế VAT (10%) từ hàm tinhThue
+        // Tham số đầu tiên là null vì ở đây ta không dùng tới 'this'
+        const tinhVAT = tinhThue.bind(null, 0.1);
+
+        console.log(tinhVAT(100)); // 10 (tương đương tinhThue(0.1, 100))
+        console.log(tinhVAT(500)); // 50 (tương đương tinhThue(0.1, 500))
+
+        // 3. Mượn phương thức (Method Borrowing)
+        const runner = {
+            name: "Vận động viên",
+            run: function (speed) {
+                console.log(this.name + " đang chạy với tốc độ " + speed + "km/h");
+            }
+        };
+
+        const member = {
+            name: "Thành viên CLB"
+        };
+
+        // 'member' không có hàm run, nên ta mượn từ 'runner'
+        const memberRun = runner.run.bind(member);
+
+        memberRun(15); // Kết quả: "Thành viên CLB đang chạy với tốc độ 15km/h"
+
+        // 4. Ứng dụng trong Event Listener (DOM)
+        const app = {
+            user: "Admin",
+            handleClick: function () {
+                alert("Người dùng: " + this.user);
+            }
+        };
+
+        const button = document.querySelector('button');
+
+        // button.addEventListener('click', app.handleClick);  // -> Sẽ báo lỗi "Người dùng: undefined" vì this là cái nút bấm.
+        // Phải dùng bind:
+        button.addEventListener('click', app.handleClick.bind(app));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Lexical Scope: "Sơ đồ nhà" (Vị trí) - Là quy tắc xác định một biến có thể được sử dụng ở đâu.
+        const quocGia = "Việt Nam"; // Phạm vi toàn cục (Global)
+        function thanhPho() {
+            const tenThanhPho = "Hà Nội"; // Phạm vi cục bộ (Local)
+            function quan() {
+                const tenQuan = "Hoàn Kiếm";
+                // Hàm 'quan' có thể nhìn thấy mọi thứ bên ngoài nó
+                console.log(tenQuan + ", " + tenThanhPho + ", " + quocGia);
+            }
+            quan();
+        }
+        thanhPho(); // Kết quả: "Hoàn Kiếm, Hà Nội, Việt Nam"  
+
+
+        // 2. Closure: "Chiếc ba lô" (Bộ nhớ) - Là kết quả của việc một hàm con được đem đi nơi khác nhưng vẫn giữ liên lạc với nguồn gốc của nó.
+        const SayHello = ((Welcome) => {
+            return ((value) => {
+                console.log(`${Welcome} ${value}`);
+            })
+        })
+        let Hello = SayHello("Welcome to");
+        Hello("VietNam");   // Output: Welcome(function SayHello) VietNam(Function value)
+
+        // Lexical Scope là cái khung, còn Closure là hành động thực tế. Không có Lexical Scope thì không thể có Closure.
+
+
+    </script>
+</body>
+
+</html>

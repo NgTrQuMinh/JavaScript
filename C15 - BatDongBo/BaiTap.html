@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function makeTime(str, time) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(str);
+                }, time);
+            });
+        }
+
+        async function AllTime() {
+            try {
+                const Time1 = await makeTime("Run the first time", 3000);
+                console.log(Time1);
+                const Time2 = await makeTime("Run the second time", 2000);
+                console.log(Time2);
+                const Time3 = await makeTime("Run the third time", 1000);
+                console.log(Time3);
+
+
+                console.log("Done");    
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        AllTime();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. Các cách khai báo Function
+        // a. Function Declaration (Khai báo truyền thống)
+        function xinChao(ten) {
+            return "Chào " + ten + "!";
+        }
+
+        // b. Function Expression (Biểu thức hàm) - Hàm được gán vào một biến. Cách này không có Hoisting.
+        const tinhTong = function (a, b) {
+            return a + b;
+        };
+
+        // c. Arrow Function 
+        const binhPhuong = ((n) => {
+            return n * n;
+        });
+
+        // Phân loại hàm trong JavaScript dựa trên Tham số (Parameters) và Giá trị trả về (Return Value).
+        // 1. Hàm không có tham số và không có giá trị trả về
+        function hienThongBao() {
+            console.log("Chào mừng bạn đã quay trở lại!");
+            // Không có từ khóa return
+        }
+        hienThongBao(); // Gọi hàm: Kết quả in ra console
+
+        // 2. Hàm có tham số nhưng không có giá trị trả về
+        function chaoCaNhan(ten) {
+            console.log("Xin chào, " + ten + "!");
+        }
+        chaoCaNhan("An"); // In ra: Xin chào, An!
+
+        // 3. Hàm không có tham số nhưng có giá trị trả về
+        function layNamHienTai() {
+            return new Date().getFullYear();
+        }
+
+        let nam = layNamHienTai(); // Biến 'nam' sẽ giữ giá trị 2024 (hoặc năm hiện tại)
+        console.log("Năm nay là: " + nam);
+
+        // 4. Hàm có tham số và có giá trị trả về (Phổ biến nhất)
+        function tinhDienTich(dai, rong) {
+            let ketQua = dai * rong;
+            return ketQua;
+        }
+        let dt = tinhDienTich(5, 10); // dt = 50
+        console.log("Diện tích sân vườn là: " + dt + "m2");
+
+        /// Function có tham số là Function.
+        const Sum = (a, b) => {
+            return a + b;
+        };
+
+        let a = 10, b = 20;
+        console.log("Tổng:", Sum(a, b));
+
+        const Average = (a, b, sum) => {  // tham số sum là function bên trên
+            return sum(a, b) / 2;   // sum(a + b) / 2;
+        }
+
+        let m = 20, n = 40;
+        console.log("Trung Bình Công:", Average(m, n, Sum));
+    </script>
+</body>
+
+</html>

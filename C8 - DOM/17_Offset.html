@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            position: relative;
+            /* Làm gốc tọa độ cho offsetLeft/Top */
+            width: 400px;
+            height: 300px;
+            margin: 50px;
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+        }
+
+        .box {
+            width: 150px;
+            height: 100px;
+            padding: 20px;
+            border: 10px solid #3498db;
+            background-color: #e74c3c;
+            color: white;
+            position: absolute;
+            top: 50px;
+            left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="myBox" class="box">
+            Hello Offset!
+        </div>
+    </div>
+    <script>
+        // offset được sử dụng để xác định kích thước và vị trí vật lý của một phần tử so với các phần tử khác trên trang.
+        // OFFSET: Tổng kích thước vật lý (Bao gồm Content + Padding + Border + Scrollbar)
+        const box = document.getElementById('myBox');
+
+        // 1. Kích thước (offsetWidth/Height)
+        // Chiều rộng = 150 (content) + 40 (padding trái/phải) + 20 (border trái/phải) = 210
+        console.log("Width thực tế (offsetWidth): " + box.offsetWidth + "px");
+        console.log("Height thực tế (offsetHeight): " + box.offsetHeight + "px");
+
+        // 2. Vị trí (offsetLeft/Top)
+        // Khoảng cách từ mép trái của box đến mép trái phía trong của container
+        console.log("Cách lề trái (offsetLeft): " + box.offsetLeft + "px");
+        console.log("Cách lề trên (offsetTop): " + box.offsetTop + "px");
+
+        // 3. Phần tử cha làm gốc tọa độ
+        console.log("Gốc tọa độ là: ", box.offsetParent.className);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 20. Lớn hơn liền kề
+        const Arr = [341, 607, 986, 616, 131, 857, 234];
+
+        // Dùng For Duyệt.
+        for (const [index, value] of Arr.entries()) {
+            if (Arr[index] > Arr[index + 1] && Arr[index] > Arr[index - 1]) {
+                console.log(value);
+            }
+        }
+
+        // Tạo Hàm với Filter()
+        const Adjacent_Biggest = Arr.filter((value, index) => {
+            return Arr[index] > Arr[index + 1] && Arr[index] > Arr[index - 1];
+        })
+        console.log(Adjacent_Biggest);
+    </script>
+</body>
+</html>

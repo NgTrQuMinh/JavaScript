@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Slideshow 6 Buttons</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+
+        img {
+            width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .controls {
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Slideshow</h2>
+    <img id="slide" src="./Image/1.jpg">
+    <div class="controls">
+        <button id="firstBtn">First</button>
+        <button id="prevBtn">Prev</button>
+        <button id="playBtn">Play</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="nextBtn">Next</button>
+        <button id="lastBtn">Last</button>
+    </div>
+    <script>
+        const images = [
+            "./Images/1.jpg",
+            "./Images/2.jpg",
+            "./Images/3.jpg",
+            "./Images/4.jpg",
+            "./Images/5.jpg"
+        ];
+
+        const slide = document.getElementById("slide");
+        let index = 0;
+        let interval = null;
+        function showImage() {  
+            slide.src = images[index];
+        }
+        function first() {
+            index = 0;
+            showImage();
+        }
+        function last() {
+            index = images.length - 1;
+            showImage();
+        }
+        function next() {
+            ++index;
+            if (index >= images.length) {
+                index = 0;
+            }
+            showImage();
+        }
+        function prev() {
+            index--;
+            if (index < 0) {
+                index = images.length - 1;
+            }
+            showImage();
+        }
+        function play() {
+            if (!interval) {
+                interval = setInterval(() => {
+                    next();
+                }, 1000);
+            }
+        }
+
+        function pause() {
+            clearInterval(interval);
+            interval = null;
+        }
+        document.getElementById("firstBtn").addEventListener("click", first);
+        document.getElementById("prevBtn").addEventListener("click", prev);
+        document.getElementById("nextBtn").addEventListener("click", next);
+        document.getElementById("lastBtn").addEventListener("click", last);
+        document.getElementById("playBtn").addEventListener("click", play);
+        document.getElementById("pauseBtn").addEventListener("click", pause);
+    </script>
+
+</body>
+
+</html>

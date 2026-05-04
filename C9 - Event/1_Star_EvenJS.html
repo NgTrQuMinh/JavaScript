@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>clickME</button>
+    <script>
+        /* (JS Events) là những "hành động" hoặc "sự việc" xảy ra trên trình duyệt mà hệ thống có thể phản hồi lại.
+         Đây là nền tảng để tạo ra các trang web tương tác.
+
+        1. Cách thức hoạt động
+        Khi một sự kiện xảy ra (ví dụ: người dùng nhấp vào nút), trình duyệt sẽ phát ra một tín hiệu. 
+        Bạn có thể sử dụng Event Listener để "nghe" tín hiệu đó và thực thi một đoạn mã (gọi là Event Handler).
+
+        Cấu trúc cơ bản:
+        element.addEventListener('tên_sự_kiện', function () {
+            // Hành động sẽ thực hiện
+        });
+        */
+
+        // 2. Các nhóm sự kiện phổ biến
+        // A. Sự kiện Chuột (Mouse Events)
+        // click: Khi người dùng nhấp chuột vào phần tử.
+        // dblclick: Nhấp đúp chuột.
+        // mouseover: Khi con trỏ chuột di chuyển vào phần tử.
+        // mouseout: Khi con trỏ chuột rời khỏi phần tử.
+
+        // B. Sự kiện Bàn phím (Keyboard Events)
+        // keydown: Khi người dùng nhấn một phím xuống.
+        // keyup: Khi người dùng thả phím ra.
+
+        // C. Sự kiện Form
+        // submit: Khi người dùng gửi một biểu mẫu (form).
+        // change: Khi giá trị của một ô nhập liệu thay đổi.
+        // focus: Khi một phần tử (như ô input) được chọn.
+
+        // D. Sự kiện Hệ thống/Cửa sổ (Window Events)
+        // load: Khi toàn bộ trang web (bao gồm hình ảnh, script) đã tải xong.
+        // resize: Khi người dùng thay đổi kích thước cửa sổ trình duyệt.
+        // scroll: Khi người dùng cuộn trang.
+
+        // 3. Quy trình lan truyền sự kiện (Event Propagation)
+        // Event Bubbling (Nổi bọt): Sự kiện bắt đầu từ phần tử nhỏ nhất (nơi bị tác động) rồi lan dần lên các phần tử cha bên ngoài. Đây là cơ chế mặc định.
+        // Event Capturing (Đánh chặn): Ngược lại với nổi bọt, sự kiện đi từ các phần tử ngoài cùng vào sâu bên trong.
+
+        // 4. Đối tượng event (The Event Object)
+        // event.target: Trả về phần tử chính xác đã tạo ra sự kiện.
+        // event.preventDefault(): Ngăn chặn hành vi mặc định (ví dụ: ngăn không cho link tự nhảy trang hoặc form tự load lại).
+        // event.stopPropagation(): Dừng việc lan truyền sự kiện (ngừng nổi bọt).
+
+        const btn = document.querySelector('button');
+
+        btn.addEventListener('click', (e) => {
+            console.log('Bạn vừa nhấn vào: ' + e.target.tagName);
+            alert('Chào mừng bạn đến với thế giới JavaScript!');
+        });
+
+    </script>
+</body>
+
+</html>

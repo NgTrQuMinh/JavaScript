@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Promise.all() - "Tất cả cùng thắng, hoặc một người ngã là cả đội rút lui."
+        const prepareMusic = new Promise((resolve, reject) => {
+            let check = true;
+            setTimeout(() => {
+                if (check) {
+                    resolve("🎵 Nhạc đã lên");
+                } else {
+                    reject("❌ Nhạc đã tắt!");
+                }
+            }, 2000);
+        })
+        const prepareDrinks = new Promise((resolve, reject) => {
+            let check = false; // false = hết nước ngọt
+            setTimeout(() => {
+                if (check) {
+                    resolve("Nược ngọt đã có");
+                } else {
+                    reject("❌ Hết nước ngọt rồi!");
+                }
+            }, 4000);
+        })
+        const Pizza = new Promise((resolve, reject) => {
+            let check = true;
+            setTimeout(() => {
+                if (check) {
+                    resolve("🍕 Đồ ăn đã xong");
+                } else {
+                    reject("❌ Hết đồ ăn rồi!");
+                }
+            }, 3000);
+        })
+        Promise.all([prepareMusic, prepareDrinks, Pizza])
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        // ❌ Hết nước ngọt rồi!
+
+        // Promise.race() - Cuộc đua (Chỉ lấy người nhanh nhất).
+        Promise.race([prepareMusic, prepareDrinks, Pizza])
+            .then((data) => {
+                console.log("Người chiến thắng cuộc đua:", data);
+            })
+            .catch((error) => {
+                console.log("Cuộc đua dừng lại vì có người gặp sự cố đầu tiên:", error);
+            });
+        // Người chiến thắng cuộc đua: 🎵 Nhạc đã lên
+
+        // Promise.allSettled() - "Người quan sát kiên nhẫn"
+        const task1 = new Promise((resolve, reject) => setTimeout(() => resolve("Lau nhà xong"), 1000));
+        const task2 = new Promise((resolve, reject) => setTimeout(() => reject("Quét nhà hỏng - Gãy chổi"), 2000));
+        const task3 = new Promise((resolve, reject) => setTimeout(() => resolve("Nấu cơm xong"), 3000));
+
+        console.log("Đang thực hiện các công việc nhà...");
+
+        Promise.allSettled([task1, task2, task3])
+            .then((results) => {
+                console.log("Báo cáo cuối ngày đầy đủ:", results);
+
+                // 1. Lọc ra những việc THÀNH CÔNG
+                const successTasks = results
+                    .filter(item => item.status === "fulfilled") 
+                    .map(item => item.value);
+                console.log("✅ Các việc đã xong:", successTasks);
+
+                // 2. Lọc ra những việc THẤT BẠI (Làm ở đây luôn, không làm ở .catch)
+                const failedTasks = results
+                    .filter(item => item.status === "rejected")
+                    .map(item => item.reason);
+                console.log("❌ Các việc bị lỗi:", failedTasks);
+            })
+            .catch((error) => {
+                // Khối này hầu như không bao giờ chạy với allSettled
+                console.log("Lỗi hệ thống nghiêm trọng:", error);
+            });
+    </script>
+</body>
+
+</html>

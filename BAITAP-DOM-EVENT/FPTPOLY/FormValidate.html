@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+        }
+
+        .errorInput {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Validate Form</h1>
+    <form id="Form">
+        <input type="text" name="email" id="email" placeholder="Email"><span class="error errorEmail"></span>
+        <br><br>
+        <input type="password" name="password" id="password" placeholder="Password"><span
+            class="error errorPassword"></span>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const Form = document.querySelector("#Form");
+            Form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const formData = new FormData(Form);
+                const data = Object.fromEntries(formData.entries());
+
+                const email = document.querySelector("#email");
+                const password = document.querySelector("#password");
+
+                const errorEmail = document.querySelector(".errorEmail");
+                const errorPassword = document.querySelector(".errorPassword");
+                errorEmail.textContent = "";
+                errorPassword.textContent = "";
+
+                function checkEmail(email) {
+                    email = email.trim();
+                    return email.endsWith("@gmail.com") && email.indexOf("@") > 0;
+                }
+                let check = true;
+                if (data.email === "") {
+                    errorEmail.textContent = "Vui lòng nhập Email";
+                    email.classList.add("errorInput");
+                    check = false;
+                } else if (!checkEmail(data.email)) {
+                    errorEmail.textContent = "Vui lòng nhập đúng định dạng email";
+                    email.classList.add("errorInput");
+                    check = false;
+                } else {
+                    email.classList.remove("errorInput");
+                }
+
+                // password
+                function checkPassword(password) {
+                    return password.length >= 6 && /[A-Z]/.test(password);
+                }
+                if (data.password === "") {
+                    errorPassword.textContent = "Vui lòng nhập Password";
+                    password.classList.add("errorInput");
+                    check = false;
+                } else if (!checkPassword(data.password)) {
+                    errorPassword.textContent = "Password phai nhieu hon 6 ky tu va 1 chu in hoa";
+                    password.classList.add("errorInput");
+                    check = false;
+                }
+                else {
+                    password.classList.remove("errorInput");
+                }
+                if (check) {
+                    alert('Đăng nhập thành công');
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

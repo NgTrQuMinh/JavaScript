@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Kế thừa (extends) là cách bạn tạo ra một class mới dựa trên một class đã có sẵn
+        // Class mới (class con) sẽ nhận được toàn bộ các thuộc tính và phương thức từ class cũ
+        // Class cha, giúp bạn tái sử dụng mã nguồn và tránh việc viết lặp lại.
+
+        // 1. Cấu trúc cơ bản
+        // Để kế thừa, bạn dùng từ khóa extends. Nếu class con có phương thức constructor, 
+        // bạn bắt buộc phải gọi super() để kích hoạt constructor của cha trước khi sử dụng this.
+
+        class Animal {
+            alive = true;
+            eat() {
+                console.log(`This ${this.name} is eating`);
+            }
+            sleep() {
+                console.log(`This ${this.name} is sleeping`);
+            }
+        }
+
+        // extends : ừ khóa được dùng trong khai báo lớp (class) để tạo ra một lớp con kế thừa từ một lớp cha
+        // Lớp con (Rabbit) kế thừa từ Animal
+        class Rabbit extends Animal {
+            name = "Rabbit";
+            run() {
+                console.log(`This ${this.name} is running`);
+            }
+        }
+        class Fist extends Animal {
+            name = "Fist";
+            swim() {
+                console.log(`This ${this.name} is swimming`);
+            }
+        }
+        class Hawk extends Animal {
+            name = "Hawk";
+            fly() {
+                console.log(`This ${this.name} is flying`);
+            }
+        }
+
+        const rabbit = new Rabbit();
+        const fist = new Fist();
+        const hawk = new Hawk();
+        
+        console.log(rabbit.alive); // true
+        rabbit.eat(); // This Rabbit is eating
+        rabbit.sleep(); // This Rabbit is sleeping
+        rabbit.run();
+    </script>
+</body>
+
+</html>

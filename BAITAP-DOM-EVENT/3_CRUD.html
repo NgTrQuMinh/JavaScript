@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* APP */
+        .app {
+            background: white;
+            width: 380px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* TITLE */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* INPUT */
+        .todo-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            outline: none;
+        }
+
+        .todo-input button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* SEARCH */
+        #search {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* FILTER */
+        #filters {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        #filters button {
+            flex: 1;
+            margin: 0 3px;
+            padding: 6px;
+            border: none;
+            border-radius: 6px;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        /* COUNT */
+        #count {
+            margin-top: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+
+        /* LIST */
+        #list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        /* TEXT */
+        .text {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        /* BUTTONS */
+        .item button {
+            border: none;
+            padding: 5px 8px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle {
+            background: #4caf50;
+            color: white;
+        }
+
+        .del {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .edit {
+            background: #f39c12;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+        <h1>Todo List</h1>
+
+        <form class="todo-input">
+            <input type="text" id="input" name="input" placeholder="Nhập công việc...">
+            <button id="addBtn">Thêm</button>
+        </form>
+
+        <input type="text" id="search" name="search" placeholder="Tìm kiếm...">
+
+        <div id="filters">
+            <button data-filter="all">All</button>
+            <button data-filter="active">Active</button>
+            <button data-filter="completed">Done</button>
+        </div>
+        <p id="count"></p>
+
+        <ul id="list"></ul>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.todo-input');
+            const input = document.getElementById('input');
+            const list = document.getElementById('list');
+            const count = document.getElementById('count');
+            
+
+            let todos = [];
+            todos = JSON.parse(localStorage.getItem('data')) || [];
+
+            let SearchInput = "";
+            let filter = 'all';
+
+            function render() {
+                let data = [...todos];
+
+                if (SearchInput != "") {
+                    data = data.filter((value) => {
+                        const textValue = value.text.trim().toLocaleLowerCase();
+                        return textValue.includes(SearchInput.trim().toLocaleLowerCase());
+                    })
+                }
+
+                if (filter === "all") {
+                    data = data;
+                }
+
+                if (filter === "active") {
+                    data = data.filter((value) => !value.checked);
+                }
+
+                if (filter === "completed") {
+                    data = data.filter((value) => value.checked);
+                }
+                
+                count.textContent = data.length;
+                list.innerHTML = data.map((value) => {
+                    return `
+                        <li class="item" data-id="${value.id}">
+                            <span class="text ${value.checked ? "checked" : ""}">
+                                ${value.text}
+                            </span>
+                            <button class="toggle">✔</button>
+                            <button class="del">X</button>
+                            <button class="edit">Sửa</button>
+                        </li>
+                    `
+                }).join("");
+            }
+            
+            const search = document.getElementById('search');
+            search.addEventListener('input', (e) => {
+                SearchInput = e.target.value;
+                render();
+            })
+
+            const filters = document.getElementById('filters');
+            filters.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                filter = btn.dataset.filter;
+                render();
+            })
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const textInput = input.value.trim();
+
+                todos.push({
+                    id: Date.now(),
+                    text: textInput,
+                    checked: false
+                });
+
+                SetLocal();
+                render();
+                form.reset();
+            })
+
+            list.addEventListener('click', (e) => {
+                const item = e.target.closest("li");
+                if (!item) return;
+                const idItem = item.dataset.id;
+                const indexId = todos.findIndex((todo) => {
+                    return todo.id === Number(idItem);
+                });
+
+                if (e.target.classList.contains("toggle")) {
+                    todos[indexId].checked = !todos[indexId].checked;
+                }
+                if (e.target.classList.contains("del")) {
+                    todos.splice(indexId, 1);
+                }
+                if (e.target.classList.contains("edit")) {
+                    const newText = prompt("Edit Text: ");
+                    if (newText != "") {
+                        todos[indexId].text = newText;
+                    }
+                }
+                SetLocal();
+                render();
+            })
+
+            function SetLocal() {
+                localStorage.setItem('data', JSON.stringify(todos));
+            }
+            render();
+        })
+
+    </script>
+</body>
+
+</html>

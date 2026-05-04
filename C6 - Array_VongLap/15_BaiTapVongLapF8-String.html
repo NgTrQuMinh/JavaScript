@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. Viết một hàm repeatChar nhận vào hai tham số: character và n. Hàm này sẽ trả về một chuỗi gồm kí tự character được lặp lại n lần.
+        function repeatChar(character, n) {
+            let result = "";
+            for (let i = 0; i < n; i++) {
+                result += character;
+            }
+            return result;
+        }
+        
+        // 2. Viết một hàm arrayToHTMLList nhận vào một mảng các chuỗi và trả về một chuỗi HTML. Chuỗi HTML này sẽ thể hiện một danh sách không sắp xếp (<ul>) với mỗi phần tử của mảng được biểu diễn bằng một mục danh sách (<li>).
+        function arrayToHTMLList(arr) { 
+            let result = "<ul>";
+            for (let i = 0; i < arr.length; i++) {
+                result += `<li>${arr[i]}</li>`;
+            }
+            return `<ul>${result}</ul>`;
+        }
+        document.write(arrayToHTMLList(["HTML", "CSS", "JavaScript"]));
+        
+        // 3. Viết một hàm linearSearch nhận vào hai tham số: một mảng số nguyên arr và một giá trị target cần tìm. Hàm này sẽ thực hiện tìm kiếm trong mảng: nếu tìm thấy target, trả về index của target trong mảng nếu không tìm thấy, trả về -1.
+        function linearSearch(arr, target) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === target) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    </script>
+</body>
+</html>

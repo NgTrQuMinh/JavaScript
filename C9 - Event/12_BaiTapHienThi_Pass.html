@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form__Log-in {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            position: relative;
+            /* This allows the icon to be positioned relative to this div */
+            width: 100%;
+        }
+
+        .form__Log-in input {
+            width: 400px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Position the eye icon inside the input */
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .submit {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .submit:hover {
+            background-color: #0056b3;
+        }
+
+        .colorEYE {
+            font-size: 32px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form__Log-in">
+            <h2>Login</h2>
+            <input class="username" type="text" name="username" id="username" placeholder="Username">
+
+            <div class="input-group">
+                <input class="password" type="password" name="password" id="password" placeholder="Password">
+                <i id="eye" class="fa-solid fa-eye" id="togglePassword"></i>
+            </div>
+
+            <button type="submit" class="submit">Đăng Nhập</button>
+        </form>
+    </div>
+
+    <script>
+        const form__LogIn = document.querySelector(".form__Log-in");
+        const username = document.querySelector(".username");
+        const password = document.querySelector(".password");
+        const eye = document.querySelector("#eye");
+        
+        const Username = "admin";
+        const Password = "123";
+
+        const hidden = (() => {
+            if (password.type === "password") {
+                password.type = "text";
+                eye.classList.add("colorEYE");
+            } else {
+                password.type = "password";
+                eye.classList.remove("colorEYE");
+            }
+        })
+        eye.addEventListener("click", hidden);
+
+
+
+        const Click__Submit = ((e) => {
+            e.preventDefault();
+            const UserME = username.value;
+            const PassME = password.value;
+            if (UserME === Username && PassME === Password) {
+                alert("Đăng Nhập Thành Công!");
+                window.localStorage.setItem("user", UserME);
+                window.location.href = "/Mang 1 Chieu/11_Fibonacci.html"
+            } else {
+                alert("Đăng Nhập Thất Bại");
+            }
+        })
+        form__LogIn.addEventListener("submit", Click__Submit);
+    </script>
+</body>
+
+</html>

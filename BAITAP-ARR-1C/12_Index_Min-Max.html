@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 12. Vị trí số lớn nhất, nhỏ nhất
+        const Arr = [936, 234, 471, 168, 834, 82, 280, 674, 88];
+
+        // Cách 1: Duyệt For 
+        let min = Infinity, max = -Infinity;
+        let indexMin, indexMax;
+        for (let i = 0; i < Arr.length; i++) {
+            if (Arr[i] > max) {
+                max = Arr[i];
+                indexMax = i;
+            }
+            else if (Arr[i] < min) {
+                min = Arr[i];
+                indexMin = i;
+            }
+        }        
+        console.log(indexMin);
+        console.log(indexMax);
+
+        // Cách 2: Gọi Hàm Math.(min, max) để tìm min và max và Gọi Hàm IndexOf để tìm vị trí.
+        const Min = Math.min(...Arr);
+        const minIndex = Arr.indexOf(Min); 
+        const Max = Math.max(...Arr);
+        const maxIndex = Arr.indexOf(Max);
+        console.log("Value:",Min, "Index:",minIndex);
+        console.log("Value:",Max, "Index:",maxIndex);
+        
+    </script>
+</body>
+</html>

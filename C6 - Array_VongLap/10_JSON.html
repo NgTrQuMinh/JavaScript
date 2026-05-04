@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. JSON (JavaScript Object Notation) là một định dạng dữ liệu dạng văn bản (text). 
+        // Nó giống như một "bản tin" dùng để gửi và nhận dữ liệu giữa trình duyệt và máy chủ (server).
+
+        // Dù trông rất giống Object trong JS, nhưng JSON có quy tắc khắt khe hơn:
+        // Key (Khóa): Bắt buộc phải nằm trong dấu ngoặc kép đôi "".
+        // Value (Giá trị): Chỉ được là chuỗi (string), số, boolean, null, array hoặc object khác. (Không được chứa hàm/function).
+
+        // 2. Hai lệnh "thần thánh" bạn cần nhớ
+        // ------1. JSON.stringify() (Mã hóa)
+        // Dùng khi bạn có một Object trong code và muốn gửi nó đi lên server. Bạn phải "đóng gói" nó thành chuỗi JSON trước.
+        const user =
+        {
+            id: 1,
+            name: "Minh",
+            class: "CNTT"
+        }; // Đây là Object JS
+        const Send_Database = JSON.stringify(user); // Chuyển thành chuỗi JSON
+        console.log(Send_Database); // Kết quả: {"id":1,"name":"Minh","class":"CNTT"}
+
+
+        // -----2. JSON.parse() (Giải mã)
+        // Dùng khi bạn nhận được một chuỗi JSON từ server và muốn biến nó thành một Object để xử lý (ví dụ: lấy tên, tính toán số lượng).
+        const Server_Database =
+            `{
+            "id": 1,
+            "name": "Minh",
+            "class": "CNTT"
+        }`;
+
+        const studentJS = JSON.parse(Server_Database); // Chuyển thành Object
+        console.log(studentJS);
+        console.log(studentJS.name); // Minh.
+
+
+        // So sánh 2 mảng.
+        const Arr1 = [1, 2, 3];
+        const Arr2 = [1, 2, 3];
+        
+        const JSON_Arr1 = JSON.stringify(Arr1);
+        const JSON_Arr2 = JSON.stringify(Arr2);
+        console.log(JSON_Arr1 === JSON_Arr2 ? "YES" : "NO");
+    </script>
+</body>
+
+</html>

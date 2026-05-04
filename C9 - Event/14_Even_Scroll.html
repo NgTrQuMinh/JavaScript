@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debounce Scroll Demo</title>
+    <style>
+        body {
+            /* Tạo chiều cao giả để có thanh cuộn */
+            height: 2000px;
+            background: linear-gradient(to bottom, #f0f0f0, #333);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .status {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="status">Hãy thử cuộn chuột và xem Console (F12)</div>
+
+    <p id="result"></p>
+    <script>
+        // Hàm Debounce
+        function debounce(func, delay) {
+            let timer;
+            return function (...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+        // Lắng nghe sự kiện Scroll với delay là 300ms
+        window.addEventListener("scroll", debounce(function (e) {
+            console.log("Sự kiện Scroll đã thực thi sau khi ngừng cuộn 300ms!");
+            console.log("Vị trí hiện tại:", window.scrollY);
+        }, 300)); // <--- Đừng quên tham số delay này nhé
+
+
+        // window.pageXOffset: Trả về số pixel mà tài liệu hiện đang được cuộn theo chiều ngang (từ trái sang phải).
+        // window.pageYOffset: Trả về số pixel mà tài liệu hiện đang được cuộn theo chiều dọc (từ trên xuống dưới).
+        window.addEventListener('scroll', function () {
+            console.log("Cuộn ngang:", window.pageXOffset);
+            console.log("Cuộn dọc:", window.pageYOffset);
+
+            if (window.pageYOffset > 500) {
+                console.log("Bạn đã cuộn quá 500px!");
+            }
+        });
+
+
+        // OffsetWidth / OffsetHeight
+        // Đây là kích thước không gian thực tế mà phần tử đó chiếm dụng trên trang web.
+        function check() {
+            const status = document.querySelector(".status");
+            let offsetW = status.offsetWidth;
+            let offsetH = status.offsetHeight;
+
+            // Lấy giá trị Scroll
+            let scrollW = status.scrollWidth;
+            let scrollH = status.scrollHeight;
+            console.log(offsetW);
+            console.log(offsetH);
+            console.log(scrollW);
+            console.log(scrollH);
+        }
+        check();
+
+    </script>
+</body>
+
+</html>

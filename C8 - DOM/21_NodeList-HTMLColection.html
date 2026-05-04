@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list">
+        <li class="item">1</li>
+        <li class="item">2</li>
+        <li class="item">3</li>
+        <li class="item">4</li>
+        <li class="item">5</li>
+    </ul>
+    <script>
+        // HTMLCollection - không dùng đc for Each
+        // const collection = document.getElementsByClassName('my-class');
+        // const images = document.images; // Tất cả thẻ <img>
+
+        // NodeList - Thường xuất hiện khi bạn sử dụng các phương thức hiện đại hoặc truy cập sâu vào cấu trúc node
+        // const nodes = document.querySelectorAll('.my-class');
+        // const childNodes = document.body.childNodes; // Bao gồm cả khoảng trắng (text node)
+
+        const list = document.getElementById('list');   // HTMLCollection
+        
+        // const item = document.getElementsByClassName('item');   // HTMLCollection
+        // [...item].forEach((value) => {  // Phải đổi sang mảng mới dùng đc forEach
+        //     console.log(value); // sử lý item bên trong.
+        // });
+        
+        const item = list.querySelectorAll('.item');   // NodeList
+        console.log(item);
+        item.forEach((value) => {
+            console.log(value); // sử lý item bên trong.
+            value.classList.add('active');
+        });
+
+        // 1. Nhóm Nội dung (Lấy hoặc sửa chữ)
+        // textContent: Lấy/sửa văn bản (nhanh, an toàn, bỏ qua thẻ HTML).
+        // innerHTML: Lấy/sửa nội dung bao gồm cả thẻ HTML (dùng khi muốn chèn thêm thẻ con).
+        // 2. Nhóm Giao diện (Thay đổi CSS)
+        // classList: Quan trọng nhất để quản lý Class. Có các hàm: .add(), .remove(), .toggle(), .contains().
+        // style: Dùng để sửa trực tiếp CSS Inline (ví dụ: li.style.color = 'red').
+        // 3. Nhóm Dữ liệu & Nhận diện (Quan trọng cho Logic)
+        // dataset: Truy cập các thuộc tính data-* (ví dụ: data-id, data-price) để lưu trữ dữ liệu ngầm trên thẻ.
+        // id / tagName: Dùng để định danh hoặc kiểm tra loại thẻ.
+        // 4. Nhóm Di chuyển (Điều hướng trong DOM)
+        // parentElement: Tìm thẻ cha.
+        // nextElementSibling / previousElementSibling: Tìm anh chị em ngay cạnh (bỏ qua các nút văn bản thừa).
+
+        
+    </script>
+</body>
+
+</html>

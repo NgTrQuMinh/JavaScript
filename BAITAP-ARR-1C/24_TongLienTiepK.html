@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Bài 24. Cửa sổ cỡ K 
+        // tổng của mọi dãy con liên tiếp cỡ K của mảng Arr[]
+        const Arr = [5, 9, 4, 5, 5, 8, 7];
+        const K = 5;
+
+        for (let i = 0; i <= Arr.length - K; i++) { //
+            let sum = 0;
+            for (let j = 0; j < K; j++) {
+                sum += Arr[i + j];
+            }
+            console.log(sum);
+        }
+    </script>
+</body>
+</html>
