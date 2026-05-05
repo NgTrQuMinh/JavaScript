@@ -167,115 +167,124 @@
         <ul id="list"></ul>
     </div>
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector('.todo-input');
-            const input = document.getElementById('input');
-            const list = document.getElementById('list');
-            const count = document.getElementById('count');
-            
+        window.addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector(".todo-input");
+            const list = document.querySelector("#list");
+            const count = document.querySelector("#count");
+            const search = document.querySelector("#search");
+            const filterBtns = document.querySelectorAll("#filters button");
 
-            let todos = [];
-            todos = JSON.parse(localStorage.getItem('data')) || [];
+            let todos = JSON.parse(localStorage.getItem('data')) || [];
 
-            let SearchInput = "";
-            let filter = 'all';
+            let keyword = "";
+            let filter = "all";
 
-            function render() {
+            function getFilteredTodos() {
                 let data = [...todos];
 
-                if (SearchInput != "") {
-                    data = data.filter((value) => {
-                        const textValue = value.text.trim().toLocaleLowerCase();
-                        return textValue.includes(SearchInput.trim().toLocaleLowerCase());
-                    })
+                // search
+                if (keyword.trim() !== "") {
+                    data = data.filter(todo =>
+                        todo.text.toLowerCase().includes(keyword.toLowerCase())
+                    );
                 }
 
-                if (filter === "all") {
-                    data = data;
-                }
-
+                // filter
                 if (filter === "active") {
-                    data = data.filter((value) => !value.checked);
+                    data = data.filter(todo => !todo.checked);
                 }
 
                 if (filter === "completed") {
-                    data = data.filter((value) => value.checked);
+                    data = data.filter(todo => todo.checked);
                 }
-                
-                count.textContent = data.length;
-                list.innerHTML = data.map((value) => {
-                    return `
-                        <li class="item" data-id="${value.id}">
-                            <span class="text ${value.checked ? "checked" : ""}">
-                                ${value.text}
-                            </span>
-                            <button class="toggle">✔</button>
-                            <button class="del">X</button>
-                            <button class="edit">Sửa</button>
-                        </li>
-                    `
-                }).join("");
+
+                return data;
             }
-            
-            const search = document.getElementById('search');
+
+            function render() {
+                let data = getFilteredTodos();
+
+                count.textContent = data.length;
+
+                list.innerHTML = data.map(todo => `
+                    <li class="item" data-id="${todo.id}">
+                        <span class="text ${todo.checked ? "checked" : ""}">
+                            ${todo.text}
+                        </span>
+                        <button class="toggle">✔</button>
+                        <button class="del">X</button>
+                        <button class="edit">Sửa</button>
+                    </li>
+                `).join("");
+            };
+
+            // search
             search.addEventListener('input', (e) => {
-                SearchInput = e.target.value;
+                keyword = e.target.value;
                 render();
-            })
+            });
 
-            const filters = document.getElementById('filters');
-            filters.addEventListener('click', (e) => {
-                const btn = e.target.closest('button');
-                if (!btn) return;
-                filter = btn.dataset.filter;
-                render();
-            })
-
+            // filter
+            filterBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    filter = btn.dataset.filter;
+                    render();
+                });
+            });
+            
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const textInput = input.value.trim();
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                if (!data.input.trim()) return;
 
                 todos.push({
                     id: Date.now(),
-                    text: textInput,
+                    text: data.input,
                     checked: false
                 });
 
                 SetLocal();
                 render();
                 form.reset();
-            })
+            });
 
+            // actions
             list.addEventListener('click', (e) => {
-                const item = e.target.closest("li");
+                const item = e.target.closest('li');
                 if (!item) return;
-                const idItem = item.dataset.id;
-                const indexId = todos.findIndex((todo) => {
-                    return todo.id === Number(idItem);
-                });
 
-                if (e.target.classList.contains("toggle")) {
-                    todos[indexId].checked = !todos[indexId].checked;
+                const idItem = Number(item.dataset.id);
+
+                const indexID = todos.findIndex(todo => todo.id === idItem);
+
+                if (e.target.classList.contains('toggle')) {
+                    todos[indexID].checked = !todos[indexID].checked;
                 }
-                if (e.target.classList.contains("del")) {
-                    todos.splice(indexId, 1);
+
+                if (e.target.classList.contains('del')) {
+                    todos.splice(indexID, 1);
                 }
-                if (e.target.classList.contains("edit")) {
-                    const newText = prompt("Edit Text: ");
-                    if (newText != "") {
-                        todos[indexId].text = newText;
+
+                if (e.target.classList.contains('edit')) {
+                    const newText = prompt("Fix:");
+                    if (newText && newText.trim() !== "") {
+                        todos[indexID].text = newText;
                     }
                 }
+
                 SetLocal();
                 render();
-            })
+            });
 
             function SetLocal() {
                 localStorage.setItem('data', JSON.stringify(todos));
             }
-            render();
-        })
 
+            render();
+        });
     </script>
 </body>
 
