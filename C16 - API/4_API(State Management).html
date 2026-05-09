@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Quản lý trạng thái (State Management) là xương sống của bất kỳ ứng dụng Frontend hiện đại. 
+        // Khi ứng dụng của bạn lớn dần, việc dữ liệu thay đổi ở một nơi nhưng cần cập nhật ở mười nơi khác trở thành một bài toán hóc búa.
+
+        // 1. State là gì?
+        // State là "trí nhớ" của ứng dụng tại một thời điểm nhất định. Nó lưu trữ dữ liệu người dùng nhập vào, kết quả từ API, hoặc trạng thái của giao diện (ví dụ: menu đang đóng hay mở).
+
+        // 2. Các cấp độ của State
+        // a. Local State (Trạng thái cục bộ) - Đây là state chỉ dùng trong một Component duy nhất.
+        // Ví dụ: Giá trị của một ô Input, trạng thái ẩn/hiện của một Modal.
+        // Công cụ: useState, useReducer (React), ref, reactive (Vue).
+
+        // b. Global State (Trạng thái toàn cục)
+        // Dữ liệu cần được chia sẻ giữa nhiều Component nằm xa nhau trong cây thư mục mà không muốn truyền qua quá nhiều cấp trung gian (Prop Drilling).
+        // Ví dụ: Thông tin đăng nhập người dùng, cấu hình ngôn ngữ (i18n), giỏ hàng.
+        // Công cụ: Redux, Zustand, Pinia, Context API.
+
+        // c. Server State (Trạng thái từ Server)
+        // Dữ liệu được lấy từ API và cần được đồng bộ với Database. Loại state này có các đặc thù như: bộ nhớ đệm (caching), trạng thái đang tải (loading), và tự động gọi lại (re-fetching).
+        // Công cụ: TanStack Query (React Query), SWR.
+
+        // 3. Các thư viện phổ biến hiện nay()...
+
+        // 4. Tư duy quản lý State "sạch"
+        // Để tránh code trở thành một mớ hỗn độn (Spaghetti code), hãy tuân thủ các nguyên tắc sau:
+        // Đừng lạm dụng Global State: Nếu một biến chỉ dùng cho một Component, hãy giữ nó ở Local. Đưa mọi thứ lên Global sẽ khiến ứng dụng nặng nề và khó kiểm soát.
+        // Single Source of Truth: Một mảng dữ liệu chỉ nên được quản lý bởi một nguồn duy nhất. Tránh việc copy dữ liệu từ Global State xuống Local State để chỉnh sửa.
+        // Derived State (Trạng thái phái sinh): Đừng tạo thêm state cho những thứ có thể tính toán được.
+        // Sai: Tạo total state để lưu tổng tiền.
+        // Đúng: Chỉ lưu mảng cart, sau đó dùng một biến const total = cart.reduce(...) để tính toán ngay khi render.
+
+        // 5. Quy trình xử lý dữ liệu từ API vào State
+        // Thông thường, một luồng xử lý chuẩn sẽ diễn ra như sau:
+        // Gửi yêu cầu: Gọi API (sử dụng fetch hoặc axios).
+        // Loading: Bật trạng thái isLoading = true để hiển thị spinner trên màn hình.
+        // Success: Khi có dữ liệu, dùng Array Methods (như đã học ở mục 1) để chuẩn hóa dữ liệu, sau đó lưu vào Global State.
+        // Error: Nếu lỗi, lưu thông báo lỗi vào state để hiển thị cho người dùng.
+
+        // Xử lý mảng (Array Methods) và Quản lý trạng thái (State Management) vào một ví dụ thực tế.
+        // Zustand — thư viện quản lý trạng thái
+        // Bài toán: Quản lý danh sách sản phẩm từ API
+        // Lấy dữ liệu từ API.
+        // Lưu vào Store (Global State).
+        // Sử dụng filter để tìm kiếm sản phẩm.
+        // Sử dụng reduce để tính tổng doanh thu.
+
+        // 1. Khởi tạo Store (Zustand) - Đây là nơi lưu trữ dữ liệu "tập trung" cho toàn bộ ứng dụng.
+        import { create } from 'zustand';
+
+        const useProductStore = create((set, get) => ({
+            products: [],
+            isLoading: false,
+            searchTerm: "",
+
+            // Action: Gọi API và lưu dữ liệu
+            fetchProducts: async () => {
+                set({ isLoading: true });
+                const res = await fetch('https://fakestoreapi.com/products');
+                const data = await res.json();
+                set({ products: data, isLoading: false });
+            },
+
+            // Action: Cập nhật từ khóa tìm kiếm
+            setSearchTerm: (term) => set({ searchTerm: term }),
+
+            // Derived State (State phái sinh): Lọc sản phẩm dựa trên searchTerm
+            getFilteredProducts: () => {
+                const { products, searchTerm } = get();
+                return products.filter(p =>
+                    p.title.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+        }));
+
+        // 2. Sử dụng trong Component (React)
+        // Tại đây, chúng ta sẽ thấy sức mạnh của việc kết hợp các phương thức mảng để hiển thị dữ liệu.
+        function ProductApp() {
+            const { fetchProducts, isLoading, searchTerm, setSearchTerm, getFilteredProducts } = useProductStore();
+
+            // Gọi API khi component mount
+            useEffect(() => { fetchProducts() }, []);
+
+            const filteredProducts = getFilteredProducts();
+
+            // Tính tổng giá trị của các sản phẩm đang hiển thị (Array Reduce)
+            const totalValue = filteredProducts.reduce((sum, item) => sum + item.price, 0);
+
+            if (isLoading) return <p>Đang tải dữ liệu...</p>;
+
+            return (
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Tìm sản phẩm..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+
+                    <h3>Tổng giá trị hiển thị: ${totalValue.toFixed(2)}</h3>
+
+                    <ul>
+                        {filteredProducts.map(product => (
+                            <li key={product.id}>
+                                {product.title} - <strong>${product.price}</strong>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+    </script>
+</body>
+
+</html>

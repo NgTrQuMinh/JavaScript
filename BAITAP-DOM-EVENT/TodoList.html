@@ -166,129 +166,122 @@
 
         <p id="count"></p>
 
-        <ul id="list"></ul>
+        <ul id="list">
+
+        </ul>
     </div>
 
     <script>
-        window.addEventListener("DOMContentLoaded", (e) => {
+        window.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector(".todo-input");
-            const input = document.getElementById("input");
             const list = document.getElementById("list");
-            const search = document.getElementById("search");
-            const count = document.getElementById("count");
-            const filters = document.getElementById("filters");
 
-            const STORAGE_KEY = "todos";
+            let todos = [];
+            todos = JSON.parse(localStorage.getItem('data')) || [];
 
-            let todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            let currentFilter = "all";
-            let keyword = "";
+            const search = document.querySelector("#search");
+            let inputSearch = "";
 
-            // ================= RENDER =================
-            function Render() {
+            const filterBtns = document.querySelector("#filters");
+            let checkFilter = "all";
+
+            function render() {
                 let data = [...todos];
 
-                // search
-                if (keyword) {
-                    data = data.filter(todo =>
-                        todo.text.toLowerCase().includes(keyword)
-                    );
+                if (inputSearch !== "") {
+                    data = data.filter((value) => {
+                        return value.text.toUpperCase().trim().includes(inputSearch);
+                    })
                 }
 
-                // filter
-                if (currentFilter === "active") {
-                    data = data.filter(todo => !todo.checked);
+                if (checkFilter === "active") {
+                    data = data.filter((value) => {
+                        return !value.checked;
+                    })
                 }
 
-                if (currentFilter === "completed") {
-                    data = data.filter(todo => todo.checked);
+                if (checkFilter === "completed") {
+                    data = data.filter((value) => {
+                        return value.checked;
+                    })
                 }
 
-                // render list
-                list.innerHTML = data.map(todo => `
-                    <li class="item" data-id="${todo.id}">
-                        <span class="text ${todo.checked ? "checked" : ""}">
-                            ${todo.text}
-                        </span>
-                        <button class="toggle">✔</button>
-                        <button class="del">X</button>
-                        <button class="edit">Sửa</button>
-                    </li>
-                `).join("");
-
-                // count
-                const left = todos.filter(t => !t.checked).length;
-                count.textContent = `Còn ${left} việc chưa làm`;
+                list.innerHTML = data.map((todo) => {
+                    return `
+                        <li class="item" data-id="${todo.id}">
+                            <span class="text ${todo.checked ? "checked" : ""}">
+                                ${todo.text}
+                            </span>
+                            <button class="toggle">✔</button>
+                            <button class="del">X</button>
+                            <button class="edit">Sửa</button>
+                        </li>
+                    `
+                }).join("");
+                let count = document.querySelector("#count");
+                count.textContent = data.length;
             }
 
-            // ================= ADD =================
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
+            search.addEventListener('input', (e) => {
+                inputSearch = e.target.value.toUpperCase().trim();
+                render();
+            })
 
-                const value = input.value.trim();
-                if (!value) return;
+            filterBtns.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                checkFilter = btn.dataset.filter;
+                render();
+            })
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Lấy dữ liệu từ form
+                const formData = new FormData(form);
+                // Chuyển sang object
+                const data = Object.fromEntries(formData.entries());
 
                 todos.push({
                     id: Date.now(),
-                    text: value,
+                    text: data.input,
                     checked: false
                 });
 
-                save();
-                Render();
+                setLocal();
+                render();
                 form.reset();
-            });
+            })
 
-            // ================= CLICK =================
-            list.addEventListener("click", (e) => {
-                const item = e.target.closest(".item");
+            list.addEventListener('click', (e) => {
+                const item = e.target.closest('.item');
                 if (!item) return;
+                let idItem = item.dataset.id;
+                let indexID = todos.findIndex((value) => {
+                    return value.id === Number(idItem);
+                })
 
-                const id = Number(item.dataset.id);
-                const index = todos.findIndex(t => t.id === id);
-                if (index === -1) return;
-
-                if (e.target.classList.contains("toggle")) {
-                    todos[index].checked = !todos[index].checked;
+                if (e.target.classList.contains('toggle')) {
+                    todos[indexID].checked = !todos[indexID].checked;
                 }
 
-                if (e.target.classList.contains("del")) {
-                    todos.splice(index, 1);
+                if (e.target.classList.contains('del')) {
+                    todos.splice(indexID, 1);
                 }
 
-                if (e.target.classList.contains("edit")) {
-                    const newText = prompt("Sửa:");
-                    if (newText && newText.trim()) {
-                        todos[index].text = newText.trim();
+                if (e.target.classList.contains('edit')) {
+                    let newText = prompt('Edit: ');
+                    if (newText != "") {
+                        todos[indexID].text = newText;
                     }
                 }
+                setLocal();
+                render();
+            })
 
-                save();
-                Render();
-            });
-
-            // ================= SEARCH =================
-            search.addEventListener("input", (e) => {
-                keyword = e.target.value.toLowerCase();
-                Render();
-            });
-
-            // ================= FILTER =================
-            filters.addEventListener("click", (e) => {
-                const btn = e.target.closest("button");
-                if (!btn) return;
-
-                currentFilter = btn.dataset.filter;
-                Render();
-            });
-
-            // ================= SAVE =================
-            function save() {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+            function setLocal() {
+                localStorage.setItem('data', JSON.stringify(todos));
             }
-
-            // load
-            Render();
+            render();
         })
     </script>
 </body>

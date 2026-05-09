@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // API: Application Programming Interface - Giao diện Lập trình Ứng dụng
+        // Để dễ hình dung, hãy tưởng tượng một kịch bản tại nhà hàng:
+        // 1. Bạn (Người dùng): Bạn ngồi vào bàn và muốn gọi món (gửi yêu cầu).
+        // 2. Nhà bếp (Hệ thống/Server): Nơi chế biến món ăn (xử lý dữ liệu).
+        // 3. API (Người bồi bàn): Bạn không thể vào thẳng bếp để nói với đầu bếp. Bạn đưa yêu cầu cho người bồi bàn. Người bồi bàn chuyển yêu cầu đó đến bếp, sau đó mang món ăn (kết quả) quay lại cho bạn.
+
+        // API hoạt động như thế nào?
+        // Quy trình cơ bản thường diễn ra theo 4 bước:
+        // 1. Gửi yêu cầu (Request) Ứng dụng A gửi một yêu cầu đến ứng dụng B thông qua địa chỉ API.
+        // 2. Xác thực: Hệ thống kiểm tra xem ứng dụng A có quyền truy cập dữ liệu hay không.
+        // 3. Xử lý: Hệ thống B thực hiện các thao tác cần thiết (tìm dữ liệu, tính toán...).
+        // 4. Phản hồi (Response): Hệ thống B gửi kết quả trả về cho ứng dụng A (thường dưới dạng dữ liệu như JSON hoặc XML).
+
+        // Tại sao API lại quan trọng?
+        // Tiết kiệm thời gian: Lập trình viên không cần phải viết lại từ đầu những chức năng phức tạp Ví dụ: Để có bản đồ trên ứng dụng, họ chỉ cần gọi API của Google Maps
+        // Tính bảo mật: API chỉ chia sẻ những dữ liệu cần thiết. Nó giống như một tấm màng lọc, không cho phép bên ngoài truy cập trực tiếp vào toàn bộ cơ sở dữ liệu của hệ thống.
+        // Kết nối vạn vật: API giúp các thiết bị khác nhau (điện thoại, máy tính, đồng hồ thông minh, nhà thông minh) hoạt động cùng nhau một cách trơn tru.
+
+        // Các ví dụ thực tế về API
+        // Đăng nhập bằng Facebook/Google: Khi bạn nhấn "Đăng nhập bằng Google" trên một trang web mới, trang web đó đang sử dụng API của Google để xác thực danh tính của bạn.
+        // Thanh toán trực tuyến: Các trang thương mại điện tử sử dụng API của ngân hàng hoặc ví điện tử (Momo, VNPay) để thực hiện giao dịch mà không cần giữ thông tin thẻ của bạn.
+        // Dự báo thời tiết: Ứng dụng thời tiết trên điện thoại của bạn thực tế không có cảm biến đo nhiệt độ; nó gọi API từ các trạm khí tượng để lấy thông tin và hiển thị cho bạn.
+    </script>
+</body>
+
+</html>

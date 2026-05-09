@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // kỹ thuật xử lý dữ liệu API
+        // 1. Lọc và Biến đổi Dữ liệu (The Big Three)
+        // Đây là ba phương thức "quốc dân" giúp bạn xử lý hầu hết các yêu cầu từ giao diện.
+        // filter(): Giữ lại các phần tử thỏa mãn điều kiện (ví dụ: tìm sản phẩm còn hàng).
+        // map(): Biến đổi cấu trúc dữ liệu (ví dụ: chỉ lấy name và price từ một object API cồng kềnh).
+        // reduce(): Gom nhóm hoặc tính toán giá trị tổng hợp (ví dụ: tính tổng tiền giỏ hàng).
+
+        // Ví dụ thực tế:
+        // Giả sử bạn nhận được danh sách User từ API:
+        const apiData = [
+            { id: 1, name: "An", age: 25, active: true },
+            { id: 2, name: "Bình", age: 17, active: true },
+            { id: 3, name: "Chi", age: 30, active: false }
+        ];
+
+        // Lấy danh sách tên của những người đã kích hoạt và trên 18 tuổi
+        const validUserNames = apiData
+            .filter(user => user.active && user.age >= 18)
+            .map(user => user.name);
+        // Kết quả: ["An"]
+
+        // Tính tổng sở người dùng
+        const totalActiveUsers = apiData
+            .filter(user => user.active)
+            .reduce((total, user) => total + 1, 0);
+        // Kết quả: 1
+
+        // 2. Tìm kiếm và Kiểm tra (Search & Logic)
+        // Khi cần kiểm tra trạng thái của dữ liệu mà không muốn lặp qua toàn bộ mảng một cách thủ công:
+        // find(): Trả về phần tử đầu tiên tìm thấy. Rất hữu ích khi lấy chi tiết một item dựa trên ID từ URL.
+        // some(): Trả về true nếu ít nhất một phần tử thỏa điều kiện (ví dụ: kiểm tra xem giỏ hàng có sản phẩm nào hết hàng không).
+        // every(): Trả về true nếu tất cả phần tử thỏa điều kiện (ví dụ: kiểm tra xem người dùng đã tích chọn tất cả điều khoản chưa).
+
+        // Kiem tra xem người dùng có ID 1 hay khòng
+        const userExists = apiData.some(user => user.id === 1);
+        console.log(userExists);    // Kết quả: true
+
+        // 3. Gom nhóm dữ liệu (Grouping)
+        // Trong thực tế, API thường trả về một danh sách phẳng, nhưng bạn lại muốn hiển thị theo nhóm (ví dụ: nhóm sản phẩm theo danh mục category).
+        // Kỹ thuật sử dụng Object.groupBy() (Mới):
+        const inventory = [
+            { name: "iPhone", type: "Electronics" },
+            { name: "Sofa", type: "Furniture" },
+            { name: "iPad", type: "Electronics" }
+        ];
+
+        const grouped = Object.groupBy(inventory, item => item.type);
+
+        /* Kết quả:
+        {
+          Electronics: [{ name: "iPhone", ... }, { name: "iPad", ... }],
+          Furniture: [{ name: "Sofa", ... }]
+        }
+        */
+
+        // 4. Xử lý dữ liệu lồng nhau (Flattening)
+        // Đôi khi API trả về dữ liệu có cấu trúc mảng trong mảng (như danh sách bài đăng, mỗi bài đăng có một mảng các tag).
+        // flat(): Làm phẳng mảng.
+        // flatMap(): Vừa map vừa làm phẳng, cực kỳ hiệu quả khi xử lý các danh sách lồng nhau.
+
+        // 5. Lưu ý quan trọng khi xử lý API
+        // Immutability (Tính bất biến): Các phương thức như map, filter, reduce tạo ra mảng mới thay vì sửa mảng gốc.
+        // Optional Chaining (?.): Luôn sử dụng khi truy cập dữ liệu sâu để tránh lỗi "Cannot read property of undefined" nếu API trả về thiếu field.
+        // Dữ liệu rỗng: Luôn khởi tạo giá trị mặc định là [] trước khi gọi API để các phương thức mảng không bị lỗi crash ứng dụng.
+
+    </script>
+</body>
+
+</html>
