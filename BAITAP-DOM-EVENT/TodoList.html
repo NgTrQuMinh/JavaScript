@@ -173,44 +173,45 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector(".todo-input");
-            const list = document.getElementById("list");
+            const form = document.querySelector('.todo-input');
+            const input = document.querySelector('input');
+            const list = document.querySelector('#list');
 
             let todos = [];
             todos = JSON.parse(localStorage.getItem('data')) || [];
 
-            const search = document.querySelector("#search");
+            const search = document.querySelector('#search');
             let inputSearch = "";
 
-            const filterBtns = document.querySelector("#filters");
-            let checkFilter = "all";
+            const filters = document.querySelector('#filters');
+            let inputFilter = "all";
 
             function render() {
                 let data = [...todos];
 
                 if (inputSearch !== "") {
                     data = data.filter((value) => {
-                        return value.text.toUpperCase().trim().includes(inputSearch);
+                        return value.text.toUpperCase().trim().includes(inputSearch.toUpperCase().trim());
                     })
                 }
 
-                if (checkFilter === "active") {
+                if (inputFilter === 'active') {
                     data = data.filter((value) => {
                         return !value.checked;
                     })
                 }
 
-                if (checkFilter === "completed") {
+                if (inputFilter === 'completed') {
                     data = data.filter((value) => {
                         return value.checked;
                     })
                 }
 
-                list.innerHTML = data.map((todo) => {
+                list.innerHTML = data.map((value) => {
                     return `
-                        <li class="item" data-id="${todo.id}">
-                            <span class="text ${todo.checked ? "checked" : ""}">
-                                ${todo.text}
+                        <li class="item" data-id="${value.id}">
+                            <span class="text ${value.checked ? " checked" : ""}">
+                                ${value.text}
                             </span>
                             <button class="toggle">✔</button>
                             <button class="del">X</button>
@@ -218,45 +219,45 @@
                         </li>
                     `
                 }).join("");
-                let count = document.querySelector("#count");
-                count.textContent = data.length;
-            }
+                const count = document.querySelector("#count");
+                count.textContent = `${data.length} tasks`;
+            };
 
             search.addEventListener('input', (e) => {
-                inputSearch = e.target.value.toUpperCase().trim();
+                inputSearch = e.target.value;
                 render();
-            })
+            });
 
-            filterBtns.addEventListener('click', (e) => {
-                const btn = e.target.closest('button');
+            filters.addEventListener('click', (e) => {
+                let btn = e.target.closest('button');
                 if (!btn) return;
-                checkFilter = btn.dataset.filter;
+                inputFilter = btn.dataset.filter;
                 render();
             })
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                // Lấy dữ liệu từ form
-                const formData = new FormData(form);
-                // Chuyển sang object
-                const data = Object.fromEntries(formData.entries());
+                inputValue = input.value.trim();
+
+                if (inputValue === "") return;
 
                 todos.push({
                     id: Date.now(),
-                    text: data.input,
+                    text: inputValue,
                     checked: false
                 });
-
                 setLocal();
                 render();
+                input.focus();
                 form.reset();
-            })
+            });
 
             list.addEventListener('click', (e) => {
-                const item = e.target.closest('.item');
+                const item = e.target.closest('.item'); // tìm cha gần nhất
                 if (!item) return;
-                let idItem = item.dataset.id;
-                let indexID = todos.findIndex((value) => {
+                const idItem = item.dataset.id;
+                // console.log(idItem);
+                const indexID = todos.findIndex((value) => {
                     return value.id === Number(idItem);
                 })
 
@@ -270,14 +271,13 @@
 
                 if (e.target.classList.contains('edit')) {
                     let newText = prompt('Edit: ');
-                    if (newText != "") {
+                    if (newText !== "") {
                         todos[indexID].text = newText;
                     }
                 }
                 setLocal();
                 render();
             })
-
             function setLocal() {
                 localStorage.setItem('data', JSON.stringify(todos));
             }

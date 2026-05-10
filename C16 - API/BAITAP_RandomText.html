@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình lấy lời đùa ngẫu nhiên</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .Random {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            min-height: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="Random">
+        <h1 class="title">Đang tải câu đùa đầu tiên...</h1>
+        <button class="btn">Random</button>
+    </div>
+
+    <script>
+        const btn = document.querySelector(".btn");
+        const title = document.querySelector(".title");
+        const API_URL = "https://icanhazdadjoke.com/";
+
+        const getPosts = async () => {
+            try {
+                // Khóa nút bấm để tránh người dùng nhấn liên tục khi đang tải
+                btn.disabled = true;
+                title.textContent = "Đang tìm câu đùa mới...";
+
+                const response = await fetch(API_URL, {
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (!response.ok) throw new Error("Không thể kết nối API");
+
+                const data = await response.json();
+
+                // Cập nhật nội dung câu đùa
+                title.textContent = data.joke;
+
+            } catch (error) {
+                console.error("Lỗi:", error);
+                title.textContent = "Rất tiếc, đã có lỗi xảy ra. Thử lại sau nhé!";
+            } finally {
+                // Mở khóa nút bấm
+                btn.disabled = false;
+            }
+        }
+        btn.addEventListener("click", getPosts);
+        getPosts();
+    </script>
+</body>
+
+</html>
