@@ -69,76 +69,71 @@
         <button type="submit">Thanh Toán</button>
 
     </form>
+
     <script>
-        window.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener('DOMContentLoaded', () => {
             const loaihang = document.querySelector("#loaihang");
-            const dongia = document.querySelector("#donggia");
+            const donggia = document.querySelector("#donggia");
             const soluong = document.querySelector("#soluong");
             const thanhtien = document.querySelector("#thanhtien");
-            loaihang.addEventListener("change", () => { // su kien khi chon loai hang
+
+            loaihang.addEventListener('change', () => {
                 donggia.value = loaihang.value;
                 thanhtien.value = donggia.value * soluong.value;
-            })
-            soluong.addEventListener("input", () => {   // su kien khi thay doi so luong
+            });
+
+            soluong.addEventListener('input', () => {
                 thanhtien.value = donggia.value * soluong.value;
-            })
+            });
 
             const noithanh = document.querySelector("#noithanh");
             const ngoaithanh = document.querySelector("#ngoaithanh");
             const phivanchuyen = document.querySelector("#phivanchuyen");
-            noithanh.addEventListener("click", (e) => {
-                phivanchuyen.value = noithanh.value;
-            });
-            ngoaithanh.addEventListener("click", (e) => {
-                phivanchuyen.value = ngoaithanh.value;
-            });
 
-            const Form = document.getElementById("Form");
-            Form.addEventListener("submit", (e) => {
+            noithanh.addEventListener("click", () => {
+                phivanchuyen.value = noithanh.value;
+            })
+            ngoaithanh.addEventListener("click", () => {
+                phivanchuyen.value = ngoaithanh.value;
+            })
+
+            const form = document.querySelector("#Form");
+            form.addEventListener("submit", (e) => {
                 e.preventDefault();
-                const formData = new FormData(Form);
+                const formData = new FormData(form);
                 const data = Object.fromEntries(formData.entries());
 
                 let check = true;
-
-                // Khach hang
-                const khachhang = document.querySelector("#khachhang");
-                const errorkhachhang = document.querySelector(".errorkhachhang");
-                errorkhachhang.textContent = "";
                 if (data.khachhang === "") {
-                    khachhang.classList.add("inputError");
-                    errorkhachhang.textContent = "Vui lòng nhập tên";
+                    document.querySelector(".errorkhachhang").innerHTML = "Khách hàng khóa bằng rẻ";
+                    document.querySelector("#khachhang").classList.add("inputError");
                     check = false;
                 } else {
-                    khachhang.classList.remove("inputError");
-
+                    document.querySelector(".errorkhachhang").innerHTML = "";
+                    document.querySelector("#khachhang").classList.remove("inputError");
                 }
 
-                // Loai hang
-                const errorloaihang = document.querySelector(".errorloaihang");
-                errorloaihang.textContent = "";
                 if (data.loaihang === "0") {
-                    errorloaihang.textContent = "Vui lòng chọn loại hàng";
-                    loaihang.classList.add("inputError");
+                    document.querySelector(".errorloaihang").innerHTML = "Chọn loại hàng";
+                    document.querySelector("#loaihang").classList.add("inputError");
                     check = false;
                 } else {
-                    loaihang.classList.remove("inputError");
+                    document.querySelector(".errorloaihang").innerHTML = "";
+                    document.querySelector("#loaihang").classList.remove("inputError");
                 }
 
-                // phi van chuyen
-                const errorphivanchuyen = document.querySelector(".errorphivanchuyen");
-                errorphivanchuyen.textContent = "";
-                if (!noithanh.checked && !ngoaithanh.checked) {
-                    errorphivanchuyen.textContent = "Vui lòng chọn phương thức nhận hàng";
+                if (!data.noinhanhang) {
+                    document.querySelector(".errorphivanchuyen").innerHTML = "Chọn nơi nhận hàng";
                     check = false;
+                } else {
+                    document.querySelector(".errorphivanchuyen").innerHTML = "";
                 }
-
                 if (check) {
-                    alert("Thanh toán thành công");
-                    Form.reset();
+                    alert("Thanh Toán Thanh Cong");
+                    form.reset();
                 }
-            })
-        })
+            });
+        });
     </script>
 </body>
 
