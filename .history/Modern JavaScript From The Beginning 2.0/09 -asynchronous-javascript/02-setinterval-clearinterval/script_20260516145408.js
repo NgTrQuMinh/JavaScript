@@ -19,7 +19,7 @@ function renderColor() {
 function changeColor() {
   index++;
   if (index === colors.length) {
-    index = 0;
+    index = 0; // Reset back to the start of the array
   }
   renderColor();
 }

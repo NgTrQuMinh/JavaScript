@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="List">
+        <li class="item"></li>
+    </ul>
+    <script>
+        // Fetch API trong JS là một giao diện tích hợp sẵn (built-in) giúp bạn thực hiện các yêu cầu mạng 
+        // (gửi và nhận dữ liệu từ server) như GET, POST, PUT, DELETE một cách bất đồng bộ.
+        // Nó thay thế cho phương pháp cũ là XMLHttpRequest và hoạt động dựa trên Promise, giúp code ngắn gọn và dễ đọc hơn rất nhiều.
+        // window.fetch(url, options) 
+        fetch('https://api.github.com/users/NgTrQuMinh')
+            .then(response => {
+                console.log(response.login);
+            })
+            .catch(err => {
+                console.log("Error: ", err);
+            }) 
+    </script>
+</body>
+
+</html>

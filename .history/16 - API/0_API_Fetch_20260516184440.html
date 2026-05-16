@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list">
+        <li class="item"></li>
+    </ul>
+    <script>
+        // Fetch API trong JS là một giao diện tích hợp sẵn (built-in) giúp bạn thực hiện các yêu cầu mạng 
+        // (gửi và nhận dữ liệu từ server) như GET, POST, PUT, DELETE một cách bất đồng bộ.
+        // Nó thay thế cho phương pháp cũ là XMLHttpRequest và hoạt động dựa trên Promise, giúp code ngắn gọn và dễ đọc hơn rất nhiều.
+        // window.fetch(url, options) 
+
+        const listContainer = document.querySelector('#list');
+        // Cach 1:
+        fetch('https://api.github.com/users/NgTrQuMinh')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Kết nối mạng có vấn đề!');
+                }
+                return response.json();
+            })
+            .then(response => {
+                console.log(response); // Xem cấu trúc Object trong Console
+                // Vì data là 1 Object, ta gán trực tiếp chuỗi HTML vào innerHTML
+                listContainer.innerHTML = `<li>${response.login} - ${response.name || 'No Name'}</li>`;
+            })
+            .catch(err => {
+                console.error(err);
+            });
+            
+            // 💡 Mẹo nhỏ cho bạn khi làm việc với API:
+            // Mỗi khi fetch một API mới, bạn nên dùng console.log(response) trước (như bạn đã làm).
+            // Nếu thấy Console hiện dấu { } ➔ Đi thẳng vào vấn đề, lấy dữ liệu ra dùng luôn.
+            // Nếu thấy Console hiện dấu [ ] ➔ Lúc này mới lôi .map() ra trị nó nhé!
+    </script>
+</body>
+
+</html>

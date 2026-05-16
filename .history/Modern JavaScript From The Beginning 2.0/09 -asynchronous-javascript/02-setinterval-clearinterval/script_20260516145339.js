@@ -6,7 +6,7 @@ let intervalID = null; // Only declare this once
 // 2. Helper function to apply the color
 function renderColor() {
   document.body.style.backgroundColor = colors[index];
-
+  
   // Optional: Adjust text color for readability against dark/light backgrounds
   if (['black', 'blue', 'purple'].includes(colors[index])) {
     document.body.style.color = 'white';
@@ -19,14 +19,16 @@ function renderColor() {
 function changeColor() {
   index++;
   if (index === colors.length) {
-    index = 0;
+    index = 0; // Reset back to the start of the array
   }
   renderColor();
 }
 
 function startChange() {
+  // Prevent multiple intervals from stacking up
   if (!intervalID) {
-    changeColor();
+    // Run changeColor immediately on click, then every 1000ms
+    changeColor(); 
     intervalID = setInterval(changeColor, 1000);
   }
 }

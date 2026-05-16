@@ -19,13 +19,15 @@ function renderColor() {
 function changeColor() {
   index++;
   if (index === colors.length) {
-    index = 0;
+    index = 0; // Reset back to the start of the array
   }
   renderColor();
 }
 
 function startChange() {
+  // Prevent multiple intervals from stacking up
   if (!intervalID) {
+    // Run changeColor immediately on click, then every 1000ms
     changeColor();
     intervalID = setInterval(changeColor, 1000);
   }
