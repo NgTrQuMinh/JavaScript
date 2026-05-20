@@ -1,0 +1,116 @@
+/* --- Khởi tạo cơ bản & Phông chữ --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Nền Gradient tối sang trọng, không bị mỏi mắt */
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    overflow: hidden;
+}
+
+/* --- Khung chứa câu đùa (Card) --- */
+.Random {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 480px;
+    padding: 40px 30px;
+    min-height: 320px;
+    /* Hiệu ứng kính mờ (Glassmorphism) nhẹ */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    /* Đổ bóng sâu tạo cảm giác nổi khối 3D */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+/* --- Nội dung câu đùa (Title) --- */
+.title {
+    color: #f1f5f9;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    font-weight: 500;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    /* Giới hạn vùng hiển thị chữ mượt mà */
+    padding: 0 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Nút bấm ngẫu nhiên (Button) --- */
+.btn {
+    position: relative;
+    padding: 16px 40px;
+    width: 100%;
+    border-radius: 16px;
+    border: none;
+    /* Gradient màu Cyan - Blue công nghệ hiện đại */
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.2s ease,
+        background 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột vào nút */
+.btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(6, 182, 212, 0.6);
+    background: linear-gradient(135deg, #22d3ee 0%, #60a5fa 100%);
+}
+
+/* Hiệu ứng khi click chuột vào nút */
+.btn:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(6, 182, 212, 0.4);
+}
+
+/* Trạng thái nút bị khóa khi đang loading */
+.btn:disabled {
+    background: #334155;
+    color: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --- Hiệu ứng loading nhấp nháy chuyển màu --- */
+.loading {
+    background: linear-gradient(90deg, #94a3b8, #38bdf8, #94a3b8);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 1.5s infinite linear;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
