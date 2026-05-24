@@ -2,117 +2,123 @@ window.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'https://jsonplaceholder.typicode.com/todos';
     const todoList = document.querySelector('#todo-list');
     const todoForm = document.querySelector('#todo-form');
+    const loadingEl = document.querySelector('#loading');
 
-    let localTodos = [];    // "bộ nhớ tạm" (State) trung tam luu tru data
+    let Todos = [];
+    Todos = JSON.parse(localStorage.getItem('datas')) || [];
 
-    // 1. Hàm lấy dữ liệu từ API
-    const getData = async () => {
+    const getDatas = async () => {
         try {
-            const response = await fetch(`${API_URL}?_limit=5`, {
+            const response = await fetch(API_URL + `?_limit=5`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             });
-            if (!response.ok) throw new Error(`Lỗi: ${response.status}`);
-            return await response.json();
+            if (!response.ok) {
+                throw new Error(`Lỗi: ${response.status}`);
+            }
+            const datas = await response.json();
+            return datas;
         } catch (error) {
-            console.error('Lỗi lấy dữ liệu:', error);
-            return []; // Trả về mảng rỗng nếu lỗi để ứng dụng không bị sập
+            console.error(error);
+            return [];
+        } finally {
+            // Ẩn thông báo Loading bất kể thành công hay thất bại
+            if (loadingEl) loadingEl.style.display = 'none';
         }
     }
 
-    // 2. Hàm hiển thị danh sách ra màn hình
-    function render(todos) {
-        todoList.innerHTML = todos.map((item) => {
+    function render(data) {
+        todoList.innerHTML = data.map((item) => {
             return `
-            <li class="todo-item" data-id="${item.id}">
-                <div class="todo-content ${item.completed ? 'completed' : ''}">
-                    <input type="checkbox" ${item.completed ? 'checked' : ''}>
-                    <span class="todo-text">${item.title}</span>
-                </div>
-                <button class="delete-btn">Delete</button>
-            </li>
-            `;
+                <li class="todo-item ${item.completed ? 'completed' : ''}" data-id="${item.id}">
+                    <div class="todo-content">
+                        <input type="checkbox" ${item.completed ? 'checked' : ''}>
+                        <span class="todo-text">${item.title}</span>
+                    </div>
+                    <button class="delete-btn">Delete</button>
+                </li>
+            `
         }).join('');
-    };
+    }
 
-    // 3. Sự kiện thêm một Todo mới
     todoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const todoInput = document.querySelector('#todo-input');
-        const todoText = todoInput.value.trim();
-        if (!todoText) return;
+        const inputValue = document.getElementById('todo-input').value.trim();
+        if (!inputValue) return;
 
         try {
-            const response = await fetch(API_URL, { // Gửi tới API_URL gốc
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    title: todoText,
-                    completed: false,
+                    title: inputValue,
+                    completed: false
                 }),
             });
-            if (!response.ok) throw new Error(`Lỗi: ${response.status}`);
+            const data = await response.json();
 
-            const newTodo = await response.json();
-            newTodo.id = Date.now(); // Id newTodo
+            data.id = Date.now();
 
-            localTodos.push(newTodo);
-            render(localTodos);
-            todoInput.value = ''; // Reset ô nhập
+            Todos.push(data);
+            setLocal();
+            render(Todos);
         } catch (error) {
-            console.error('Lỗi thêm dữ liệu:', error);
+            console.error(error);
         }
+        todoForm.reset();
     });
 
-    // 4. Sự kiện Xóa và Cập nhật trạng thái Todo
     todoList.addEventListener('click', async (e) => {
         const item = e.target.closest('.todo-item');
         if (!item) return;
-        const todoId = item.dataset.id;
-        const todoItem = localTodos.findIndex(value => String(value.id) === String(todoId));
-        if (todoItem === -1) return;
+        const itemID = item.dataset.id;
+        const indexID = Todos.findIndex((t) => String(t.id) === String(itemID));
 
-        // TÁC VỤ 1: XÓA TODO
+        if (indexID === -1) return;
+
+        // XỬ LÝ XÓA
         if (e.target.classList.contains('delete-btn')) {
             try {
-                const response = await fetch(`${API_URL}/${todoId}`, {
-                    method: 'DELETE',
-                });
-                if (!response.ok) throw new Error(`Lỗi: ${response.status}`);
-
-                localTodos.splice(todoItem, 1);
+                if (Number(itemID) <= 200) {
+                    await fetch(API_URL + `/${itemID}`, { method: 'DELETE' });
+                }
+                Todos.splice(indexID, 1);
             } catch (error) {
-                console.error('Lỗi xóa dữ liệu:', error);
+                console.error(error);
             }
         }
 
-        // TÁC VỤ 2: CLICK CHECKBOX
-        if (e.target.closest('input[type="checkbox"]')) {
-            const currentStatus = localTodos[todoItem].completed;
-
+        // XỬ LÝ CHECKBOX
+        else if (e.target.closest('input[type="checkbox"]')) {
+            const currentStatus = Todos[indexID].completed;
             try {
-                const response = await fetch(`${API_URL}/${todoId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        completed: !currentStatus,
-                    }),
-                });
-                if (!response.ok && todoId <= 200) throw new Error(`Lỗi: ${response.status}`);
-
-                localTodos[todoItem].completed = !currentStatus;
+                if (Number(itemID) <= 200) {
+                    await fetch(API_URL + `/${itemID}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ completed: !currentStatus }),
+                    });
+                }
+                Todos[indexID].completed = !currentStatus; // Cập nhật trạng thái local
             } catch (error) {
-                console.error('Lỗi cập nhật trạng thái:', error);
+                console.error(error);
             }
         }
 
-        // Giữ nguyên phong cách của bạn: Luôn chạy render lại sau khi kết thúc click xử lý dữ liệu xong
-        render(localTodos);
+        setLocal();
+        render(Todos);
     });
 
-    const startApp = async () => {
-        localTodos = await getData(); // Gán dữ liệu lấy về vào mảng local
-        render(localTodos);
+    const starApp = async () => {
+        // Nếu localStorage trống thì mới fetch từ API về
+        if (Todos.length === 0) {
+            Todos = await getDatas();
+            setLocal();
+        }
+        render(Todos);
     }
-    startApp();
+    function setLocal() {
+        localStorage.setItem('datas', JSON.stringify(Todos));
+    }
+    starApp();
 });
