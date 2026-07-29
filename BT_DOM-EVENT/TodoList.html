@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -113,6 +115,8 @@
         .text {
             flex: 1;
             margin-right: 10px;
+            word-break: break-word;
+            /* Tránh text quá dài làm vỡ khung */
         }
 
         .checked {
@@ -166,19 +170,16 @@
 
         <p id="count"></p>
 
-        <ul id="list">
-
-        </ul>
+        <ul id="list"></ul>
     </div>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('.todo-input');
-            const input = document.querySelector('input');
+            const input = document.querySelector('#input'); // Chỉ định rõ ID để tránh nhầm lẫn với ô search
             const list = document.querySelector('#list');
 
-            let todos = [];
-            todos = JSON.parse(localStorage.getItem('data')) || [];
+            let todos = JSON.parse(localStorage.getItem('data')) || [];
 
             const search = document.querySelector('#search');
             let inputSearch = "";
@@ -187,41 +188,32 @@
             let inputFilter = "all";
 
             function render() {
-                let data = [...todos];
+                let data = todos.filter(todo => {
+                    const matchesSearch = todo.text.toLowerCase().trim().includes(inputSearch.toLowerCase().trim());
 
-                if (inputSearch !== "") {
-                    data = data.filter((value) => {
-                        return value.text.toUpperCase().trim().includes(inputSearch.toUpperCase().trim());
-                    })
-                }
+                    if (inputFilter === 'active') return matchesSearch && !todo.checked;
+                    if (inputFilter === 'completed') return matchesSearch && todo.checked;
+                    return matchesSearch;
+                });
 
-                if (inputFilter === 'active') {
-                    data = data.filter((value) => {
-                        return !value.checked;
-                    })
-                }
+                // Khởi tạo chuỗi HTML thô từ mảng data đã được lọc sạch ở trên
+                const rawHTML = data.map((value) => `
+                    <li class="item" data-id="${value.id}">
+                        <span class="text ${value.checked ? "checked" : ""}">
+                            ${value.text}
+                        </span>
+                        <button class="toggle">✔</button>
+                        <button class="del">X</button>
+                        <button class="edit">Sửa</button>
+                    </li>
+                `).join("");
 
-                if (inputFilter === 'completed') {
-                    data = data.filter((value) => {
-                        return value.checked;
-                    })
-                }
+                // ÁP DỤNG DOMPURIFY: Lọc sạch mã độc XSS trước khi gán vào giao diện
+                list.innerHTML = DOMPurify.sanitize(rawHTML);
 
-                list.innerHTML = data.map((value) => {
-                    return `
-                        <li class="item" data-id="${value.id}">
-                            <span class="text ${value.checked ? " checked" : ""}">
-                                ${value.text}
-                            </span>
-                            <button class="toggle">✔</button>
-                            <button class="del">X</button>
-                            <button class="edit">Sửa</button>
-                        </li>
-                    `
-                }).join("");
                 const count = document.querySelector("#count");
                 count.textContent = `${data.length} tasks`;
-            };
+            }
 
             search.addEventListener('input', (e) => {
                 inputSearch = e.target.value;
@@ -233,11 +225,11 @@
                 if (!btn) return;
                 inputFilter = btn.dataset.filter;
                 render();
-            })
+            });
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                inputValue = input.value.trim();
+                const inputValue = input.value.trim();
 
                 if (inputValue === "") return;
 
@@ -253,13 +245,12 @@
             });
 
             list.addEventListener('click', (e) => {
-                const item = e.target.closest('.item'); // tìm cha gần nhất
+                const item = e.target.closest('.item');
                 if (!item) return;
                 const idItem = item.dataset.id;
-                // console.log(idItem);
-                const indexID = todos.findIndex((value) => {
-                    return value.id === Number(idItem);
-                })
+
+                const indexID = todos.findIndex((value) => value.id === Number(idItem));
+                if (indexID === -1) return;
 
                 if (e.target.classList.contains('toggle')) {
                     todos[indexID].checked = !todos[indexID].checked;
@@ -270,19 +261,21 @@
                 }
 
                 if (e.target.classList.contains('edit')) {
-                    let newText = prompt('Edit: ');
-                    if (newText !== "") {
-                        todos[indexID].text = newText;
+                    let newText = prompt('Edit: ', todos[indexID].text);
+                    if (newText !== null && newText.trim() !== "") {
+                        todos[indexID].text = newText.trim();
                     }
                 }
                 setLocal();
                 render();
-            })
+            });
+
             function setLocal() {
                 localStorage.setItem('data', JSON.stringify(todos));
             }
+
             render();
-        })
+        });
     </script>
 </body>
 

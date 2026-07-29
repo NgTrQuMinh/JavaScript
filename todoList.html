@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typicode Todos Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Task Manager</h1>
+      <p>Powered by Typicode JSONPlaceholder API</p>
+    </header>
+
+    <!-- Form to Add Todo -->
+    <form id="todo-form">
+      <input type="text" id="todo-input" name="valueInput" placeholder="Add a new task..." required />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">Loading tasks...</div>
+
+    <!-- Todos List -->
+    <ul id="todo-list">
+      <!-- <li class="todo-item " data-id="1">
+        <div class="todo-content">
+          <input type="checkbox">
+          <span class="todo-text">Test Case</span>
+        </div>
+        <button class="delete-btn">Delete</button>
+      </li> -->
+    </ul>
+  </div>
+
+  <script src="main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
+</body>
+
+</html>
