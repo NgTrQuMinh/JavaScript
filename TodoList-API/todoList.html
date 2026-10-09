@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Khai báo đây là tài liệu HTML5 -->
+<html lang="vi">
+<!-- lang="vi": báo trình duyệt trang dùng tiếng Việt -->
+
+<head>
+  <!-- Mã hóa UTF-8 để hiển thị đúng tiếng Việt -->
+  <meta charset="UTF-8">
+  <!-- Giúp trang hiển thị đúng trên điện thoại -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tiêu đề hiển thị trên tab trình duyệt -->
+  <title>Todo List</title>
+  <!-- Nhúng file CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Khung chính của ứng dụng -->
+  <main class="app">
+    <!-- Tiêu đề trang -->
+    <h1 class="app-title">Việc cần làm</h1>
+
+    <!-- Form thêm todo: id phải khớp với JS (#todo-form) -->
+    <form id="todo-form" class="todo-form">
+      <!-- Ô nhập: id phải khớp với JS (#todo-input) -->
+      <input id="todo-input" class="todo-input" type="text" placeholder="Nhập việc cần làm..." autocomplete="off"
+        aria-label="Việc cần làm">
+      <!-- Nút gửi form -->
+      <button type="submit" class="add-btn">Thêm</button>
+    </form>
+
+    <!-- Danh sách todo: JS sẽ đổ các <li> vào đây (#todo-list) -->
+    <ul id="todo-list" class="todo-list">
+
+    </ul>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

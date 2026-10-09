@@ -1,0 +1,232 @@
+/* Biến màu: đổi 1 chỗ, cả trang đổi theo */
+:root {
+    --bg: #eef1f5;
+    /* Màu nền trang */
+    --card: #ffffff;
+    /* Màu nền khung chính */
+    --text: #1f2933;
+    /* Màu chữ chính */
+    --muted: #8a94a0;
+    /* Màu chữ phụ (todo đã xong) */
+    --line: #e1e5ea;
+    /* Màu đường kẻ, viền */
+    --accent: #1d6f6b;
+    /* Màu nhấn (nút Thêm, checkbox) */
+    --accent-dark: #155753;
+    /* Màu nhấn khi rê chuột */
+    --danger: #c0392b;
+    /* Màu nút Xóa */
+}
+
+/* Reset: bỏ margin/padding mặc định, tính kích thước gồm cả viền */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Nền và font toàn trang */
+body {
+    min-height: 100vh;
+    /* Cao tối thiểu bằng màn hình */
+    background: var(--bg);
+    /* Dùng màu nền ở trên */
+    color: var(--text);
+    /* Màu chữ mặc định */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Font hệ thống, hỗ trợ tiếng Việt tốt */
+    line-height: 1.5;
+    /* Giãn dòng dễ đọc */
+    padding: 48px 16px;
+    /* Chừa khoảng trống quanh khung */
+}
+
+/* Khung chính ở giữa trang */
+.app {
+    max-width: 520px;
+    /* Rộng tối đa 520px */
+    margin: 0 auto;
+    /* Căn giữa theo chiều ngang */
+    background: var(--card);
+    /* Nền trắng */
+    border-radius: 12px;
+    /* Bo góc */
+    padding: 28px;
+    /* Khoảng cách bên trong */
+    box-shadow: 0 8px 24px rgba(31, 41, 51, 0.08);
+    /* Đổ bóng nhẹ */
+}
+
+/* Tiêu đề */
+.app-title {
+    font-size: 1.5rem;
+    /* Cỡ chữ tiêu đề */
+    margin-bottom: 20px;
+    /* Cách form bên dưới */
+}
+
+/* Form: ô nhập và nút nằm cùng hàng */
+.todo-form {
+    display: flex;
+    /* Xếp ngang */
+    gap: 8px;
+    /* Khoảng cách giữa input và nút */
+    margin-bottom: 20px;
+    /* Cách danh sách bên dưới */
+}
+
+/* Ô nhập todo */
+.todo-input {
+    flex: 1;
+    /* Chiếm hết chỗ còn lại */
+    padding: 10px 12px;
+    /* Khoảng cách bên trong */
+    border: 1px solid var(--line);
+    /* Viền mảnh */
+    border-radius: 8px;
+    /* Bo góc */
+    font-size: 1rem;
+    /* Cỡ chữ */
+}
+
+/* Khi click vào ô nhập: hiện viền màu nhấn (không bỏ outline mà thay bằng cái rõ hơn) */
+.todo-input:focus-visible {
+    outline: 2px solid var(--accent);
+    /* Viền nhấn */
+    outline-offset: 1px;
+    /* Cách ô nhập 1px */
+    border-color: var(--accent);
+    /* Đổi màu viền */
+}
+
+/* Nút Thêm */
+.add-btn {
+    padding: 10px 18px;
+    /* Khoảng cách bên trong */
+    background: var(--accent);
+    /* Nền màu nhấn */
+    color: #fff;
+    /* Chữ trắng */
+    border: none;
+    /* Bỏ viền */
+    border-radius: 8px;
+    /* Bo góc */
+    font-size: 1rem;
+    /* Cỡ chữ */
+    cursor: pointer;
+    /* Con trỏ hình bàn tay */
+}
+
+/* Nút Thêm khi rê chuột hoặc dùng bàn phím */
+.add-btn:hover,
+.add-btn:focus-visible {
+    background: var(--accent-dark);
+    /* Đậm hơn một chút */
+}
+
+/* Danh sách todo */
+.todo-list {
+    list-style: none;
+    /* Bỏ chấm đầu dòng */
+}
+
+/* Mỗi todo là 1 hàng */
+.todo-item {
+    display: flex;
+    /* Xếp ngang: nội dung + nút Xóa */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: space-between;
+    /* Nội dung bên trái, nút Xóa bên phải */
+    gap: 12px;
+    /* Khoảng cách giữa 2 phần */
+    padding: 12px 0;
+    /* Khoảng cách trên/dưới */
+    border-bottom: 1px solid var(--line);
+    /* Đường kẻ ngăn cách */
+}
+
+/* Bỏ đường kẻ ở todo cuối cùng */
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+/* Nhóm checkbox + chữ */
+.todo-content {
+    display: flex;
+    /* Xếp ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    gap: 10px;
+    /* Khoảng cách checkbox và chữ */
+    min-width: 0;
+    /* Cho phép chữ dài co lại thay vì tràn khung */
+}
+
+/* Checkbox */
+.todo-content input[type="checkbox"] {
+    width: 18px;
+    /* Chiều rộng */
+    height: 18px;
+    /* Chiều cao */
+    accent-color: var(--accent);
+    /* Màu khi được tick */
+    cursor: pointer;
+    /* Con trỏ bàn tay */
+}
+
+/* Chữ của todo */
+.todo-text {
+    overflow-wrap: anywhere;
+    /* Từ quá dài sẽ tự xuống dòng */
+}
+
+/* Todo đã hoàn thành: gạch ngang và làm mờ chữ */
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    /* Gạch ngang */
+    color: var(--muted);
+    /* Màu xám */
+}
+
+/* Nút Delete */
+.delete-btn {
+    flex-shrink: 0;
+    /* Không bị co khi chữ dài */
+    padding: 6px 12px;
+    /* Khoảng cách bên trong */
+    background: transparent;
+    /* Nền trong suốt */
+    color: var(--danger);
+    /* Chữ màu đỏ */
+    border: 1px solid var(--danger);
+    /* Viền đỏ */
+    border-radius: 6px;
+    /* Bo góc */
+    font-size: 0.875rem;
+    /* Chữ nhỏ hơn một chút */
+    cursor: pointer;
+    /* Con trỏ bàn tay */
+}
+
+/* Nút Delete khi rê chuột hoặc dùng bàn phím: đổ đầy màu đỏ */
+.delete-btn:hover,
+.delete-btn:focus-visible {
+    background: var(--danger);
+    /* Nền đỏ */
+    color: #fff;
+    /* Chữ trắng */
+}
+
+/* Màn hình nhỏ (điện thoại): giảm khoảng cách cho vừa */
+@media (max-width: 480px) {
+    body {
+        padding: 24px 12px;
+        /* Giảm khoảng trống quanh khung */
+    }
+
+    .app {
+        padding: 20px;
+        /* Giảm khoảng cách bên trong khung */
+    }
+}
