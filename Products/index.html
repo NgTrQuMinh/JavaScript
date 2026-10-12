@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý giỏ hàng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="header-title">Cửa hàng mini</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Danh sách sản phẩm -->
+        <section class="section products-section">
+            <h2 class="section-title">Danh sách sản phẩm</h2>
+            <div id="product-list" class="product-grid">
+
+            </div>
+        </section>
+
+        <!-- Giỏ hàng -->
+        <section class="section cart-section">
+            <h2 class="section-title">Giỏ hàng</h2>
+
+            <!-- Bảng giỏ hàng -->
+            <div class="cart-wrapper hidden" id="cart-wrapper">
+                <div class="cart-table-wrapper">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Giỏ hàng trống -->
+            <div id="cart-empty" class="cart-empty">
+                <i class="bi bi-cart-x"></i>
+                <p>Giỏ hàng trống</p>
+            </div>
+
+            <!-- Thống kê -->
+            <div class="stats-card">
+                <h3 class="stats-title">Thống kê</h3>
+                <ul class="stats-list">
+                    <li class="stats-item">
+                        <span class="stats-label">Tổng số loại sản phẩm</span>
+                        <span class="stats-value" id="stat-types">0</span>
+                    </li>
+                    <li class="stats-item">
+                        <span class="stats-label">Tổng số lượng sản phẩm</span>
+                        <span class="stats-value" id="stat-qty">0</span>
+                    </li>
+                    <li class="stats-item">
+                        <span class="stats-label">Tổng tiền cần thanh toán</span>
+                        <span class="stats-value stats-value--total" id="stat-total">0 ₫</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Cửa hàng mini</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+
+</html>
